@@ -1,5 +1,11 @@
 export const Navigation = Object.freeze({
-    BILLS: 'Bills',
-    SCAN: 'Scan',
-    SETTINGS: 'Settings',
-  });
+  BILLNAVIGATOR: 'BillNavigator',
+  BILLS: 'Bills',
+  BILLDETAIL: 'BillDetail',
+  SCANNAVIGATOR: 'ScanNavigator',
+  SCAN: 'Scan',
+  ADDPEOPLE: 'AddPeople',
+  ADDITEMS: 'AddItems',
+  ACCEPTRESULT: 'AcceptResult',
+  SETTINGS: 'Settings',
+})

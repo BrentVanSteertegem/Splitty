@@ -1,3 +1,3 @@
-import AppContainer from "./Shared/App/AppContainer"
+import AppContainer from './Shared/App/AppContainer'
 
 export { AppContainer }

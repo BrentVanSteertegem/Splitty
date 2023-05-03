@@ -1,32 +1,32 @@
-import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
-import { Variables } from "../../../style";
+import { useFonts } from 'expo-font'
+import * as SplashScreen from 'expo-splash-screen'
+import { useEffect } from 'react'
+import { Variables } from '../../../style'
 
-SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync()
 
 const AppContainer = ({ children }: { children: JSX.Element }): JSX.Element | null => {
   const [fontsLoaded] = useFonts({
     [Variables.fonts
-      .title]: require("../../../../../assets/fonts/Quicksand-Regular.ttf"),
+      .title]: require('../../../../../assets/fonts/Quicksand-Regular.ttf'),
     [Variables.fonts
-      .text]: require("../../../../../assets/fonts/Poppins-Regular.ttf"),
-  });
+      .text]: require('../../../../../assets/fonts/Poppins-Regular.ttf'),
+  })
 
   useEffect(() => {
     if (fontsLoaded) {
       const hide = async () => {
-        await SplashScreen.hideAsync();
-      };
-      hide();
+        await SplashScreen.hideAsync()
+      }
+      hide()
     }
-  }, [fontsLoaded]);
+  }, [fontsLoaded])
 
   if (!fontsLoaded) {
-    return null;
+    return null
   }
 
-  return children;
+  return children
 }
 
-export default AppContainer;
+export default AppContainer

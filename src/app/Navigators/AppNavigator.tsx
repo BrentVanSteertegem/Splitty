@@ -1,8 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { BillsScreen, ScanScreen, SettingsScreen } from '../Screens'
+import { SettingsScreen } from '../Screens'
 import { DefaultNavigatorOptions, Variables } from '../style'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 import { Navigation } from '../../core/navigation'
+import ScanNavigator from './ScanNavigator'
+import BillNavigator from './BillNavigator'
 
 const AppNavigator = () => {
     const Tab = createBottomTabNavigator()
@@ -10,19 +12,18 @@ const AppNavigator = () => {
     return (
         <Tab.Navigator screenOptions={DefaultNavigatorOptions}>
             <Tab.Screen
-                name={Navigation.BILLS}
-                component={BillsScreen}
+                name={Navigation.BILLNAVIGATOR}
+                component={BillNavigator}
                 options={{
+                    headerShown: false,
                     tabBarIcon: ({ color }) => <FontAwesome5 name="receipt" color={color} size={Variables.sizes.headerIcon} />
                 }}
             />
             <Tab.Screen
-                name={Navigation.SCAN}
-                component={ScanScreen}
+                name={Navigation.SCANNAVIGATOR}
+                component={ScanNavigator}
                 options={{
-                    headerStyle: {
-                        height: 0
-                    },
+                    headerShown: false,
                     tabBarIcon: ({ color }) => <FontAwesome5 name="camera" color={color} size={Variables.sizes.headerIcon} />
                 }}
             />

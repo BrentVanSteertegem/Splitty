@@ -124,6 +124,9 @@ export const DefaultNavigatorOptions = {
         fontSize: Variables.textSizes.header,
         lineHeight: Variables.textSizes.header,
     },
+    headerStyle: {
+        // height: Variables.textSizes.header
+    },
     tabBarIconStyle: {
         height: Sizes.xlarge,
     },

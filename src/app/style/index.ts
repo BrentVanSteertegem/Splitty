@@ -108,12 +108,13 @@ export const DefaultStyles = {
     },
     button: {
         backgroundColor: Variables.colors.primary,
-        color: Variables.colors.buttonText,
         padding: Spacing.medium,
         borderRadius: Rounded.medium,
     },
     buttonText: {
+        color: Variables.colors.buttonText,
         textAlign: 'center',
+        fontSize: Variables.textSizes.large,
     }
 }
   
@@ -123,9 +124,6 @@ export const DefaultNavigatorOptions = {
         fontFamily: Fonts.title,
         fontSize: Variables.textSizes.header,
         lineHeight: Variables.textSizes.header,
-    },
-    headerStyle: {
-        // height: Variables.textSizes.header
     },
     tabBarIconStyle: {
         height: Sizes.xlarge,

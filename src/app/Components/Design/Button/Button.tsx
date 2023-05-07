@@ -6,7 +6,11 @@ export type ButtonContainerProps = {
     size?: 'full-width' | 'fit-content',
 }
 
-type InnerButtonProps = {
+export type ButtonTextProps = {
+    fontSize?: 'medium' | 'large',
+}
+
+type InnerButtonProps = ButtonTextProps & {
     children?: JSX.Element | string,
     faIconLeft?: string,
     faIconRight?: string,
@@ -17,22 +21,22 @@ type ButtonProps = ButtonContainerProps & InnerButtonProps & {
     disabled?: boolean,
 }
 
-const renderButtonContent = ({type, children, faIconLeft, faIconRight}: InnerButtonProps & ButtonContainerProps) => {
+const renderButtonContent = ({children, type, fontSize, faIconLeft, faIconRight}: InnerButtonProps & ButtonContainerProps) => {
     return (
         <StButtonContainer type={type}>
-            <StButtonText>{children}</StButtonText>
+            <StButtonText fontSize={fontSize}>{children}</StButtonText>
         </StButtonContainer>
     )
 }
 
-export const Button = ({ children, type, size, faIconLeft, faIconRight, disabled, onPress }: ButtonProps) => {
+export const Button = ({ children, type, fontSize, size, faIconLeft, faIconRight, disabled, onPress }: ButtonProps) => {
     return (
         <Pressable disabled={disabled} onPress={onPress}>
             {size && size == 'full-width' ?
-                renderButtonContent({type, children, faIconLeft, faIconRight})
+                renderButtonContent({children, type, fontSize, faIconLeft, faIconRight})
             : 
             <Text> {/* By wrapping the entire button container in a text component, the container will behave as if width would be set to fit-content */}
-                {renderButtonContent({type, children, faIconLeft, faIconRight})}
+                {renderButtonContent({children, type, fontSize, faIconLeft, faIconRight})}
             </Text>
             }
             

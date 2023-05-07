@@ -27,10 +27,11 @@ const Sizes = {
 }
   
 const TextSizes = {
-    small: Sizes.small,
-    medium: Sizes.medium,
-    large: Sizes.large,
-    header: Sizes.xxlarge,
+    xsmall: Sizes.small,
+    small: Sizes.medium,
+    medium: Sizes.large,
+    large: Sizes.xlarge,
+    xlarge: Sizes.xxlarge,
 }
   
 const Spacing = {
@@ -95,9 +96,9 @@ export const DefaultStyles = {
     },
     title: {
         fontFamily: Fonts.title,
-        fontSize: TextSizes.header,
+        fontSize: TextSizes.xlarge,
         color: Variables.colors.headerText,
-        lineHeight: TextSizes.header,
+        lineHeight: TextSizes.xlarge,
     },
     error: {
         padding: Sizes.xsmall,
@@ -110,11 +111,11 @@ export const DefaultStyles = {
         backgroundColor: Variables.colors.primary,
         padding: Spacing.medium,
         borderRadius: Rounded.medium,
+        alignItems: 'center',
     },
     buttonText: {
         color: Variables.colors.buttonText,
-        textAlign: 'center',
-        fontSize: Variables.textSizes.large,
+        fontSize: Variables.textSizes.medium,
     }
 }
   
@@ -122,8 +123,8 @@ export const DefaultNavigatorOptions = {
     tabBarHideOnKeyboard: true,
     headerTitleStyle: {
         fontFamily: Fonts.title,
-        fontSize: Variables.textSizes.header,
-        lineHeight: Variables.textSizes.header,
+        fontSize: Variables.textSizes.xlarge,
+        lineHeight: Variables.textSizes.xlarge,
     },
     tabBarIconStyle: {
         height: Sizes.xlarge,

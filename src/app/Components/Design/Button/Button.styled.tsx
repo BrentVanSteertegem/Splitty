@@ -1,13 +1,14 @@
 import { Text, View } from 'react-native'
 import styled from 'styled-components'
 import { DefaultStyles, Variables } from '../../../style'
-import { ButtonContainerProps } from './Button'
+import { ButtonContainerProps, ButtonTextProps } from './Button'
 
 export const StButtonContainer = styled(View)<ButtonContainerProps>`
     ${DefaultStyles.button}
-    background-color: ${props => props && props.type == 'secondary' ? Variables.colors.secondary : Variables.colors.primary};
+    ${props => props && props.type !== undefined && props.type == 'secondary' ? `background-color: ${Variables.colors.secondary};` : null}
 `
 
-export const StButtonText = styled(Text)`
+export const StButtonText = styled(Text)<ButtonTextProps>`
     ${DefaultStyles.buttonText}
+    ${props => props && props.fontSize !== undefined && props.fontSize == 'large' ? `font-size: ${Variables.textSizes.xlarge}px;` : null}
 `

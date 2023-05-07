@@ -25,6 +25,14 @@
     },
     "androidStatusBar": {
       "barStyle": "light-content"
-    }
+    },
+    "plugins": [
+     [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow ${name} to acces your camera."
+        }
+      ]
+    ]
   }
 }

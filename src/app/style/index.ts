@@ -78,15 +78,17 @@ export const DefaultStyles = {
         marginTop: Sizes.medium,
     },
     container: {
-        paddingHorizontal: Spacing.medium,
+        flex: 1,
+    },
+    contentContainer: {
+        marginHorizontal: Spacing.medium,
+    },
+    flexEnd: {
+        justifyContent: 'flex-end',
     },
     centered: {
         alignItems: 'center',
-    },
-    centeredView: {
-        alignItems: 'center',
         justifyContent: 'center',
-        height: '100%',
     },
     text: {
         fontFamily: Fonts.text,
@@ -112,6 +114,7 @@ export const DefaultStyles = {
         padding: Spacing.medium,
         borderRadius: Rounded.medium,
         alignItems: 'center',
+        marginBottom: Spacing.medium,
     },
     buttonText: {
         color: Variables.colors.buttonText,

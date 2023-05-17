@@ -1,15 +1,16 @@
+import { forwardRef } from 'react'
 import { StCamera } from './Camera.styled'
 import { CameraType } from 'expo-camera'
 
 type CameraProps = {
     children: React.ReactNode,
-    type: CameraType
+    type: CameraType,
 }
 
-export const Camera = ({ children, type }: CameraProps) => {
+export const Camera = forwardRef(({ children, type }: CameraProps, ref: any) => {
     return (
-        <StCamera type={type}>
+        <StCamera type={type} ref={ref}>
             {children}
         </StCamera>
     )
-}
+})

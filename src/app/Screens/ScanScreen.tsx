@@ -1,15 +1,16 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { Text } from 'react-native'
 import { Camera, CameraType } from 'expo-camera'
 import { Container, ContentContainer, FlexEndContainer, CenteredContainer } from '../Components/Design/Container'
 import { Button } from '../Components/Design/Button'
 import { Camera as StCamera } from '../Components/Shared/Camera'
-import React from 'react'
-import { callGoogleVisionAsync } from '../../core/ocr/callGoogleVisionAsync'
+import { processBill } from '../../core/ocr/ProcessBillAsync'
+import { Entity, ResponseData } from '../types'
 
 const ScanScreen = () => {
   const [permission, requestPermission] = Camera.useCameraPermissions()
   const cameraRef = useRef<Camera>(null)
+  const [data, setData] = useState<ResponseData>()
   
   if (!permission) {
     // Camera permissions are still loading
@@ -30,18 +31,20 @@ const ScanScreen = () => {
   
   const takePicture = async () => {
     if (cameraRef && cameraRef.current) {
-      return await cameraRef.current.takePictureAsync({
+      const picture = await cameraRef.current.takePictureAsync({
         base64: true,
       })
+      // cameraRef.current.pausePreview()
+      return picture
     }
     console.log('No camera')
     return
   }
 
-  const scanBill = async (picture: string) => {
-    if (picture) {
+  const scanBill = async (pictureBase64: string) => {
+    if (pictureBase64) {
       try {
-        return callGoogleVisionAsync(picture)
+        return processBill(pictureBase64)
       } catch {
         console.log('No ocr')
         return
@@ -57,8 +60,27 @@ const ScanScreen = () => {
     picture = await takePicture()
     if (picture && picture.base64) {
       const data = await scanBill(picture.base64)
-      console.log(data)
-      window.alert(data)
+      if (data) {
+        console.log(data)
+        if (data.document && data.document.entities) {
+          setData(data)
+          data.document.entities.forEach((entity: Entity) => {
+            console.log(entity)
+            if (entity.type === 'line_item') {
+              const textSegments: string[] = []
+              entity.properties.forEach((property) => {
+                textSegments.push(property.mentionText)
+              })
+              console.log(textSegments.join(' ')+'\n')
+            }
+          })
+          return
+        }
+        console.log('No entities')
+      } else {
+        console.log('No data')
+      }
+      cameraRef.current?.resumePreview()
       return
     }
     console.log('No scan')

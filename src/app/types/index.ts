@@ -9,7 +9,11 @@ type Document = {
     entities: Entity[]
 }
 
-export type Entity = {
+export type Entity = SubEntity & {
+    properties: SubEntity[]
+}
+
+type SubEntity = {
     confidence: number
     id: number
     mentionText: string
@@ -30,8 +34,20 @@ export type Entity = {
         endOffset: string
         }[]
     }
-    properties: {
-        mentionText: string
-    }[]
     type: string
+}
+
+export type Bill = {
+    items: Item[]
+    total: number
+    currency: string
+}
+
+export type Item = {
+    name: string
+    description?: string
+    quantity: number
+    price?: number
+    totalPrice: number
+    notes?: string[]
 }

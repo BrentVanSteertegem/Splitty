@@ -5,6 +5,6 @@ import { IconProps } from './Icon'
 
 export const StIcon = styled(FontAwesome5)<IconProps>`
     color: ${props => props.color ? props.color : Variables.colors.buttonText};
-    size: ${props => props.size ? props.size : Variables.sizes.icon};
-    height: ${props => props.size ? props.size : Variables.sizes.icon};
+    fontSize: ${props => props.size ? props.size : Variables.sizes.icon}px;
+    height: ${props => props.size ? props.size : Variables.sizes.icon}px;
 `

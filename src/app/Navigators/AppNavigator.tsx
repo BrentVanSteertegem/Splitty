@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { SettingsScreen } from '../Screens'
 import { DefaultNavigatorOptions, Variables } from '../style'
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 import { Navigation } from '../../core/navigation'
 import ScanNavigator from './ScanNavigator'
 import BillNavigator from './BillNavigator'
+import { Icon } from '../Components/Design/Icon'
 
 const AppNavigator = () => {
     const Tab = createBottomTabNavigator()
@@ -16,7 +16,7 @@ const AppNavigator = () => {
                 component={BillNavigator}
                 options={{
                     headerShown: false,
-                    tabBarIcon: ({ color }) => <FontAwesome5 name="receipt" color={color} size={Variables.sizes.headerIcon} />
+                    tabBarIcon: ({ color }) => <Icon name="receipt" color={color} size={Variables.sizes.headerIcon} />
                 }}
             />
             <Tab.Screen
@@ -24,14 +24,14 @@ const AppNavigator = () => {
                 component={ScanNavigator}
                 options={{
                     headerShown: false,
-                    tabBarIcon: ({ color }) => <FontAwesome5 name="camera" color={color} size={Variables.sizes.headerIcon} />
+                    tabBarIcon: ({ color }) => <Icon name="camera" color={color} size={Variables.sizes.headerIcon} />
                 }}
             />
             <Tab.Screen
                 name={Navigation.SETTINGS}
                 component={SettingsScreen}
                 options={{
-                    tabBarIcon: ({ color }) => <FontAwesome5 name="cog" color={color} size={Variables.sizes.headerIcon} />
+                    tabBarIcon: ({ color }) => <Icon name="cog" color={color} size={Variables.sizes.headerIcon} />
                 }}
             />
         </Tab.Navigator>

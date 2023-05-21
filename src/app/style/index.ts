@@ -74,10 +74,13 @@ export const Variables = {
 }
   
 export const DefaultStyles = {
-    defaultContentStart: {
+    largeVerticalPadding: {
         marginTop: Sizes.xxlarge,
     },
-    smallContentStart: {
+    mediumVerticalPadding: {
+        marginTop: Sizes.xlarge,
+    },
+    smallVerticalPadding: {
         marginTop: Sizes.medium,
     },
     container: {
@@ -97,13 +100,13 @@ export const DefaultStyles = {
         fontFamily: Fonts.text,
         color: Variables.colors.text,
         fontSize: `${TextSizes.medium}px`,
-        lineHeight: `${TextSizes.medium * 1.3}px`,
+        lineHeight: `${TextSizes.medium * 1.4}px`,
     },
     title: {
         fontFamily: Fonts.title,
         color: Variables.colors.headerText,
         fontSize: `${TextSizes.xlarge}px`,
-        lineHeight: `${TextSizes.xlarge * 1.3}px`,
+        lineHeight: `${TextSizes.xlarge * 1.4}px`,
     },
     error: {
         padding: Sizes.xsmall,
@@ -125,7 +128,20 @@ export const DefaultStyles = {
     buttonText: {
         color: Variables.colors.buttonText,
         fontSize: Variables.textSizes.medium,
-    }
+    },
+    textInputContainer: {
+        backgroundColor: Variables.colors.white,
+        padding: Spacing.medium,
+        borderRadius: Rounded.medium,
+    },
+    textInput: {
+        fontFamily: Fonts.text,
+        fontSize: TextSizes.small,
+        height: `${TextSizes.small * 1.4}px`,
+        borderBottomWidth: 1,
+        borderBottomColor: Variables.colors.placeholderColor,
+        textDecorationLine: 'none',
+    },
 }
   
 export const DefaultNavigatorOptions = {

@@ -4,7 +4,7 @@ import { DefaultNavigatorOptions, Variables } from '../style'
 import { Navigation } from '../../core/navigation'
 import ScanNavigator from './ScanNavigator'
 import BillNavigator from './BillNavigator'
-import { Icon } from '../Components/Design/Icon'
+import { Icon } from '../Components'
 
 const AppNavigator = () => {
     const Tab = createBottomTabNavigator()

@@ -1,9 +1,10 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Navigation } from '../../core/navigation'
 import { AcceptResultScreen, AddItemsScreen, AddPeopleScreen, ScanScreen } from '../Screens'
-import { DefaultNavigatorOptions } from '../style'
+import { DefaultNavigatorOptions, Variables } from '../style'
+import { HeaderButtonLeft, Title } from '../Components'
 
-const ScanNavigator = () => {
+const ScanNavigator = ({ navigation }) => {
     const Stack = createNativeStackNavigator()
 
     return (
@@ -21,7 +22,19 @@ const ScanNavigator = () => {
                 name={Navigation.ADDPEOPLE}
                 component={AddPeopleScreen}
                 options={{
-                    headerTitle: 'New bill'
+                    title: 'New bill',
+                    headerLeft: () => (
+                        <HeaderButtonLeft onPress={() => navigation.navigate(Navigation.SCANNAVIGATOR, { screen: Navigation.SCAN })}>
+                            <Title
+                                style={{
+                                    lineHeight: Variables.textSizes.xlarge + Variables.spacing.medium,
+                                }}
+                            >
+                                &lt;
+                            </Title>
+                        </HeaderButtonLeft>
+                    ),
+                    headerBackVisible: false,
                 }}
             />
             <Stack.Screen

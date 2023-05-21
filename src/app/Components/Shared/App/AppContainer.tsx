@@ -5,7 +5,7 @@ import { Variables } from '../../../style'
 
 SplashScreen.preventAutoHideAsync()
 
-const AppContainer = ({ children }: { children: JSX.Element }): JSX.Element | null => {
+export const AppContainer = ({ children }: { children: JSX.Element }): JSX.Element | null => {
   const [fontsLoaded] = useFonts({
     [Variables.fonts
       .title]: require('../../../../../assets/fonts/Quicksand-Regular.ttf'),
@@ -28,5 +28,3 @@ const AppContainer = ({ children }: { children: JSX.Element }): JSX.Element | nu
 
   return children
 }
-
-export default AppContainer

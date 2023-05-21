@@ -1,9 +1,9 @@
 import { Pressable, Text } from 'react-native'
-import { StButtonContainer, StButtonText } from './Button.styled'
+import { StButtonContainer, StButtonText, StSecondaryButtonContainer, StTextButtonContainer } from './Button.styled'
 import { Icon } from '../Icon'
 
 export type ButtonContainerProps = {
-    type?: 'primary' | 'secondary',
+    type?: 'primary' | 'secondary' | 'text',
     size?: 'full-width' | 'fit-content',
 }
 
@@ -22,13 +22,36 @@ type ButtonProps = ButtonContainerProps & InnerButtonProps & {
     disabled?: boolean,
 }
 
-const renderButtonContent = ({children, type, fontSize, faIconLeft, faIconRight}: InnerButtonProps & ButtonContainerProps) => {
+const renderButtonContainer = ({children, type, fontSize, faIconLeft, faIconRight}: InnerButtonProps & ButtonContainerProps) => {
+    switch (type) {
+        case 'secondary':
+            return (
+                <StSecondaryButtonContainer>
+                    {renderButtonContent({children, fontSize, faIconLeft, faIconRight})}
+                </StSecondaryButtonContainer>
+            )
+        case 'text':
+            return (
+                <StTextButtonContainer>
+                    {renderButtonContent({children, fontSize, faIconLeft, faIconRight})}
+                </StTextButtonContainer>
+            )
+        default:
+            return (
+                <StButtonContainer>
+                    {renderButtonContent({children, fontSize, faIconLeft, faIconRight})}
+                </StButtonContainer>
+            )
+    }
+}
+
+const renderButtonContent = ({children, fontSize, faIconLeft, faIconRight}: InnerButtonProps) => {
     return (
-        <StButtonContainer type={type}>
+        <>
             {faIconLeft && <Icon name={faIconLeft}/>}
             <StButtonText fontSize={fontSize}>{children}</StButtonText>
             {faIconRight && <Icon name={faIconRight}/>}
-        </StButtonContainer>
+        </>
     )
 }
 
@@ -36,10 +59,10 @@ export const Button = ({ children, type, fontSize, size, faIconLeft, faIconRight
     return (
         <Pressable disabled={disabled} onPress={onPress}>
             {size && size == 'full-width' ?
-                renderButtonContent({children, type, fontSize, faIconLeft, faIconRight})
+                renderButtonContainer({children, type, fontSize, faIconLeft, faIconRight})
             : 
             <Text> {/* By wrapping the entire button container in a text component, the container will behave as if width would be set to fit-content */}
-                {renderButtonContent({children, type, fontSize, faIconLeft, faIconRight})}
+                {renderButtonContainer({children, type, fontSize, faIconLeft, faIconRight})}
             </Text>
             }
             

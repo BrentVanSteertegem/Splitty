@@ -96,14 +96,14 @@ export const DefaultStyles = {
     text: {
         fontFamily: Fonts.text,
         color: Variables.colors.text,
-        fontSize: TextSizes.medium,
-        lineHeight: TextSizes.medium,
+        fontSize: `${TextSizes.medium}px`,
+        lineHeight: `${TextSizes.medium * 1.3}px`,
     },
     title: {
         fontFamily: Fonts.title,
-        fontSize: TextSizes.xlarge,
         color: Variables.colors.headerText,
-        lineHeight: TextSizes.xlarge,
+        fontSize: `${TextSizes.xlarge}px`,
+        lineHeight: `${TextSizes.xlarge * 1.3}px`,
     },
     error: {
         padding: Sizes.xsmall,
@@ -133,7 +133,6 @@ export const DefaultNavigatorOptions = {
     headerTitleStyle: {
         fontFamily: Fonts.title,
         fontSize: Variables.textSizes.xlarge,
-        lineHeight: Variables.textSizes.xlarge,
     },
     tabBarIconStyle: {
         height: Sizes.xlarge,

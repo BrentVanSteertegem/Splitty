@@ -74,7 +74,10 @@ export const Variables = {
 }
   
 export const DefaultStyles = {
-    contentStart: {
+    defaultContentStart: {
+        marginTop: Sizes.xxlarge,
+    },
+    smallContentStart: {
         marginTop: Sizes.medium,
     },
     container: {
@@ -113,6 +116,9 @@ export const DefaultStyles = {
         backgroundColor: Variables.colors.primary,
         padding: Spacing.medium,
         borderRadius: Rounded.medium,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        gap: Spacing.xsmall,
         alignItems: 'center',
         marginBottom: Spacing.medium,
     },

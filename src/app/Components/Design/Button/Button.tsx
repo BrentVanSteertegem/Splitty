@@ -1,5 +1,6 @@
 import { Pressable, Text } from 'react-native'
 import { StButtonContainer, StButtonText } from './Button.styled'
+import { Icon } from '../Icon'
 
 export type ButtonContainerProps = {
     type?: 'primary' | 'secondary',
@@ -24,7 +25,9 @@ type ButtonProps = ButtonContainerProps & InnerButtonProps & {
 const renderButtonContent = ({children, type, fontSize, faIconLeft, faIconRight}: InnerButtonProps & ButtonContainerProps) => {
     return (
         <StButtonContainer type={type}>
+            {faIconLeft && <Icon name={faIconLeft}/>}
             <StButtonText fontSize={fontSize}>{children}</StButtonText>
+            {faIconRight && <Icon name={faIconRight}/>}
         </StButtonContainer>
     )
 }

@@ -17,3 +17,7 @@ export const StText = styled(Text)<StTextProps>`
 export const StTitle = styled(Text)`
     ${DefaultStyles.title}
 `
+
+export const StHeaderTitle = styled(StTitle)`
+    line-height: ${Variables.textSizes.xlarge + Variables.spacing.medium}px;
+`

@@ -1,9 +1,9 @@
-import { StTitle } from './Text.styled'
 import { TextProps } from './Text'
+import { StTitle } from './Text.styled'
 
-export const Title = ({ children, style }: TextProps) => {
+export const Title = ({ children }: TextProps) => {
     return (
-        <StTitle style={style}>
+        <StTitle>
             {children}
         </StTitle>
     )

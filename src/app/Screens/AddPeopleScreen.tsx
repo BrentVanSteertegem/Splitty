@@ -4,7 +4,7 @@ import { Button, CenteredContainer, ContentContainer, LargeVerticalPadding, Flex
 import { PersonProps } from '../types'
 
 const AddPeopleScreen = ({ navigation, route }) => {
-  const { bill } = route.params
+  const { bill, people: paramsPeople, billName: paramsBillName } = route.params
 
   useEffect(() => {
     if (!bill) {
@@ -12,8 +12,8 @@ const AddPeopleScreen = ({ navigation, route }) => {
     }
   }, [])
 
-  const [billName, setBillName] = useState<string>('')
-  const [people, setPeople] = useState<PersonProps[]>([{
+  const [billName, setBillName] = useState<string>(paramsBillName || '')
+  const [people, setPeople] = useState<PersonProps[]>(paramsPeople || [{
     name: 'You',
     items: [],
     total: 0

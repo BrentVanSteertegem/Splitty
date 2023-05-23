@@ -16,6 +16,10 @@ export const StTextButtonContainer = styled(StButtonContainer)`
     padding: 0;
 `
 
+export const StNegativeButtonContainer = styled(StButtonContainer)`
+    background-color: ${Variables.colors.error};
+`
+
 export const StButtonText = styled(Text)<ButtonTextProps>`
     ${DefaultStyles.buttonText}
     ${props => props && props.fontSize !== undefined && props.fontSize == 'large' ? `font-size: ${Variables.textSizes.xlarge}px;` : null}

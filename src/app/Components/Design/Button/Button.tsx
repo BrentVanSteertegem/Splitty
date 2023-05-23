@@ -1,9 +1,9 @@
 import { Pressable, Text } from 'react-native'
-import { StButtonContainer, StButtonText, StSecondaryButtonContainer, StTextButtonContainer } from './Button.styled'
+import { StButtonContainer, StButtonText, StNegativeButtonContainer, StSecondaryButtonContainer, StTextButtonContainer } from './Button.styled'
 import { Icon } from '../Icon'
 
 export type ButtonContainerProps = {
-    type?: 'primary' | 'secondary' | 'text',
+    type?: 'primary' | 'secondary' | 'text' | 'negative',
     size?: 'full-width' | 'fit-content',
 }
 
@@ -35,6 +35,12 @@ const renderButtonContainer = ({children, type, fontSize, faIconLeft, faIconRigh
                 <StTextButtonContainer>
                     {renderButtonContent({children, fontSize, faIconLeft, faIconRight})}
                 </StTextButtonContainer>
+            )
+        case 'negative':
+            return (
+                <StNegativeButtonContainer>
+                    {renderButtonContent({children, fontSize, faIconLeft, faIconRight})}
+                </StNegativeButtonContainer>
             )
         default:
             return (

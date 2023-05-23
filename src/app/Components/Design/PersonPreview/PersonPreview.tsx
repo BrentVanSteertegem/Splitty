@@ -6,17 +6,22 @@ export type PersonPreviewBubbleProps = {
     bubbleColor?: string
 }
 
-type PersonPreviewProps = PersonPreviewBubbleProps & {
-    name: string
+export type StPersonPreviewProps = {
+    gap?: number
 }
 
-export const PersonPreview = ({ name, bubbleColor }: PersonPreviewProps) => {
+type PersonPreviewProps = PersonPreviewBubbleProps & StPersonPreviewProps & {
+    name: string,
+    showFullName?: boolean
+}
+
+export const PersonPreview = ({ name, showFullName = true, bubbleColor, gap }: PersonPreviewProps) => {
     return (
-        <StPersonPreview>
+        <StPersonPreview gap={gap}>
             <StPersonPreviewBubble bubbleColor={bubbleColor}>
                 <Text color={Variables.colors.white}>{name[0]}</Text>
             </StPersonPreviewBubble>
-            <Text>{name}</Text>
+            {showFullName && <Text>{name}</Text>}
         </StPersonPreview>
     )
 }

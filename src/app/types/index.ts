@@ -47,7 +47,14 @@ export type Item = {
     name: string
     description?: string
     quantity: number
-    price?: number
-    totalPrice: number
+    price: number
+    totalPrice?: number
     notes?: string[]
+}
+
+export type PersonProps = {
+    id: number
+    name: string
+    items: Item[]
+    total: number
 }

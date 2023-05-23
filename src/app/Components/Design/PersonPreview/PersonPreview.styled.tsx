@@ -1,12 +1,12 @@
 import { View } from 'react-native'
 import styled from 'styled-components'
 import { Variables } from '../../../style'
-import { PersonPreviewBubbleProps } from './PersonPreview'
+import { PersonPreviewBubbleProps, StPersonPreviewProps } from './PersonPreview'
 
-export const StPersonPreview = styled(View)`
+export const StPersonPreview = styled(View)<StPersonPreviewProps>`
     flex-direction: row;
     align-items: center;
-    gap: ${Variables.spacing.small}px;
+    gap: ${({ gap }) => gap ? gap : Variables.spacing.small}px;
 `
 
 export const StPersonPreviewBubble = styled(View)<PersonPreviewBubbleProps>`

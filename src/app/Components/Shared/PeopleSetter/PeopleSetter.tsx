@@ -8,8 +8,7 @@ import { Modal } from '../../Design/Modal'
 import { Text } from '../../Design/Text'
 import { TextInput } from '../../Design/Input'
 import { StPeoplecontainer } from './PeopleSetter.styled'
-
-const bubbleColors = ['#999','#27B', '#D42']
+import { PersonPreviewBubbleColors } from '../../../style/PersonPreviewBubbleColors'
 
 type PeopleSetterProps = {
     people: PersonProps[]
@@ -22,7 +21,12 @@ export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
 
     const renderAddPersonModal = () => {
         const onContinue = () => {
-            setPeople([...people, { name, items: [], total: 0 }])
+            setPeople([...people, { 
+                id: people[people.length - 1].id + 1,
+                name,
+                items: [],
+                total: 0,
+            }])
             setName('')
             setShowModal(false)
         }
@@ -57,7 +61,6 @@ export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
             people.splice(people.findIndex(person => person.name == name), 1)
             setPeople([...people])
         }
-
         return people.map((person, index) => {
             return (
                 <Pressable
@@ -66,7 +69,7 @@ export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
                 >
                     <PersonPreview
                         name={person.name}
-                        bubbleColor={bubbleColors[index % bubbleColors.length]}
+                        bubbleColor={Object.values(PersonPreviewBubbleColors)[person.id % Object.values(PersonPreviewBubbleColors).length]}
                     />
                 </Pressable>
             )

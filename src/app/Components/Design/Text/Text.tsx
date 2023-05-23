@@ -3,22 +3,20 @@ import { StText } from './Text.styled'
 
 export type StTextProps = {
     fontSize?: 'small' | 'medium' | 'large',
+    color?: string,
     grayedOut?: boolean,
-    offset?: boolean
 }
 
 export type TextProps = {
     children: ReactNode,
-    style?: object
 }
 
-export const Text = ({ fontSize, grayedOut, offset, children, style }: TextProps & StTextProps) => {
+export const Text = ({ fontSize, color, grayedOut, children }: TextProps & StTextProps) => {
     return (
         <StText
             fontSize={fontSize}
+            color={color}
             grayedOut={grayedOut}
-            offset={offset}
-            style={style}
         >
             {children}
         </StText>

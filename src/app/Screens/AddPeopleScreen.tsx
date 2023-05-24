@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { ScrollView } from 'react-native'
 import { Navigation } from '../../core/navigation'
 import { Button, CenteredContainer, ContentContainer, LargeVerticalPadding, FlexEndContainer, Text, TextInput, SmallVerticalPadding, MediumVerticalPadding, PeopleSetter } from '../Components'
@@ -8,13 +8,13 @@ import { MediumHorizontalPadding } from '../Components'
 
 const AddPeopleScreen = ({ navigation, route }) => {
   const { bill, people: paramsPeople, billName: paramsBillName } = route.params
-
+  
   useEffect(() => {
     if (!bill) {
       navigation.navigate(Navigation.SCANNAVIGATOR, { screen: Navigation.SCAN })
     }
   }, [])
-
+  
   const [billName, setBillName] = useState<string>(paramsBillName || '')
   const [people, setPeople] = useState<PersonProps[]>(paramsPeople || [{
     id: 0,
@@ -22,9 +22,13 @@ const AddPeopleScreen = ({ navigation, route }) => {
     items: [],
     total: 0
   }])
-
+  
+  const svRef = useRef<ScrollView>(null)
   return bill ? (
-    <ScrollView>
+    <ScrollView
+      ref={svRef}
+      onContentSizeChange={() => svRef.current!.scrollToEnd({ animated: true })}
+      >
       <FullScreenContainer>
         <ContentContainer>
           <LargeVerticalPadding />
@@ -43,6 +47,7 @@ const AddPeopleScreen = ({ navigation, route }) => {
             people={people}
             setPeople={setPeople}
             />
+          <MediumVerticalPadding />
           <CenteredContainer>
             <FlexEndContainer>
               <Button

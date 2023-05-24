@@ -3,6 +3,7 @@ import { ScrollView } from 'react-native'
 import { Navigation } from '../../core/navigation'
 import { Button, CenteredContainer, ContentContainer, LargeVerticalPadding, FlexEndContainer, Text, TextInput, SmallVerticalPadding, MediumVerticalPadding, Offset, PeopleSetter } from '../Components'
 import { PersonProps } from '../types'
+import { FullScreenContainer } from '../Components/Design/Container/FullScreenContainer'
 
 const AddPeopleScreen = ({ navigation, route }) => {
   const { bill, people: paramsPeople, billName: paramsBillName } = route.params
@@ -23,43 +24,45 @@ const AddPeopleScreen = ({ navigation, route }) => {
 
   return bill ? (
     <ScrollView>
-      <ContentContainer>
-        <LargeVerticalPadding />
-        <Offset>
-          <Text fontSize='large'>Bill name</Text>
-        </Offset>
-        <TextInput 
-          onChangeText={setBillName}
-          placeholder='Restaurant name e.g.'
-        />
-        <MediumVerticalPadding />
-        <Offset>
-          <Text fontSize='large'>People</Text>
-        </Offset>
-        <PeopleSetter
-          people={people}
-          setPeople={setPeople}
-          />
-        <CenteredContainer>
-          <FlexEndContainer>
-            <Button
-              onPress={() => navigation.navigate(
-                Navigation.SCANNAVIGATOR, { 
-                  screen: Navigation.ADDITEMS, 
-                  params: { 
-                    billName,
-                    people,
-                    bill
-                  } 
-                }
-                )}
-                >
-              Split expenses
-            </Button>
-            <SmallVerticalPadding />
-          </FlexEndContainer>
-        </CenteredContainer>
-      </ContentContainer>
+      <FullScreenContainer>
+        <ContentContainer>
+          <LargeVerticalPadding />
+          <Offset>
+            <Text fontSize='large'>Bill name</Text>
+          </Offset>
+          <TextInput 
+            onChangeText={setBillName}
+            placeholder='Restaurant name e.g.'
+            />
+          <MediumVerticalPadding />
+          <Offset>
+            <Text fontSize='large'>People</Text>
+          </Offset>
+          <PeopleSetter
+            people={people}
+            setPeople={setPeople}
+            />
+          <CenteredContainer>
+            <FlexEndContainer>
+              <Button
+                onPress={() => navigation.navigate(
+                  Navigation.SCANNAVIGATOR, { 
+                    screen: Navigation.ADDITEMS, 
+                    params: { 
+                      billName,
+                      people,
+                      bill
+                    } 
+                  }
+                  )}
+                  >
+                Split expenses
+              </Button>
+              <SmallVerticalPadding />
+            </FlexEndContainer>
+          </CenteredContainer>
+        </ContentContainer>
+      </FullScreenContainer>
     </ScrollView>
   ) : null
 }

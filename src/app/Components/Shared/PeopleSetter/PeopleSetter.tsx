@@ -21,6 +21,10 @@ export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
 
     const renderAddPersonModal = () => {
         const onContinue = () => {
+            if (name.trim() == '') {
+                return window.alert('Name cannot be empty')
+
+            }
             setPeople([...people, { 
                 id: people[people.length - 1].id + 1,
                 name,

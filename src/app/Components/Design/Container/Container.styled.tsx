@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { Dimensions, View } from 'react-native'
 import styled from 'styled-components'
 import { DefaultStyles } from '../../../style'
 
@@ -19,4 +19,8 @@ export const StCenteredContainer = styled(View)`
 export const StFlexEndContainer = styled(View)`
     ${DefaultStyles.container}
     ${DefaultStyles.flexEnd}
+`
+
+export const StFullScreenContainer = styled(View)`
+    min-height: ${Dimensions.get('window').height - 136}px;
 `

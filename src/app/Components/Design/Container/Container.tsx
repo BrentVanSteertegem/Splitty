@@ -1,7 +1,8 @@
-import { StContainer, StContentContainer, StFlexEndContainer } from './Container.styled'
+import { ReactNode } from 'react'
+import { StContainer } from './Container.styled'
 
 export type ContainerProps = {
-    children: React.ReactNode
+    children: ReactNode
 }
 
 export const Container = ({ children }: ContainerProps) => {

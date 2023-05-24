@@ -6,7 +6,7 @@ import { StActivePersonPreviewContainerProps } from './PersonSelector'
 export const StPersonSelector = styled(View)`
     flex-direction: row;
     gap: ${Variables.spacing.xsmall}px;
-    margin-bottom: ${Variables.sizes.large}px;
+    margin-bottom: ${Variables.sizes.xlarge}px;
 `
 
 export const StActivePersonPreviewContainer = styled(View)<StActivePersonPreviewContainerProps>`

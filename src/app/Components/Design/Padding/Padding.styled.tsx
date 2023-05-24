@@ -6,6 +6,10 @@ export const StLargeVerticalPadding = styled(View)`
     ${DefaultStyles.largeVerticalPadding}
 `
 
+export const StMediumHorizontalPadding = styled(View)`
+    ${DefaultStyles.mediumHorizontalPadding}
+`
+
 export const StMediumVerticalPadding = styled(View)`
     ${DefaultStyles.mediumVerticalPadding}
 `

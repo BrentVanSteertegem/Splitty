@@ -1,7 +1,10 @@
+import { PaddingProps } from './MediumHorizontalPadding'
 import { StSmallVerticalPadding } from './Padding.styled'
 
-export const SmallVerticalPadding = () => {
+export const SmallVerticalPadding = ({ children }: PaddingProps) => {
     return (
-        <StSmallVerticalPadding/>
+        <StSmallVerticalPadding>
+            {children}
+        </StSmallVerticalPadding>
     )
 }

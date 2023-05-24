@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { ScrollView } from 'react-native'
 import { Navigation } from '../../core/navigation'
-import { Button, CenteredContainer, ContentContainer, LargeVerticalPadding, FlexEndContainer, Text, TextInput, SmallVerticalPadding, MediumVerticalPadding, Offset, PeopleSetter } from '../Components'
+import { Button, CenteredContainer, ContentContainer, LargeVerticalPadding, FlexEndContainer, Text, TextInput, SmallVerticalPadding, MediumVerticalPadding, PeopleSetter } from '../Components'
 import { PersonProps } from '../types'
 import { FullScreenContainer } from '../Components/Design/Container/FullScreenContainer'
+import { MediumHorizontalPadding } from '../Components'
 
 const AddPeopleScreen = ({ navigation, route }) => {
   const { bill, people: paramsPeople, billName: paramsBillName } = route.params
@@ -27,17 +28,17 @@ const AddPeopleScreen = ({ navigation, route }) => {
       <FullScreenContainer>
         <ContentContainer>
           <LargeVerticalPadding />
-          <Offset>
+          <MediumHorizontalPadding>
             <Text fontSize='large'>Bill name</Text>
-          </Offset>
+          </MediumHorizontalPadding>
           <TextInput 
             onChangeText={setBillName}
             placeholder='Restaurant name e.g.'
             />
           <MediumVerticalPadding />
-          <Offset>
+          <MediumHorizontalPadding>
             <Text fontSize='large'>People</Text>
-          </Offset>
+          </MediumHorizontalPadding>
           <PeopleSetter
             people={people}
             setPeople={setPeople}

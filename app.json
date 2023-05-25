@@ -25,7 +25,8 @@
       }
     },
     "androidStatusBar": {
-      "barStyle": "light-content"
+      "barStyle": "light-content",
+      "translucent": true
     },
     "plugins": [
      [

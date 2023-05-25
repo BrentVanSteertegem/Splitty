@@ -1,16 +1,64 @@
 import { useRef, useState } from 'react'
 import { Text } from 'react-native'
 import { Camera, CameraType } from 'expo-camera'
-import { Container, ContentContainer, FlexEndContainer, CenteredContainer } from '../Components/Design/Container'
-import { Button } from '../Components/Design/Button'
-import { Camera as StCamera } from '../Components/Shared/Camera'
+import { Button, Camera as StCamera, Container, ContentContainer, JustifyEndContainer, CenteredContainer, SmallVerticalPadding } from '../Components'
 import { processBillAsync } from '../../core/ocr/ProcessBillAsync'
 import { Bill } from '../types'
+import { Navigation } from '../../core/navigation'
 
-const ScanScreen = () => {
+const testingBill: Bill = {
+  items: [
+    {
+      name: 'BICKY CRISPY',
+      price: 3.70,
+      quantity: 2,
+      totalPrice: 7.40,
+    },
+    {
+      name: 'MEXICANO',
+      price: 2.60,
+      quantity: 3,
+      totalPrice: 7.80,
+    },
+    {
+      name: 'GEBAKKEN LOOKWORST',
+      price: 2.70,
+      quantity: 1,
+      totalPrice: 2.70,
+    },
+    {
+      name: 'KLEIN PAK',
+      price: 2.60,
+      quantity: 2,
+      totalPrice: 5.20,
+    },
+    {
+      name: 'STOOFVLEES',
+      price: 5.50,
+      quantity: 1,
+      totalPrice: 5.50,
+    },
+    {
+      name: 'MINI PAK',
+      price: 2.20,
+      quantity: 1,
+      totalPrice: 2.20,
+    },
+    {
+      name: 'TARTAAR',
+      price: 0.90,
+      quantity: 2,
+      totalPrice: 1.80,
+    }
+  ],
+  total: 32.60,
+  currency: 'EUR'
+}
+
+const ScanScreen = ({ navigation }) => {
   const [permission, requestPermission] = Camera.useCameraPermissions()
   const cameraRef = useRef<Camera>(null)
-  const [data, setData] = useState<Bill | undefined>() // TODO: remove this after testing
+  // const [data, setData] = useState<Bill | undefined>() // TODO: remove this after testing
   
   if (!permission) {
     // Camera permissions are still loading
@@ -22,7 +70,8 @@ const ScanScreen = () => {
     return (
       <ContentContainer>
         <CenteredContainer>
-          <Text style={{ textAlign: 'center' }}>Splitty needs access to your camera in order to be able to scan bills</Text>
+          <Text>Splitty needs access to your camera in order to be able to scan bills</Text>
+          <SmallVerticalPadding />
           <Button onPress={requestPermission}>Allow acces</Button>
         </CenteredContainer>
       </ContentContainer>
@@ -34,7 +83,7 @@ const ScanScreen = () => {
       const picture = await cameraRef.current.takePictureAsync({
         base64: true,
       })
-      // cameraRef.current.pausePreview() //TODO: enable this again after testing
+      cameraRef.current.pausePreview() //TODO: enable this again after testing
       return picture
     }
     console.log('No camera')
@@ -58,11 +107,17 @@ const ScanScreen = () => {
 
   const onScan = async () => {
     picture = await takePicture()
+    cameraRef.current?.resumePreview()
     if (picture && picture.base64) {
-      const bill = await scanBill(picture.base64) // TODO: always enable this after testing
-      setData(bill) // TODO: always enable this after testing
-      console.log(bill)
-      cameraRef.current?.resumePreview()
+      // const bill = await scanBill(picture.base64) // TODO: always enable this after testing
+      // setData(bill) // TODO: always enable this after testing
+      // console.log(bill) // TODO: remove after testing
+      navigation.navigate(Navigation.SCANNAVIGATOR, {
+        screen: Navigation.ADDPEOPLE,
+        params: {
+          bill: testingBill
+        },
+      })
       return
     }
     console.log('No scan')
@@ -76,9 +131,9 @@ const ScanScreen = () => {
         ref={cameraRef}
       >
         <ContentContainer>
-          <FlexEndContainer>
+          <JustifyEndContainer>
             <Button fontSize='large' size='full-width' onPress={onScan}>Scan</Button>
-          </FlexEndContainer>
+          </JustifyEndContainer>
         </ContentContainer>
       </StCamera>
     </Container>

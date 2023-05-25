@@ -7,5 +7,8 @@ module.exports = ({ config }) => ({
         PROJECT_ID: process.env.PROJECT_ID,
         PROCESSOR_ID: process.env.PROCESSOR_ID,
         PROCESSOR_AUTH_TOKEN: process.env.PROCESSOR_AUTH_TOKEN,
+        eas: {
+            projectId: process.env.EAS_PROJECT_ID,
+        },
     },
 })

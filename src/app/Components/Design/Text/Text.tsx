@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { StText } from './Text.styled'
 
 export type StTextProps = {
-    fontSize?: 'small' | 'medium' | 'large',
+    fontSize?: 'xsmall' | 'small' | 'medium' | 'large',
     color?: string,
     grayedOut?: boolean,
 }

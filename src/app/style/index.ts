@@ -77,6 +77,9 @@ export const DefaultStyles = {
     largeVerticalPadding: {
         marginTop: Sizes.xxlarge,
     },
+    mediumHorizontalPadding: {
+        marginHorizontal: Sizes.medium,
+    },
     mediumVerticalPadding: {
         marginTop: Sizes.xlarge,
     },

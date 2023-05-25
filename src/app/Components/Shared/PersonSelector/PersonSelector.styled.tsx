@@ -10,5 +10,5 @@ export const StPersonSelector = styled(View)`
 `
 
 export const StActivePersonPreviewContainer = styled(View)<StActivePersonPreviewContainerProps>`
-    margin-right: ${({ hasNext }) => hasNext ? Variables.spacing.large : 0}px;
+    margin-right: ${({ hasNext }) => hasNext ? Variables.spacing.xlarge : 0}px;
 `

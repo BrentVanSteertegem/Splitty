@@ -19,7 +19,7 @@ export const PersonPreview = ({ name, showFullName = true, bubbleColor, gap }: P
     return (
         <StPersonPreview gap={gap}>
             <StPersonPreviewBubble bubbleColor={bubbleColor}>
-                <Text color={Variables.colors.white}>{name[0]}</Text>
+                <Text color={Variables.colors.white}>{name[0].toUpperCase()}</Text>
             </StPersonPreviewBubble>
             {showFullName && <Text>{name}</Text>}
         </StPersonPreview>

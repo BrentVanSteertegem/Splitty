@@ -2,13 +2,13 @@ import { useState } from 'react'
 import { Pressable } from 'react-native'
 import { PersonProps } from '../../../types'
 import { Button } from '../../Design/Button'
-import { Offset } from '../../Design/Offset'
 import { PersonPreview } from '../../Design/PersonPreview'
 import { Modal } from '../../Design/Modal'
 import { Text } from '../../Design/Text'
 import { TextInput } from '../../Design/Input'
 import { StPeoplecontainer } from './PeopleSetter.styled'
 import { PersonPreviewBubbleColors } from '../../../style/PersonPreviewBubbleColors'
+import { MediumHorizontalPadding } from '../../Design/Padding'
 
 type PeopleSetterProps = {
     people: PersonProps[]
@@ -47,9 +47,9 @@ export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
                 onContinue={onContinue}
                 onContinueText='Add person'
             >
-                <Offset>
+                <MediumHorizontalPadding>
                     <Text>Enter name</Text>
-                </Offset>
+                </MediumHorizontalPadding>
                 <TextInput
                     focus={true}
                     onChangeText={setName}
@@ -83,11 +83,11 @@ export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
     return (
         <>
             {showModal && renderAddPersonModal()}
-            <Offset>
+            <MediumHorizontalPadding>
                 <StPeoplecontainer>
                     {renderPeople(people)}
                 </StPeoplecontainer>
-            </Offset>
+            </MediumHorizontalPadding>
             <Button
                 faIconLeft='plus'
                 onPress={() => setShowModal(true)}

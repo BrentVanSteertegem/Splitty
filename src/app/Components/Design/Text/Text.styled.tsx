@@ -8,6 +8,7 @@ export const StText = styled(Text)<StTextProps>`
     ${({ color }) => color && `color: ${color}`}
     ${({ grayedOut }) => grayedOut && `color: ${Variables.colors.darkGray}`}
     ${({ fontSize }) => 
+    fontSize == 'xsmall' ? `font-size: ${Variables.textSizes.xsmall}px; line-height: ${Variables.textSizes.xsmall * 1.4}px;` : 
     fontSize == 'small' ? `font-size: ${Variables.textSizes.small}px; line-height: ${Variables.textSizes.small * 1.4}px;` : 
     fontSize == 'large' ? `font-size: ${Variables.textSizes.large}px; line-height: ${Variables.textSizes.large * 1.4}px;` :
     `font-size: ${Variables.textSizes.medium}px; line-height: ${Variables.textSizes.medium * 1.4}px;`

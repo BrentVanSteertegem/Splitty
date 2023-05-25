@@ -46,7 +46,7 @@ const ScanNavigator = ({ navigation }) => {
                 component={AddItemsScreen}
                 options={
                     ({ route }) => ({
-                        title: route.params.billName || 'New bill',
+                        title: route.params?.billName || 'New bill',
                         headerLeft: () => (
                             <HeaderButtonLeft
                                 onPress={
@@ -55,9 +55,9 @@ const ScanNavigator = ({ navigation }) => {
                                         {
                                             screen: Navigation.ADDPEOPLE,
                                             params: {
-                                                bill: route.params.bill,
-                                                people: route.params.people,
-                                                billName: route.params.billName
+                                                bill: route.params.bill!,
+                                                people: route.params.people!,
+                                                billName: route.params?.billName
                                             }
                                         }
                                     )
@@ -74,6 +74,31 @@ const ScanNavigator = ({ navigation }) => {
             <Stack.Screen
                 name={Navigation.ACCEPTRESULT}
                 component={AcceptResultScreen}
+                options={
+                    ({ route }) => ({
+                        title: route.params.billName || 'New bill',
+                        headerLeft: () => (
+                            <HeaderButtonLeft
+                                onPress={
+                                    () => navigation.navigate(
+                                        Navigation.SCANNAVIGATOR, 
+                                        {
+                                            screen: Navigation.ADDITEMS,
+                                            params: {
+                                                bill: route.params.bill!,
+                                                people: route.params.people!,
+                                                billName: route.params?.billName
+                                            }
+                                        }
+                                    )
+                                }
+                            >
+                                <HeaderTitle>&lt;</HeaderTitle>
+                            </HeaderButtonLeft>
+                        ),
+                        headerBackVisible: false,
+                    })
+                }
             />
         </Stack.Navigator>
     )

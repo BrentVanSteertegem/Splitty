@@ -1,10 +1,52 @@
-import { View, Text } from 'react-native'
+import { useState } from 'react'
+import { ScrollView } from 'react-native'
+import { BillItemsList, Button, ContentContainer, JustifyEndContainer, FullScreenContainer, LargeVerticalPadding, MediumVerticalPadding, PersonSelector, RowContainer, SmallVerticalPadding, AlignEndContainer } from '../Components'
+import { Navigation } from '../../core/navigation'
 
-const AddItemsScreen = () => {
+const AddItemsScreen = ({ navigation, route }) => {
+  const { bill, people: paramsPeople, billName } = route.params
+
+  const [people, setPeople] = useState(paramsPeople)
+  const [activePersonIndex, setActivePersonIndex] = useState(0)
+
   return (
-    <View>
-      <Text>Add items screen</Text>
-    </View>
+    <ScrollView>
+      <FullScreenContainer>
+        <LargeVerticalPadding />
+        <PersonSelector
+          people={people}
+          activePersonIndex={activePersonIndex}
+          setActivePersonIndex={setActivePersonIndex}
+        />
+        <ContentContainer>
+          <BillItemsList
+            bill={bill}
+            people={people}
+            setPeople={setPeople}
+            activePersonIndex={activePersonIndex}
+          />
+          <MediumVerticalPadding />
+          <AlignEndContainer>
+            <JustifyEndContainer>
+              <Button
+                onPress={() => navigation.navigate(Navigation.SCANNAVIGATOR, { 
+                  screen: Navigation.ACCEPTRESULT,
+                  params: {
+                    bill,
+                    people,
+                    billName
+                  }
+                })}
+                faIconRight='chevron-right'
+              >
+                Next
+              </Button>
+            </JustifyEndContainer>
+            <SmallVerticalPadding />
+          </AlignEndContainer>
+        </ContentContainer>
+      </FullScreenContainer>
+    </ScrollView>
   )
 }
 

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { ScrollView } from 'react-native'
 import { Navigation } from '../../core/navigation'
-import { Button, CenteredContainer, ContentContainer, LargeVerticalPadding, FlexEndContainer, Text, TextInput, SmallVerticalPadding, MediumVerticalPadding, PeopleSetter, FullScreenContainer } from '../Components'
+import { Button, CenteredContainer, ContentContainer, LargeVerticalPadding, JustifyEndContainer, Text, TextInput, SmallVerticalPadding, MediumVerticalPadding, PeopleSetter, FullScreenContainer } from '../Components'
 import { PersonProps } from '../types'
 import { MediumHorizontalPadding } from '../Components'
 
@@ -48,7 +48,7 @@ const AddPeopleScreen = ({ navigation, route }) => {
             />
           <MediumVerticalPadding />
           <CenteredContainer>
-            <FlexEndContainer>
+            <JustifyEndContainer>
               <Button
                 onPress={() => navigation.navigate(
                   Navigation.SCANNAVIGATOR, { 
@@ -64,7 +64,7 @@ const AddPeopleScreen = ({ navigation, route }) => {
                 Split expenses
               </Button>
               <SmallVerticalPadding />
-            </FlexEndContainer>
+            </JustifyEndContainer>
           </CenteredContainer>
         </ContentContainer>
       </FullScreenContainer>

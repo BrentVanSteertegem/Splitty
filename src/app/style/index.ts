@@ -92,9 +92,6 @@ export const DefaultStyles = {
     contentContainer: {
         marginHorizontal: Spacing.medium,
     },
-    flexEnd: {
-        justifyContent: 'flex-end',
-    },
     centered: {
         alignItems: 'center',
         justifyContent: 'center',

@@ -31,12 +31,13 @@ export const BillItem = ({ item, index, bill, people, setPeople, activePersonInd
                 if (amount > 0) {
                     newPeople.splice(activePersonIndex, 1, {
                         ...activePerson,
+                        total: parseFloat((activePerson.total + item.price).toFixed(2)),
                         items: activePerson.items.map((personItem: Item) => {
                             if (personItem.name == item.name) {
                                 return {
                                     ...personItem,
                                     quantity: newAmount,
-                                    totalPrice: personItem.totalPrice || 0 + item.price
+                                    totalPrice: newAmount * item.price
                                 }
                             }
                             return personItem
@@ -45,6 +46,7 @@ export const BillItem = ({ item, index, bill, people, setPeople, activePersonInd
                 } else {
                     newPeople.splice(activePersonIndex, 1, {
                         ...activePerson,
+                        total: parseFloat((activePerson.total + item.price).toFixed(2)),
                         items: [...activePerson.items, {
                             ...item,
                             quantity: newAmount,
@@ -60,12 +62,13 @@ export const BillItem = ({ item, index, bill, people, setPeople, activePersonInd
                 const newAmount = amount - 1
                 newPeople.splice(activePersonIndex, 1, {
                     ...activePerson,
+                    total: parseFloat((activePerson.total - item.price).toFixed(2)),
                     items: activePerson.items.map((personItem: Item) => {
                         if (personItem.name == item.name) {
                             return {
                                 ...personItem,
                                 quantity: newAmount,
-                                totalPrice: personItem.totalPrice || 0 - item.price
+                                totalPrice:  newAmount * item.price
                             }
                         }
                         return personItem

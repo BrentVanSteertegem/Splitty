@@ -16,9 +16,9 @@ export const StCenteredContainer = styled(View)`
     ${DefaultStyles.centered}
 `
 
-export const StFlexEndContainer = styled(View)`
+export const StJustifyEndContainer = styled(View)`
     ${DefaultStyles.container}
-    ${DefaultStyles.flexEnd}
+    justify-content: flex-end;
 `
 
 export const StFullScreenContainer = styled(View)`
@@ -26,7 +26,7 @@ export const StFullScreenContainer = styled(View)`
     min-height: ${Dimensions.get('window').height - 136}px;
 `
 
-export const StRowContainer = styled(View)`
+export const StAlignEndContainer = styled(View)`
     ${DefaultStyles.container}
-    flex-direction: row;
+    align-items: flex-end;
 `

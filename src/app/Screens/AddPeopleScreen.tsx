@@ -1,9 +1,8 @@
 import { useEffect, useState, useRef } from 'react'
 import { ScrollView } from 'react-native'
 import { Navigation } from '../../core/navigation'
-import { Button, CenteredContainer, ContentContainer, LargeVerticalPadding, FlexEndContainer, Text, TextInput, SmallVerticalPadding, MediumVerticalPadding, PeopleSetter } from '../Components'
+import { Button, CenteredContainer, ContentContainer, LargeVerticalPadding, FlexEndContainer, Text, TextInput, SmallVerticalPadding, MediumVerticalPadding, PeopleSetter, FullScreenContainer } from '../Components'
 import { PersonProps } from '../types'
-import { FullScreenContainer } from '../Components/Design/Container/FullScreenContainer'
 import { MediumHorizontalPadding } from '../Components'
 
 const AddPeopleScreen = ({ navigation, route }) => {

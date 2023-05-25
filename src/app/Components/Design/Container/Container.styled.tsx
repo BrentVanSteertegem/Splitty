@@ -22,5 +22,11 @@ export const StFlexEndContainer = styled(View)`
 `
 
 export const StFullScreenContainer = styled(View)`
+    ${DefaultStyles.container}
     min-height: ${Dimensions.get('window').height - 136}px;
+`
+
+export const StRowContainer = styled(View)`
+    ${DefaultStyles.container}
+    flex-direction: row;
 `

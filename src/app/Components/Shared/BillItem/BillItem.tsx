@@ -17,7 +17,7 @@ type BillItemProps = {
 export const BillItem = ({ item, index, bill, people, setPeople, activePersonIndex }: BillItemProps) => {
     const activePerson = people[activePersonIndex]
     const [amount, setAmount] = useState(activePerson.items.find((personItem: Item) => personItem.name == item.name)?.quantity || 0)
-    const [remaining, setRemaining] = useState(item.remaining!)
+    const [remaining, setRemaining] = useState(item.quantity)
 
     useEffect(() => {
         setAmount(activePerson.items.find((personItem: Item) => personItem.name == item.name)?.quantity || 0)

@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
-import { Text } from 'react-native'
+import { useIsFocused } from '@react-navigation/native'
 import { Camera, CameraType } from 'expo-camera'
-import { Button, Camera as StCamera, Container, ContentContainer, JustifyEndContainer, CenteredContainer, SmallVerticalPadding } from '../Components'
+import { Button, Camera as StCamera, Container, ContentContainer, JustifyEndContainer, CenteredContainer, SmallVerticalPadding, Text } from '../Components'
 import { processBillAsync } from '../../core/ocr/ProcessBillAsync'
 import { Bill } from '../types'
 import { Navigation } from '../../core/navigation'
@@ -58,6 +58,7 @@ const testingBill: Bill = {
 const ScanScreen = ({ navigation }) => {
   const [permission, requestPermission] = Camera.useCameraPermissions()
   const cameraRef = useRef<Camera>(null)
+  const isFocused = useIsFocused()
   // const [data, setData] = useState<Bill | undefined>() // TODO: remove this after testing
   
   if (!permission) {
@@ -126,16 +127,18 @@ const ScanScreen = ({ navigation }) => {
 
   return (
     <Container>
-      <StCamera
-        type={CameraType.back}
-        ref={cameraRef}
-      >
-        <ContentContainer>
-          <JustifyEndContainer>
-            <Button fontSize='large' size='full-width' onPress={onScan}>Scan</Button>
-          </JustifyEndContainer>
-        </ContentContainer>
-      </StCamera>
+      {isFocused && permission.granted && (
+        <StCamera
+          type={CameraType.back}
+          ref={cameraRef}
+        >
+          <ContentContainer>
+            <JustifyEndContainer>
+              <Button fontSize='large' size='full-width' onPress={onScan}>Scan</Button>
+            </JustifyEndContainer>
+          </ContentContainer>
+        </StCamera>
+      )}
     </Container>
   )
 }

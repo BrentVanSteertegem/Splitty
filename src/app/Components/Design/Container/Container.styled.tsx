@@ -1,9 +1,14 @@
 import { Dimensions, View } from 'react-native'
 import styled from 'styled-components'
-import { DefaultStyles } from '../../../style'
+import { DefaultStyles, Variables } from '../../../style'
+import { StContainerProps } from './Container'
 
-export const StContainer = styled(View)`
+export const StContainer = styled(View)<StContainerProps>`
     ${DefaultStyles.container}
+    ${({ flexDirection }) => flexDirection && `flexDirection : ${flexDirection}`};
+    ${({ justifyContent }) => justifyContent && `justifyContent : ${justifyContent}`};
+    ${({ alignItems }) => alignItems && `alignItems : ${alignItems}`};
+    ${({ gap }) => gap && `gap : ${gap}px`};
 `
 
 export const StContentContainer = styled(View)`
@@ -16,17 +21,7 @@ export const StCenteredContainer = styled(View)`
     ${DefaultStyles.centered}
 `
 
-export const StJustifyEndContainer = styled(View)`
-    ${DefaultStyles.container}
-    justify-content: flex-end;
-`
-
 export const StFullScreenContainer = styled(View)`
     ${DefaultStyles.container}
     min-height: ${Dimensions.get('window').height - 136}px;
-`
-
-export const StAlignEndContainer = styled(View)`
-    ${DefaultStyles.container}
-    align-items: flex-end;
 `

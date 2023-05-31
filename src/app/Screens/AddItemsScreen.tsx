@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ScrollView } from 'react-native'
-import { BillItemsList, Button, ContentContainer, JustifyEndContainer, FullScreenContainer, LargeVerticalPadding, MediumVerticalPadding, PersonSelector, RowContainer, SmallVerticalPadding, AlignEndContainer } from '../Components'
+import { BillItemsList, Button, Container, ContentContainer, FullScreenContainer, LargeVerticalPadding, MediumVerticalPadding, PersonSelector, SmallVerticalPadding } from '../Components'
 import { Navigation } from '../../core/navigation'
 
 const AddItemsScreen = ({ navigation, route }) => {
@@ -26,8 +26,12 @@ const AddItemsScreen = ({ navigation, route }) => {
             activePersonIndex={activePersonIndex}
           />
           <MediumVerticalPadding />
-          <AlignEndContainer>
-            <JustifyEndContainer>
+          <Container
+            alignItems='flex-end'  
+          >
+            <Container
+              justifyContent='flex-end'
+            >
               <Button
                 onPress={() => navigation.navigate(Navigation.SCANNAVIGATOR, { 
                   screen: Navigation.ACCEPTRESULT,
@@ -41,9 +45,9 @@ const AddItemsScreen = ({ navigation, route }) => {
               >
                 Next
               </Button>
-            </JustifyEndContainer>
+            </Container>
             <SmallVerticalPadding />
-          </AlignEndContainer>
+          </Container>
         </ContentContainer>
       </FullScreenContainer>
     </ScrollView>

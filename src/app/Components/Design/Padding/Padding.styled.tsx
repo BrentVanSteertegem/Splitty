@@ -17,3 +17,7 @@ export const StMediumVerticalPadding = styled(View)`
 export const StSmallVerticalPadding = styled(View)`
     ${DefaultStyles.smallVerticalPadding}
 `
+
+export const StXSmallVerticalPadding = styled(View)`
+    ${DefaultStyles.xSmallVerticalPadding}
+`

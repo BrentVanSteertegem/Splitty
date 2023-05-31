@@ -86,6 +86,9 @@ export const DefaultStyles = {
     smallVerticalPadding: {
         marginTop: Sizes.medium,
     },
+    xSmallVerticalPadding: {
+        marginTop: Sizes.xxsmall,
+    },
     container: {
         flex: 1,
     },

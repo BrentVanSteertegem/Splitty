@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { useIsFocused } from '@react-navigation/native'
 import { Camera, CameraType } from 'expo-camera'
-import { Button, Camera as StCamera, Container, ContentContainer, JustifyEndContainer, CenteredContainer, SmallVerticalPadding, Text } from '../Components'
+import { Button, Camera as StCamera, Container, ContentContainer, CenteredContainer, SmallVerticalPadding, Text } from '../Components'
 import { processBillAsync } from '../../core/ocr/ProcessBillAsync'
 import { Bill } from '../types'
 import { Navigation } from '../../core/navigation'
@@ -133,9 +133,11 @@ const ScanScreen = ({ navigation }) => {
           ref={cameraRef}
         >
           <ContentContainer>
-            <JustifyEndContainer>
+            <Container
+              justifyContent='flex-end'
+            >
               <Button fontSize='large' size='full-width' onPress={onScan}>Scan</Button>
-            </JustifyEndContainer>
+            </Container>
           </ContentContainer>
         </StCamera>
       )}

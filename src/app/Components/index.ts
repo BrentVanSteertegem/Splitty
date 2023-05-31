@@ -1,6 +1,7 @@
 export * from './Design/Button'
 export * from './Design/Card'
 export * from './Design/Container'
+export * from './Design/Divider'
 export * from './Design/Icon'
 export * from './Design/Input'
 export * from './Design/Modal'

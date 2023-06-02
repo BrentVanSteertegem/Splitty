@@ -42,6 +42,8 @@ export type Bill = {
     total: number
     currency: string
     name?: string
+    date: string
+    people: Person[]
 }
 
 export type Item = {
@@ -53,7 +55,7 @@ export type Item = {
     notes?: string[]
 }
 
-export type PersonProps = {
+export type Person = {
     id: number
     name: string
     items: Item[]

@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import Constants from 'expo-constants'
 import { Bill, Entity, Item } from '../../app/types'
 
@@ -27,7 +28,14 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
       const bill: Bill = {
         items: [],
         total: 0,
-        currency: ''
+        currency: '',
+        date: format(new Date(), 'dd/MM/yyyy'),
+        people: [{
+          id: 0,
+          name: 'You',
+          items: [],
+          total: 0
+        }],
       }
       json.document.entities.forEach((entity: Entity) => {
         switch (entity.type){
@@ -35,6 +43,7 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
             const item: Item = {
               name:'',
               quantity: 0,
+              price: 0,
               totalPrice: 0,
               notes: [],
             }

@@ -1,6 +1,6 @@
 import { ScrollView, View } from 'react-native'
 import { Button, Card, Container, ContentContainer, Divider, LargeVerticalPadding, SmallVerticalPadding, Text, XSmallVerticalPadding } from '../Components'
-import { Bill, PersonProps } from '../types'
+import { Bill, Person } from '../types'
 import { Variables } from '../style'
 import { Navigation } from '../../core/navigation'
 import { getData, storeData } from '../../core/storage/StoreData'
@@ -35,7 +35,7 @@ const AcceptResultScreen = ({ navigation, route }) => {
       <ContentContainer>
         <Text fontSize='small'>You can view your splitted bill below. Press “complete” to accept this result or press “edit” to change the result.</Text>
         <LargeVerticalPadding />
-        {people.map((person: PersonProps, index: number) => (
+        {people.map((person: Person, index: number) => (
           <View key={index}>
                <Card>
                 <Text>{person.name}</Text>

@@ -1,11 +1,11 @@
-import { Bill, Item, PersonProps } from '../../../types'
+import { Bill, Item, Person } from '../../../types'
 import { BillItem } from '../BillItem/BillItem'
 import { StBillItemsList } from './BillItemsList.styled'
 
 type BillItemsListProps = {
     bill: Bill
-    people: PersonProps[]
-    setPeople: (people: PersonProps[]) => void
+    people: Person[]
+    setPeople: (people: Person[]) => void
     activePersonIndex: number
 }
 

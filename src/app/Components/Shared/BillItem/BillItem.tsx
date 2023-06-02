@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { View } from 'react-native'
-import { Bill, Item, PersonProps } from '../../../types'
+import { Bill, Item, Person } from '../../../types'
 import { Text } from '../../Design/Text'
 import { AmountSelector } from '../AmountSelector'
 import { StBillItem } from './BillItem.styled'
@@ -9,8 +9,8 @@ type BillItemProps = {
     item: Item
     index: number
     bill: Bill
-    people: PersonProps[]
-    setPeople: (people: PersonProps[]) => void
+    people: Person[]
+    setPeople: (people: Person[]) => void
     activePersonIndex: number
 }
 

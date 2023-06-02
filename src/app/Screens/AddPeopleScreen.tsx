@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { ScrollView } from 'react-native'
 import { Navigation } from '../../core/navigation'
 import { Button, CenteredContainer, ContentContainer, LargeVerticalPadding, Text, TextInput, SmallVerticalPadding, MediumVerticalPadding, PeopleSetter, FullScreenContainer, Container } from '../Components'
-import { PersonProps } from '../types'
+import { Person } from '../types'
 import { MediumHorizontalPadding } from '../Components'
 
 const AddPeopleScreen = ({ navigation, route }) => {
@@ -14,7 +14,7 @@ const AddPeopleScreen = ({ navigation, route }) => {
     }
   }, [])
   
-  const [people, setPeople] = useState<PersonProps[]>(paramsPeople || [{
+  const [people, setPeople] = useState<Person[]>(paramsPeople || [{
     id: 0,
     name: 'You',
     items: [],

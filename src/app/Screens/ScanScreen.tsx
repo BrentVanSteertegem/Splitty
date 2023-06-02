@@ -1,12 +1,20 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { useIsFocused } from '@react-navigation/native'
 import { Camera, CameraType } from 'expo-camera'
 import { Button, Camera as StCamera, Container, ContentContainer, CenteredContainer, SmallVerticalPadding, Text } from '../Components'
 import { processBillAsync } from '../../core/ocr/ProcessBillAsync'
 import { Bill } from '../types'
 import { Navigation } from '../../core/navigation'
+import { format } from 'date-fns'
 
 const testingBill: Bill = {
+  date: format(new Date(), 'dd/MM/yyyy'),
+  people: [{
+    id: 0,
+    name: 'You',
+    items: [],
+    total: 0
+  }],
   items: [
     {
       name: 'BICKY CRISPY',
@@ -116,7 +124,7 @@ const ScanScreen = ({ navigation }) => {
       navigation.navigate(Navigation.SCANNAVIGATOR, {
         screen: Navigation.ADDPEOPLE,
         params: {
-          bill: testingBill
+          bill: { ...testingBill }
         },
       })
       return

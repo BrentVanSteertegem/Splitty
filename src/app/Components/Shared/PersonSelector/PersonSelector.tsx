@@ -1,12 +1,12 @@
 import { Pressable, ScrollView, View } from 'react-native'
 import { PersonPreview } from '../../Design/PersonPreview'
 import { Variables } from '../../../style'
-import { PersonProps } from '../../../types'
+import { Person } from '../../../types'
 import { StActivePersonPreviewContainer, StPersonSelector } from './PersonSelector.styled'
 import { PersonPreviewBubbleColors } from '../../../style/PersonPreviewBubbleColors'
 
 type PersonSelectorProps = {
-    people: PersonProps[]
+    people: Person[]
     activePersonIndex: number
     setActivePersonIndex: (index: number) => void
 }

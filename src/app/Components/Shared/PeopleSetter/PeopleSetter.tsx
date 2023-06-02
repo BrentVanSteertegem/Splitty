@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Pressable } from 'react-native'
-import { PersonProps } from '../../../types'
+import { Person } from '../../../types'
 import { Button } from '../../Design/Button'
 import { PersonPreview } from '../../Design/PersonPreview'
 import { Modal } from '../../Design/Modal'
@@ -11,8 +11,8 @@ import { PersonPreviewBubbleColors } from '../../../style/PersonPreviewBubbleCol
 import { MediumHorizontalPadding } from '../../Design/Padding'
 
 type PeopleSetterProps = {
-    people: PersonProps[]
-    setPeople: (people: PersonProps[]) => void
+    people: Person[]
+    setPeople: (people: Person[]) => void
 }
 
 export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
@@ -60,7 +60,7 @@ export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
         )
     }
     
-    const renderPeople = (people: PersonProps[]) => {
+    const renderPeople = (people: Person[]) => {
         const deletePersonPreview = (name: string) => {
             people.splice(people.findIndex(person => person.name == name), 1)
             setPeople([...people])

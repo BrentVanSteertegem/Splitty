@@ -55,8 +55,7 @@ const ScanNavigator = ({ navigation }) => {
                                         {
                                             screen: Navigation.ADDPEOPLE,
                                             params: {
-                                                bill: route.params.bill!,
-                                                people: route.params.people!
+                                                bill: route.params.bill!
                                             }
                                         }
                                     )
@@ -84,8 +83,7 @@ const ScanNavigator = ({ navigation }) => {
                                         {
                                             screen: Navigation.ADDITEMS,
                                             params: {
-                                                bill: route.params.bill!,
-                                                people: route.params.people!
+                                                bill: route.params.bill!
                                             }
                                         }
                                     )

@@ -13,13 +13,7 @@ const AcceptResultScreen = ({ navigation, route }) => {
     bills.push(bill)
     storeData('bills', bills)
     navigation.navigate(Navigation.SCAN, {
-      bill: null,
-      people: [{
-        id: 0,
-        name: 'You',
-        items: [],
-        total: 0
-      }],
+      bill: null
     })
     navigation.navigate(
       Navigation.BILLNAVIGATOR, 
@@ -110,8 +104,7 @@ const AcceptResultScreen = ({ navigation, route }) => {
                 {
                   screen: Navigation.ADDITEMS,
                   params: {
-                    bill: route.params.bill!,
-                    people: route.params.people!
+                    bill: route.params.bill!
                   }
                 }
               )

@@ -6,7 +6,7 @@ import { Person } from '../types'
 import { MediumHorizontalPadding } from '../Components'
 
 const AddPeopleScreen = ({ navigation, route }) => {
-  const { bill, people: paramsPeople } = route.params
+  const { bill } = route.params
   
   useEffect(() => {
     if (!bill) {
@@ -14,13 +14,13 @@ const AddPeopleScreen = ({ navigation, route }) => {
     }
   }, [])
   
-  const [people, setPeople] = useState<Person[]>(paramsPeople || [{
-    id: 0,
-    name: 'You',
-    items: [],
-    total: 0
-  }])
+  const [people, setPeople] = useState<Person[]>(bill.people)
   
+  const addPerson = (newPeople: Person[]) => {
+    bill.people = newPeople
+    setPeople(newPeople)
+  }
+
   const setBillName = (text: string) => {
     bill.name = text
   }
@@ -48,7 +48,7 @@ const AddPeopleScreen = ({ navigation, route }) => {
           </MediumHorizontalPadding>
           <PeopleSetter
             people={people}
-            setPeople={setPeople}
+            setPeople={addPerson}
             />
           <MediumVerticalPadding />
           <CenteredContainer>

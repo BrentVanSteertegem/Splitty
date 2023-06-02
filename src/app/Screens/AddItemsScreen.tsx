@@ -2,11 +2,17 @@ import { useState } from 'react'
 import { ScrollView } from 'react-native'
 import { BillItemsList, Button, Container, ContentContainer, FullScreenContainer, LargeVerticalPadding, MediumVerticalPadding, PersonSelector, SmallVerticalPadding } from '../Components'
 import { Navigation } from '../../core/navigation'
+import { Person } from '../types'
 
 const AddItemsScreen = ({ navigation, route }) => {
-  const { bill, people: paramsPeople } = route.params
+  const { bill } = route.params
 
-  const [people, setPeople] = useState(paramsPeople)
+  const [people, setPeople] = useState(bill.people)
+  const updatePeople = (newPeople: Person[]) => {
+    bill.people = newPeople
+    setPeople(newPeople)
+  }
+
   const [activePersonIndex, setActivePersonIndex] = useState(0)
 
   return (
@@ -22,7 +28,7 @@ const AddItemsScreen = ({ navigation, route }) => {
           <BillItemsList
             bill={bill}
             people={people}
-            setPeople={setPeople}
+            setPeople={updatePeople}
             activePersonIndex={activePersonIndex}
           />
           <MediumVerticalPadding />

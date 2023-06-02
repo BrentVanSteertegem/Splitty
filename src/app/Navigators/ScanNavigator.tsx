@@ -46,7 +46,7 @@ const ScanNavigator = ({ navigation }) => {
                 component={AddItemsScreen}
                 options={
                     ({ route }) => ({
-                        title: route.params?.billName || 'New bill',
+                        title: route.params?.bill.name || 'New bill',
                         headerLeft: () => (
                             <HeaderButtonLeft
                                 onPress={
@@ -56,8 +56,7 @@ const ScanNavigator = ({ navigation }) => {
                                             screen: Navigation.ADDPEOPLE,
                                             params: {
                                                 bill: route.params.bill!,
-                                                people: route.params.people!,
-                                                billName: route.params?.billName
+                                                people: route.params.people!
                                             }
                                         }
                                     )
@@ -76,7 +75,7 @@ const ScanNavigator = ({ navigation }) => {
                 component={AcceptResultScreen}
                 options={
                     ({ route }) => ({
-                        title: route.params.billName || 'New bill',
+                        title: route.params.bill.name || 'New bill',
                         headerLeft: () => (
                             <HeaderButtonLeft
                                 onPress={
@@ -86,8 +85,7 @@ const ScanNavigator = ({ navigation }) => {
                                             screen: Navigation.ADDITEMS,
                                             params: {
                                                 bill: route.params.bill!,
-                                                people: route.params.people!,
-                                                billName: route.params?.billName
+                                                people: route.params.people!
                                             }
                                         }
                                     )

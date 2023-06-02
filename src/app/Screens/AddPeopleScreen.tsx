@@ -6,7 +6,7 @@ import { PersonProps } from '../types'
 import { MediumHorizontalPadding } from '../Components'
 
 const AddPeopleScreen = ({ navigation, route }) => {
-  const { bill, people: paramsPeople, billName: paramsBillName } = route.params
+  const { bill, people: paramsPeople } = route.params
   
   useEffect(() => {
     if (!bill) {
@@ -14,7 +14,6 @@ const AddPeopleScreen = ({ navigation, route }) => {
     }
   }, [])
   
-  const [billName, setBillName] = useState<string>(paramsBillName || '')
   const [people, setPeople] = useState<PersonProps[]>(paramsPeople || [{
     id: 0,
     name: 'You',
@@ -22,7 +21,12 @@ const AddPeopleScreen = ({ navigation, route }) => {
     total: 0
   }])
   
+  const setBillName = (text: string) => {
+    bill.name = text
+  }
+
   const svRef = useRef<ScrollView>(null)
+  
   return bill ? (
     <ScrollView
       ref={svRef}
@@ -55,8 +59,7 @@ const AddPeopleScreen = ({ navigation, route }) => {
                 onPress={() => navigation.navigate(
                   Navigation.SCANNAVIGATOR, { 
                     screen: Navigation.ADDITEMS, 
-                    params: { 
-                      billName,
+                    params: {
                       people,
                       bill
                     } 

@@ -1,11 +1,33 @@
 import { ScrollView, View } from 'react-native'
 import { Button, Card, Container, ContentContainer, Divider, LargeVerticalPadding, SmallVerticalPadding, Text, XSmallVerticalPadding } from '../Components'
-import { PersonProps } from '../types'
+import { Bill, PersonProps } from '../types'
 import { Variables } from '../style'
 import { Navigation } from '../../core/navigation'
+import { getData, storeData } from '../../core/storage/StoreData'
 
 const AcceptResultScreen = ({ navigation, route }) => {
-  const { bill, people, billName } = route.params
+  const { bill, people } = route.params
+
+  const onComplete = async () => {
+    const bills: Bill[] = await getData('bills') || []
+    bills.push(bill)
+    storeData('bills', bills)
+    navigation.navigate(Navigation.SCAN, {
+      bill: null,
+      people: [{
+        id: 0,
+        name: 'You',
+        items: [],
+        total: 0
+      }],
+    })
+    navigation.navigate(
+      Navigation.BILLNAVIGATOR, 
+      {
+        screen: Navigation.BILLS,
+      }
+    )
+  }
 
   return (
     <ScrollView>
@@ -89,8 +111,7 @@ const AcceptResultScreen = ({ navigation, route }) => {
                   screen: Navigation.ADDITEMS,
                   params: {
                     bill: route.params.bill!,
-                    people: route.params.people!,
-                    billName: route.params?.billName
+                    people: route.params.people!
                   }
                 }
               )
@@ -99,26 +120,7 @@ const AcceptResultScreen = ({ navigation, route }) => {
             Edit
           </Button>
           <Button
-            onPress={
-              () => {
-                navigation.navigate(Navigation.SCAN, {
-                  bill: null,
-                  people: [{
-                    id: 0,
-                    name: 'You',
-                    items: [],
-                    total: 0
-                  }],
-                  billName: null,
-                })
-                navigation.navigate(
-                  Navigation.BILLNAVIGATOR, 
-                  {
-                    screen: Navigation.BILLS,
-                  }
-                )
-              }
-            }
+            onPress={onComplete}
           >
             Complete
           </Button>

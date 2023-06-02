@@ -41,6 +41,7 @@ export type Bill = {
     items: Item[]
     total: number
     currency: string
+    name?: string
 }
 
 export type Item = {

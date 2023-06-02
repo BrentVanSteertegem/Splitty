@@ -4,7 +4,7 @@ import { BillItemsList, Button, Container, ContentContainer, FullScreenContainer
 import { Navigation } from '../../core/navigation'
 
 const AddItemsScreen = ({ navigation, route }) => {
-  const { bill, people: paramsPeople, billName } = route.params
+  const { bill, people: paramsPeople } = route.params
 
   const [people, setPeople] = useState(paramsPeople)
   const [activePersonIndex, setActivePersonIndex] = useState(0)
@@ -37,8 +37,7 @@ const AddItemsScreen = ({ navigation, route }) => {
                   screen: Navigation.ACCEPTRESULT,
                   params: {
                     bill,
-                    people,
-                    billName
+                    people
                   }
                 })}
                 faIconRight='chevron-right'

@@ -1,7 +1,6 @@
 import { ScrollView, View } from 'react-native'
-import { Button, Card, Container, ContentContainer, Divider, LargeVerticalPadding, SmallVerticalPadding, Text, XSmallVerticalPadding } from '../Components'
+import { Button, Container, ContentContainer, LargeVerticalPadding, PersonCard, SmallVerticalPadding, Text } from '../Components'
 import { Bill, Person } from '../types'
-import { Variables } from '../style'
 import { Navigation } from '../../core/navigation'
 import { getData, storeData } from '../../core/storage/StoreData'
 
@@ -31,63 +30,10 @@ const AcceptResultScreen = ({ navigation, route }) => {
         <LargeVerticalPadding />
         {people.map((person: Person, index: number) => (
           <View key={index}>
-               <Card>
-                <Text>{person.name}</Text>
-                <XSmallVerticalPadding />
-                {person.items.map((item, itemIndex) => (
-                  <View key={itemIndex}>
-                    <Container
-                      gap={Variables.spacing.xsmall}
-                      flexDirection='row'
-                    >
-                      <Text
-                        fontSize='small'
-                      >
-                        {item.quantity}x
-                      </Text>
-                      <Container
-                        flexDirection='row'
-                        justifyContent='space-between'
-                      >
-                        <View>
-                          <Text
-                            fontSize='small'
-                          >{item.name}</Text>
-                          <Text
-                            grayedOut={true}
-                            fontSize='small'
-                          >
-                            {bill.currency.length == 1 && `${bill.currency} `}
-                            {item.price}
-                            {bill.currency.length > 1 && ` ${bill.currency}`}
-                          </Text>
-                        </View>
-                        <Text
-                          color={Variables.colors.red}
-                          fontSize='small'
-                        >
-                            {bill.currency.length == 1 && `${bill.currency} `}
-                            {item.totalPrice}
-                            {bill.currency.length > 1 && ` ${bill.currency}`}
-                        </Text>
-                      </Container>
-                    </Container>
-                  </View>
-                ))}
-                <Divider />
-                <Container
-                  flexDirection='row'
-                  justifyContent='flex-end'
-                >
-                  <Text
-                    color={Variables.colors.red}
-                  >
-                    {bill.currency.length == 1 && `${bill.currency} `}
-                    {person.total}
-                    {bill.currency.length > 1 && ` ${bill.currency}`}
-                  </Text>
-                </Container>
-            </Card>
+            <PersonCard
+              person={person}
+              bill={bill}
+            />
             <SmallVerticalPadding />
           </View>
         ))}

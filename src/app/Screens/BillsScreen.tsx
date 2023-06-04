@@ -3,7 +3,7 @@ import { useIsFocused } from '@react-navigation/native'
 import { Pressable, ScrollView, View } from 'react-native'
 import { Bill, Person } from '../types'
 import { getData } from '../../core/storage/StoreData'
-import { Container, ContentContainer, Divider, SmallVerticalPadding, Text } from '../Components'
+import { ContentContainer, Divider, SmallVerticalPadding, Text } from '../Components'
 import { Variables } from '../style'
 import { Navigation } from '../../core/navigation'
 
@@ -44,9 +44,12 @@ const BillsScreen = ({ navigation }) => {
             )}
             key={index}
           >
-            <Container
-              flexDirection='row'
-              justifyContent='space-between'
+            <View // I'm using a styled View because a styled component doesn't work here
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-between'
+              }}
             >
               <View>
                 <Text
@@ -79,7 +82,7 @@ const BillsScreen = ({ navigation }) => {
                 {bill.total}
                 {bill.currency.length > 1 && ` ${bill.currency}`}
               </Text>
-            </Container>
+            </View>
             <SmallVerticalPadding />
             {index < bills.length - 1 &&
               <>

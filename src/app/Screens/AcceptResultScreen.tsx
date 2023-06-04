@@ -9,7 +9,7 @@ const AcceptResultScreen = ({ navigation, route }) => {
 
   const onComplete = async () => {
     const bills: Bill[] = await getData('bills') || []
-    bills.push(bill)
+    bills.unshift(bill)
     storeData('bills', bills)
     navigation.navigate(Navigation.SCAN, {
       bill: null

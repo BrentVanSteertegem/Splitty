@@ -1,11 +1,12 @@
+import { Pressable } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Navigation } from '../../core/navigation'
 import { BillDetailScreen, BillsScreen } from '../Screens'
-import { DefaultNavigatorOptions } from '../style'
-import { HeaderButtonLeft } from '../Components'
+import { DefaultNavigatorOptions, Variables } from '../style'
+import { HeaderButtonLeft, Icon } from '../Components'
 import { HeaderTitle } from '../Components/Design/Text/HeaderTitle'
 
-const BillNavigator = ({ navigation, route }) => {
+const BillNavigator = ({ navigation }) => {
     const Stack = createNativeStackNavigator()
 
     return (
@@ -19,7 +20,7 @@ const BillNavigator = ({ navigation, route }) => {
                 component={BillDetailScreen}
                 options={
                     ({ route }) => ({
-                        title: route.params!.bill.name || 'New bill',
+                        title: route.params!.bills[route.params!.index].name || 'New bill',
                         headerLeft: () => (
                             <HeaderButtonLeft
                                 onPress={() => navigation.goBack()}
@@ -28,6 +29,13 @@ const BillNavigator = ({ navigation, route }) => {
                             </HeaderButtonLeft>
                         ),
                         headerBackVisible: false,
+                        headerRight: () => (
+                            <Pressable
+                                onPress={() => window.alert('Edit bill')}
+                            >
+                                <Icon name='edit' size={Variables.sizes.headerIcon} />
+                            </Pressable>
+                        ),
                     })
                 }
             />

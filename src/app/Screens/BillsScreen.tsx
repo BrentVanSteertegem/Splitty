@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useIsFocused } from '@react-navigation/native'
 import { Pressable, ScrollView, View } from 'react-native'
-import { Bill } from '../types'
+import { Bill, Person } from '../types'
 import { getData } from '../../core/storage/StoreData'
 import { Container, ContentContainer, Divider, SmallVerticalPadding, Text } from '../Components'
 import { Variables } from '../style'
@@ -18,6 +18,14 @@ const BillsScreen = ({ navigation }) => {
     getBills()
   }, [useIsFocused()])
 
+  const getAmountWhoPaidBack = (people: Person[]) => {
+    let amount = 0
+    people.forEach((person: Person) => {
+      if (person.hasPaid) amount++
+    })
+    return amount == people.length ? 'Everyone' : amount
+  }
+
   return (
     <ScrollView>
       <SmallVerticalPadding />
@@ -28,8 +36,9 @@ const BillsScreen = ({ navigation }) => {
               Navigation.BILLNAVIGATOR, 
               { 
                 screen: Navigation.BILLDETAIL,
-                params: {
-                  bill: bill
+                params: { 
+                  bills,
+                  index
                 }
               }
             )}
@@ -40,7 +49,9 @@ const BillsScreen = ({ navigation }) => {
               justifyContent='space-between'
             >
               <View>
-                <Text>{bill.name}</Text>
+                <Text
+                  crossedOut={getAmountWhoPaidBack(bill.people) == 'Everyone' ? true : false}
+                >{bill.name}</Text>
                 <Text
                   grayedOut={true}
                   fontSize='small'
@@ -56,12 +67,13 @@ const BillsScreen = ({ navigation }) => {
                     color={Variables.colors.green}
                     fontSize='small'
                   >
-                    {'X' || 'Everyone'} paid you back
+                    {getAmountWhoPaidBack(bill.people)} paid you back
                   </Text>
                 </Text>
               </View>
               <Text
                 color={Variables.colors.red}
+                crossedOut={getAmountWhoPaidBack(bill.people) == 'Everyone' ? true : false}
               >
                 {bill.currency.length == 1 && `${bill.currency} `}
                 {bill.total}

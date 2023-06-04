@@ -7,6 +7,7 @@ export const StText = styled(Text)<StTextProps>`
     ${DefaultStyles.text}
     ${({ color }) => color && `color: ${color}`}
     ${({ grayedOut }) => grayedOut && `color: ${Variables.colors.darkGray}`}
+    ${({ crossedOut }) => crossedOut && 'text-decoration: line-through'}
     ${({ fontSize }) => 
     fontSize == 'xsmall' ? `font-size: ${Variables.textSizes.xsmall}px; line-height: ${Variables.textSizes.xsmall * 1.4}px;` : 
     fontSize == 'small' ? `font-size: ${Variables.textSizes.small}px; line-height: ${Variables.textSizes.small * 1.4}px;` : 

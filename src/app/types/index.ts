@@ -60,4 +60,5 @@ export type Person = {
     name: string
     items: Item[]
     total: number
+    hasPaid?: boolean
 }

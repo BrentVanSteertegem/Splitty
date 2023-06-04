@@ -1,20 +1,18 @@
 import { Pressable, Text } from 'react-native'
+import { Variables } from '../../../style'
 import { StButtonContainer, StButtonText, StNegativeButtonContainer, StSecondaryButtonContainer, StTextButtonContainer } from './Button.styled'
 import { Icon } from '../Icon'
 
 export type ButtonContainerProps = {
-    type?: 'primary' | 'secondary' | 'text' | 'negative',
+    type?: 'primary' | 'secondary' | 'text' | 'negative' | 'negative-text',
     size?: 'full-width' | 'fit-content',
-}
-
-export type ButtonTextProps = {
-    fontSize?: 'medium' | 'large',
 }
 
 type InnerButtonProps = ButtonTextProps & {
     children?: JSX.Element | string,
     faIconLeft?: string,
     faIconRight?: string,
+    color?: string,
 }
 
 type ButtonProps = ButtonContainerProps & InnerButtonProps & {
@@ -42,6 +40,12 @@ const renderButtonContainer = ({children, type, fontSize, faIconLeft, faIconRigh
                     {renderButtonContent({children, fontSize, faIconLeft, faIconRight})}
                 </StNegativeButtonContainer>
             )
+        case 'negative-text':
+            return (
+                <StTextButtonContainer>
+                    {renderButtonContent({children, fontSize, faIconLeft, faIconRight, color: Variables.colors.red})}
+                </StTextButtonContainer>
+            )
         default:
             return (
                 <StButtonContainer>
@@ -51,12 +55,27 @@ const renderButtonContainer = ({children, type, fontSize, faIconLeft, faIconRigh
     }
 }
 
-const renderButtonContent = ({children, fontSize, faIconLeft, faIconRight}: InnerButtonProps) => {
+const renderButtonContent = ({children, fontSize, faIconLeft, faIconRight, color}: InnerButtonProps) => {
     return (
         <>
-            {faIconLeft && <Icon name={faIconLeft}/>}
-            <StButtonText fontSize={fontSize}>{children}</StButtonText>
-            {faIconRight && <Icon name={faIconRight}/>}
+            {faIconLeft && 
+                <Icon
+                    name={faIconLeft}
+                    color={color}
+                />
+            }
+            <StButtonText
+                fontSize={fontSize}
+                color={color}
+            >
+                {children}
+            </StButtonText>
+            {faIconRight &&
+                <Icon
+                    name={faIconRight}
+                    
+                />
+            }
         </>
     )
 }

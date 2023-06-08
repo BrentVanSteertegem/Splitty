@@ -45,32 +45,31 @@ const AddPeopleScreen = ({ navigation, route }) => {
           <MediumVerticalPadding />
           <MediumHorizontalPadding>
             <Text fontSize='large'>People</Text>
-          </MediumHorizontalPadding>
-          <PeopleSetter
-            people={people}
-            setPeople={addPerson}
+            <PeopleSetter
+              people={people}
+              setPeople={addPerson}
             />
+          </MediumHorizontalPadding>
           <MediumVerticalPadding />
-          <CenteredContainer>
-            <Container
-              justifyContent='flex-end'
+          <Container
+            justifyContent='flex-end'
+          >
+            <Button
+              fontSize='large'
+              size='full-width'
+              onPress={() => navigation.navigate(
+                Navigation.SCANNAVIGATOR, { 
+                  screen: Navigation.ADDITEMS, 
+                  params: {
+                    people,
+                    bill
+                  } 
+                }
+              )}
             >
-              <Button
-                onPress={() => navigation.navigate(
-                  Navigation.SCANNAVIGATOR, { 
-                    screen: Navigation.ADDITEMS, 
-                    params: {
-                      people,
-                      bill
-                    } 
-                  }
-                  )}
-                  >
-                Split expenses
-              </Button>
-              <SmallVerticalPadding />
-            </Container>
-          </CenteredContainer>
+              Split bill
+            </Button>
+          </Container>
         </ContentContainer>
       </FullScreenContainer>
     </ScrollView>

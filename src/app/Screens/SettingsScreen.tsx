@@ -1,3 +1,4 @@
+import { Variables } from '../style'
 import { storeData } from '../../core/storage/StoreData'
 import { Button, ContentContainer, LargeVerticalPadding } from '../Components'
 
@@ -13,7 +14,8 @@ const SettingsScreen = () => {
         <Button
           onPress={deleteBills}
           faIconLeft='times-circle'
-          type='negative-text'
+          type='text'
+          color={Variables.colors.red}
         >
           Delete all bills
         </Button>

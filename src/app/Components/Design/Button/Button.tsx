@@ -2,17 +2,17 @@ import { Pressable, Text } from 'react-native'
 import { Variables } from '../../../style'
 import { StButtonContainer, StButtonText, StNegativeButtonContainer, StSecondaryButtonContainer, StTextButtonContainer } from './Button.styled'
 import { Icon } from '../Icon'
+import { StTextProps } from '../Text'
 
 export type ButtonContainerProps = {
-    type?: 'primary' | 'secondary' | 'text' | 'negative' | 'negative-text',
+    type?: 'primary' | 'secondary' | 'text' | 'negative',
     size?: 'full-width' | 'fit-content',
 }
 
-type InnerButtonProps = ButtonTextProps & {
+type InnerButtonProps = Partial<StTextProps> & {
     children?: JSX.Element | string,
     faIconLeft?: string,
     faIconRight?: string,
-    color?: string,
 }
 
 type ButtonProps = ButtonContainerProps & InnerButtonProps & {
@@ -20,7 +20,7 @@ type ButtonProps = ButtonContainerProps & InnerButtonProps & {
     disabled?: boolean,
 }
 
-const renderButtonContainer = ({children, type, fontSize, faIconLeft, faIconRight}: InnerButtonProps & ButtonContainerProps) => {
+const renderButtonContainer = ({children, type, fontSize, faIconLeft, faIconRight, color}: InnerButtonProps & ButtonContainerProps) => {
     switch (type) {
         case 'secondary':
             return (
@@ -31,7 +31,7 @@ const renderButtonContainer = ({children, type, fontSize, faIconLeft, faIconRigh
         case 'text':
             return (
                 <StTextButtonContainer>
-                    {renderButtonContent({children, fontSize, faIconLeft, faIconRight})}
+                    {renderButtonContent({children, fontSize, faIconLeft, faIconRight, color: color || Variables.colors.text})}
                 </StTextButtonContainer>
             )
         case 'negative':
@@ -39,12 +39,6 @@ const renderButtonContainer = ({children, type, fontSize, faIconLeft, faIconRigh
                 <StNegativeButtonContainer>
                     {renderButtonContent({children, fontSize, faIconLeft, faIconRight})}
                 </StNegativeButtonContainer>
-            )
-        case 'negative-text':
-            return (
-                <StTextButtonContainer>
-                    {renderButtonContent({children, fontSize, faIconLeft, faIconRight, color: Variables.colors.red})}
-                </StTextButtonContainer>
             )
         default:
             return (
@@ -80,14 +74,14 @@ const renderButtonContent = ({children, fontSize, faIconLeft, faIconRight, color
     )
 }
 
-export const Button = ({ children, type, fontSize, size, faIconLeft, faIconRight, disabled, onPress }: ButtonProps) => {
+export const Button = ({ children, type, fontSize, size, faIconLeft, faIconRight, color, disabled, onPress }: ButtonProps) => {
     return (
         <Pressable disabled={disabled} onPress={onPress}>
             {size && size == 'full-width' ?
-                renderButtonContainer({children, type, fontSize, faIconLeft, faIconRight})
+                renderButtonContainer({children, type, fontSize, faIconLeft, faIconRight, color})
             : 
             <Text> {/* By wrapping the entire button container in a text component, the container will behave as if width would be set to fit-content */}
-                {renderButtonContainer({children, type, fontSize, faIconLeft, faIconRight})}
+                {renderButtonContainer({children, type, fontSize, faIconLeft, faIconRight, color})}
             </Text>
             }
             

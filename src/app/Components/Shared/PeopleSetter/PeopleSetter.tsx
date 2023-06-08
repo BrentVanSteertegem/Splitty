@@ -9,6 +9,7 @@ import { TextInput } from '../../Design/Input'
 import { StPeoplecontainer } from './PeopleSetter.styled'
 import { PersonPreviewBubbleColors } from '../../../style/PersonPreviewBubbleColors'
 import { MediumHorizontalPadding } from '../../Design/Padding'
+import { Variables } from '../../../style'
 
 type PeopleSetterProps = {
     people: Person[]
@@ -83,15 +84,15 @@ export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
     return (
         <>
             {showModal && renderAddPersonModal()}
-            <MediumHorizontalPadding>
-                <StPeoplecontainer>
-                    {renderPeople(people)}
-                </StPeoplecontainer>
-            </MediumHorizontalPadding>
+            <StPeoplecontainer>
+                {renderPeople(people)}
+            </StPeoplecontainer>
             <Button
+                type='text'
+                color={Variables.colors.green}
                 faIconLeft='plus'
                 onPress={() => setShowModal(true)}
-                >
+            >
                 Add person
             </Button>
         </>

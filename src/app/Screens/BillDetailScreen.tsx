@@ -1,4 +1,5 @@
 import { ScrollView, View } from 'react-native'
+import { useIsFocused } from '@react-navigation/native'
 import { ContentContainer, PersonCard, SmallVerticalPadding } from '../Components'
 import { NavigationProps, Person } from '../types'
 import { storeData } from '../../core/storage/StoreData'
@@ -12,7 +13,7 @@ const BillDetailScreen = ({ navigation, route }: NavigationProps) => {
     navigation.setOptions({
       title: bills[index].name
     })
-  }, [navigation])
+  }, [useIsFocused()])
 
   const updatePerson = async (person: Person, peopleIndex: number) => {
     const newBills = [...bills]

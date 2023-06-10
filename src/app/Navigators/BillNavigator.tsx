@@ -1,7 +1,7 @@
 import { Pressable } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Navigation } from '../../core/navigation'
-import { BillDetailScreen, BillsScreen, EditItemsScreen, EditPeopleScreen } from '../Screens'
+import { AcceptEditResultScreen, BillDetailScreen, BillsScreen, EditItemsScreen, EditPeopleScreen } from '../Screens'
 import { DefaultNavigatorOptions, Variables } from '../style'
 import { HeaderButtonLeft, Icon } from '../Components'
 import { HeaderTitle } from '../Components/Design/Text/HeaderTitle'
@@ -82,6 +82,32 @@ const BillNavigator = ({ navigation }) => {
                 options={
                     ({ route }) => ({
                         title: route.params!.bills[route.params!.index].name || 'Nameless bill',
+                        headerLeft: () => (
+                            <HeaderButtonLeft
+                                onPress={() => navigation.navigate(
+                                    Navigation.BILLNAVIGATOR,
+                                    {
+                                        screen: Navigation.BILLDETAIL,
+                                        params: {
+                                            bills: route.params!.bills,
+                                            index: route.params!.index
+                                        }
+                                    }
+                                )}
+                            >
+                                <HeaderTitle>&lt;</HeaderTitle>
+                            </HeaderButtonLeft>
+                        ),
+                        headerBackVisible: false,
+                    })
+                }
+            />
+            <Stack.Screen
+                name={Navigation.ACCEPTRESULT}
+                component={AcceptEditResultScreen}
+                options={
+                    ({ route }) => ({
+                        title: route.params!.bill.name || 'Nameless bill',
                         headerLeft: () => (
                             <HeaderButtonLeft
                                 onPress={() => navigation.navigate(

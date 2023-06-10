@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ScrollView } from 'react-native'
 import { Bill, Person } from '../../../types'
 import { Container, ContentContainer, FullScreenContainer } from '../../Design/Container'
@@ -6,6 +6,7 @@ import { LargeVerticalPadding, MediumVerticalPadding, SmallVerticalPadding } fro
 import { PersonSelector } from '../PersonSelector'
 import { BillItemsList } from '../BillItemsList'
 import { Button } from '../../Design/Button'
+import { useIsFocused } from '@react-navigation/native'
 
 type ManageItemsProps = {
     navigation: any
@@ -23,6 +24,10 @@ export const ManageItems = ({ navigation, bill, bills, index, ButtonsNavigator, 
       bill.people = newPeople
       setPeople(newPeople)
     }
+    useEffect(() => {
+        // Refresh people when returning from edit (or add) people screen
+        setPeople(bill.people)
+    }, [useIsFocused()])
   
     const [activePersonIndex, setActivePersonIndex] = useState(0)
   
@@ -74,7 +79,9 @@ export const ManageItems = ({ navigation, bill, bills, index, ButtonsNavigator, 
                                     screen: nextButtonScreen,
                                     params: {
                                         bill,
-                                        people
+                                        people,
+                                        bills,
+                                        index
                                     }
                                 }
                             )}

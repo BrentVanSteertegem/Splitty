@@ -37,7 +37,7 @@ export const BillItem = ({ item, index, bill, people, setPeople, activePersonInd
                                 return {
                                     ...personItem,
                                     quantity: newAmount,
-                                    totalPrice: newAmount * item.price
+                                    totalPrice: parseFloat((newAmount * item.price).toFixed(2))
                                 }
                             }
                             return personItem
@@ -68,7 +68,7 @@ export const BillItem = ({ item, index, bill, people, setPeople, activePersonInd
                             return {
                                 ...personItem,
                                 quantity: newAmount,
-                                totalPrice:  newAmount * item.price
+                                totalPrice:  parseFloat((newAmount * item.price).toFixed(2))
                             }
                         }
                         return personItem

@@ -84,7 +84,7 @@ export const ManagePeople = ({ bill, bills, index, navigation, buttonNavigator, 
                                 }
                             )}
                         >
-                            Update bill
+                            {bills ? 'Update bill' : 'Split bill'}
                         </Button>
                     </Container>
                 </ContentContainer>

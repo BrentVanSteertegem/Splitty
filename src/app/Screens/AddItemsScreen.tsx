@@ -1,61 +1,17 @@
-import { useState } from 'react'
-import { ScrollView } from 'react-native'
-import { BillItemsList, Button, Container, ContentContainer, FullScreenContainer, LargeVerticalPadding, MediumVerticalPadding, PersonSelector, SmallVerticalPadding } from '../Components'
 import { Navigation } from '../../core/navigation'
-import { Person } from '../types'
+import { ManageItems } from '../Components'
+import { NavigationProps } from '../types'
 
-const AddItemsScreen = ({ navigation, route }) => {
+const AddItemsScreen = ({ navigation, route }: NavigationProps) => {
   const { bill } = route.params
 
-  const [people, setPeople] = useState(bill.people)
-  const updatePeople = (newPeople: Person[]) => {
-    bill.people = newPeople
-    setPeople(newPeople)
-  }
-
-  const [activePersonIndex, setActivePersonIndex] = useState(0)
-
   return (
-    <ScrollView>
-      <FullScreenContainer>
-        <LargeVerticalPadding />
-        <PersonSelector
-          people={people}
-          activePersonIndex={activePersonIndex}
-          setActivePersonIndex={setActivePersonIndex}
-        />
-        <ContentContainer>
-          <BillItemsList
-            bill={bill}
-            people={people}
-            setPeople={updatePeople}
-            activePersonIndex={activePersonIndex}
-          />
-          <MediumVerticalPadding />
-          <Container
-            alignItems='flex-end'  
-          >
-            <Container
-              justifyContent='flex-end'
-            >
-              <Button
-                onPress={() => navigation.navigate(Navigation.SCANNAVIGATOR, { 
-                  screen: Navigation.ACCEPTRESULT,
-                  params: {
-                    bill,
-                    people
-                  }
-                })}
-                faIconRight='chevron-right'
-              >
-                Next
-              </Button>
-            </Container>
-            <SmallVerticalPadding />
-          </Container>
-        </ContentContainer>
-      </FullScreenContainer>
-    </ScrollView>
+    <ManageItems
+      navigation={navigation}
+      bill={bill}
+      ButtonsNavigator={Navigation.SCANNAVIGATOR}
+      nextButtonScreen={Navigation.ACCEPTRESULT}
+    />
   )
 }
 

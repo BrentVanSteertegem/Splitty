@@ -1,3 +1,14 @@
+export type NavigationProps = {
+    navigation: {
+        navigate: (screen: string, params: any) => void
+        goBack: () => void
+        setOptions: (options: any) => void
+    }
+    route: {
+        params: any
+    }       
+}
+
 export type ResponseData = {
     document: Document
     humanReviewStatus: {

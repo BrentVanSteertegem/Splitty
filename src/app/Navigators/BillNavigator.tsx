@@ -1,7 +1,7 @@
 import { Pressable } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Navigation } from '../../core/navigation'
-import { BillDetailScreen, BillsScreen } from '../Screens'
+import { BillDetailScreen, BillsScreen, EditItemsScreen, EditPeopleScreen } from '../Screens'
 import { DefaultNavigatorOptions, Variables } from '../style'
 import { HeaderButtonLeft, Icon } from '../Components'
 import { HeaderTitle } from '../Components/Design/Text/HeaderTitle'
@@ -20,7 +20,7 @@ const BillNavigator = ({ navigation }) => {
                 component={BillDetailScreen}
                 options={
                     ({ route }) => ({
-                        title: route.params!.bills[route.params!.index].name || 'New bill',
+                        title: route.params!.bills[route.params!.index].name,
                         headerLeft: () => (
                             <HeaderButtonLeft
                                 onPress={() => navigation.goBack()}
@@ -31,11 +31,74 @@ const BillNavigator = ({ navigation }) => {
                         headerBackVisible: false,
                         headerRight: () => (
                             <Pressable
-                                onPress={() => window.alert('Edit bill')}
+                                onPress={() => {
+                                    navigation.navigate(
+                                        Navigation.BILLNAVIGATOR, 
+                                        {
+                                            screen: Navigation.EDITITEMS,
+                                            params: {
+                                                bills: route.params!.bills,
+                                                index: route.params!.index
+                                            }
+                                        }
+                                    )
+                                }}
                             >
                                 <Icon name='edit' size={Variables.sizes.headerIcon} />
                             </Pressable>
                         ),
+                    })
+                }
+            />
+            <Stack.Screen
+                name={Navigation.EDITPEOPLE}
+                component={EditPeopleScreen}
+                options={
+                    ({ route }) => ({
+                        title: route.params!.bill.name || 'Nameless bill',
+                        headerLeft: () => (
+                            <HeaderButtonLeft
+                                onPress={() => navigation.navigate(
+                                    Navigation.BILLNAVIGATOR,
+                                    {
+                                        screen: Navigation.BILLDETAIL,
+                                        params: {
+                                            bills: route.params!.bills,
+                                            index: route.params!.index
+                                        }
+                                    }
+                                )}
+                            >
+                                <HeaderTitle>&lt;</HeaderTitle>
+                            </HeaderButtonLeft>
+                        ),
+                        headerBackVisible: false,
+                    })
+                }
+            />
+            <Stack.Screen
+                name={Navigation.EDITITEMS}
+                component={EditItemsScreen}
+                options={
+                    ({ route }) => ({
+                        title: route.params!.bills[route.params!.index].name || 'Nameless bill',
+                        headerLeft: () => (
+                            <HeaderButtonLeft
+                                onPress={() => navigation.navigate(
+                                    Navigation.BILLNAVIGATOR,
+                                    {
+                                        screen: Navigation.BILLDETAIL,
+                                        params: {
+                                            bills: route.params!.bills,
+                                            index: route.params!.index
+                                        }
+                                    }
+                                )}
+                            >
+                                <HeaderTitle>&lt;</HeaderTitle>
+                            </HeaderButtonLeft>
+                        ),
+                        headerBackVisible: false,
                     })
                 }
             />

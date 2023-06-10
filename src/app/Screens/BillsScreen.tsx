@@ -54,7 +54,7 @@ const BillsScreen = ({ navigation }) => {
               <View>
                 <Text
                   crossedOut={getAmountWhoPaidBack(bill.people) == 'Everyone' ? true : false}
-                >{bill.name || 'Nameless bill'}</Text>
+                >{bill.name}</Text>
                 <Text
                   grayedOut={true}
                   fontSize='small'

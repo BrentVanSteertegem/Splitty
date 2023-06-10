@@ -1,12 +1,18 @@
 import { ScrollView, View } from 'react-native'
 import { ContentContainer, PersonCard, SmallVerticalPadding } from '../Components'
-import { Person } from '../types'
+import { NavigationProps, Person } from '../types'
 import { storeData } from '../../core/storage/StoreData'
+import { useEffect } from 'react'
 
-const BillDetailScreen = ({ route }) => {
+const BillDetailScreen = ({ navigation, route }: NavigationProps) => {
   const { bills, index } = route.params
-
   const bill = bills[index]
+  
+  useEffect(() => {
+    navigation.setOptions({
+      title: bills[index].name
+    })
+  }, [navigation])
 
   const updatePerson = async (person: Person, peopleIndex: number) => {
     const newBills = [...bills]

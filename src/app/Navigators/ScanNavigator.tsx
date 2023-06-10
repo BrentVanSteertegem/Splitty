@@ -46,7 +46,7 @@ const ScanNavigator = ({ navigation }) => {
                 component={AddItemsScreen}
                 options={
                     ({ route }) => ({
-                        title: route.params?.bill.name || 'New bill',
+                        title: route.params!.bill.name || 'New bill',
                         headerLeft: () => (
                             <HeaderButtonLeft
                                 onPress={
@@ -55,7 +55,7 @@ const ScanNavigator = ({ navigation }) => {
                                         {
                                             screen: Navigation.ADDPEOPLE,
                                             params: {
-                                                bill: route.params.bill!
+                                                bill: route.params!.bill
                                             }
                                         }
                                     )
@@ -67,7 +67,6 @@ const ScanNavigator = ({ navigation }) => {
                         headerBackVisible: false,
                     })
                 }
-
             />
             <Stack.Screen
                 name={Navigation.ACCEPTRESULT}

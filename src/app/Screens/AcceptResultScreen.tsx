@@ -8,6 +8,10 @@ const AcceptResultScreen = ({ navigation, route }) => {
   const { bill, people } = route.params
 
   const onComplete = async () => {
+    if (!bill.name || bill.name.trim().length == 0) {
+      bill.name = 'Nameless bill'
+    }
+    
     const bills: Bill[] = await getData('bills') || []
     bills.unshift(bill)
     storeData('bills', bills)

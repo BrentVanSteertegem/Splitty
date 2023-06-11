@@ -22,11 +22,9 @@ export const AcceptResult = ({ navigation, people, bill, bills, index, buttonsNa
     const onComplete = async () => {
         if (!bill.name || bill.name.trim().length == 0) {
             bill.name = 'Nameless bill'
-            console.log(bills, index)
         }
-
-        if (bills && index) {
-            console.log('update')
+        
+        if (bills && index !== undefined) {
             bills!.splice(index!, 1, bill)
             storeData('bills', bills)
             navigation.navigate(
@@ -38,28 +36,27 @@ export const AcceptResult = ({ navigation, people, bill, bills, index, buttonsNa
                         index
                     }
                 }
-                )
-            } else {
-                console.log('create')
-                const bills: Bill[] = await getData('bills') || []
-                bills.unshift(bill)
-                storeData('bills', bills)
-                navigation.navigate(
-                    Navigation.SCANNAVIGATOR,
-                    {
-                        screen: Navigation.SCAN,
-                        params: {
-                            bill: null
-                        }
+            )
+        } else {
+            const bills: Bill[] = await getData('bills') || []
+            bills.unshift(bill)
+            storeData('bills', bills)
+            navigation.navigate(
+                Navigation.SCANNAVIGATOR,
+                {
+                    screen: Navigation.SCAN,
+                    params: {
+                        bill: null
                     }
-                )
-                navigation.navigate(
-                    Navigation.BILLNAVIGATOR, 
-                    {
-                        screen: Navigation.BILLS,
-                    }
-                )
-            }
+                }
+            )
+            navigation.navigate(
+                Navigation.BILLNAVIGATOR, 
+                {
+                    screen: Navigation.BILLS,
+                }
+            )
+        }
       }
     
       return (

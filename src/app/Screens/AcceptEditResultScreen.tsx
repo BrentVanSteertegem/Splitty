@@ -4,7 +4,7 @@ import { NavigationProps } from '../types'
 
 const AcceptEditResultScreen = ({ navigation, route }: NavigationProps) => {
   const { bill, bills, index, people } = route.params
-  
+
   return (
     <AcceptResult
       navigation={navigation}

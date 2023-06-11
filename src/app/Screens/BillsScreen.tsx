@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useIsFocused } from '@react-navigation/native'
 import { Pressable, ScrollView, View } from 'react-native'
-import { Bill, Person } from '../types'
-import { getData } from '../../core/storage/StoreData'
-import { ContentContainer, Divider, SmallVerticalPadding, Text } from '../Components'
-import { Variables } from '../style'
+import { Bill, NavigationProps, Person } from '../types'
 import { Navigation } from '../../core/navigation'
+import { getData } from '../../core/storage/StoreData'
+import { Variables } from '../style'
+import { ContentContainer, Divider, SmallVerticalPadding, Text } from '../Components'
 
-const BillsScreen = ({ navigation }) => {
+const BillsScreen = ({ navigation }: NavigationProps) => {
   const [bills, setBills] = useState<Bill[]>([])
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const BillsScreen = ({ navigation }) => {
       setBills(newBills)
     }
     getBills()
-  }, [useIsFocused()])
+  }, [useIsFocused(), bills])
 
   const getAmountWhoPaidBack = (people: Person[]) => {
     let amount = 0

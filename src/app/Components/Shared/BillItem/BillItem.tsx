@@ -25,6 +25,7 @@ export const BillItem = ({ item, index, bill, people, setPeople, activePersonInd
 
     const updateAmount = (item: Item, index: number, isPositiveAction: boolean) => {
         const newPeople = [...people]
+
         if (isPositiveAction) {
             if (remaining > 0) {
                 const newAmount = amount + 1
@@ -55,6 +56,10 @@ export const BillItem = ({ item, index, bill, people, setPeople, activePersonInd
                     })
                 }
                 setAmount(newAmount)
+                bill.items.splice(index, 1, {
+                    ...item,
+                    quantity: item.quantity - 1
+                })
                 setRemaining(remaining - 1)
             }
         } else if (!isPositiveAction) {
@@ -75,6 +80,10 @@ export const BillItem = ({ item, index, bill, people, setPeople, activePersonInd
                     })
                 })
                 setAmount(newAmount)
+                bill.items.splice(index, 1, {
+                    ...item,
+                    quantity: item.quantity + 1
+                })
                 setRemaining(remaining + 1)
             }
         }

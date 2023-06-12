@@ -1,7 +1,6 @@
 export type NavigationProps = {
     navigation: {
         navigate: (screen: string, params: any) => void
-        goBack: () => void
         setOptions: (options: any) => void
     }
     route: {
@@ -72,4 +71,17 @@ export type Person = {
     items: Item[]
     total: number
     hasPaid?: boolean
+}
+
+export type User = {
+    id: string
+    email: string
+    password: string
+}
+
+export type Profile = {
+    userId: string
+    firstName: string
+    lastName: string
+    acceptedTerms: boolean
 }

@@ -1,11 +1,11 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Navigation } from '../../core/navigation'
-import { AcceptResultScreen, AddItemsScreen, AddPeopleScreen, ScanScreen } from '../Screens'
+import { NavigationProps } from '../types'
 import { DefaultNavigatorOptions } from '../style'
-import { HeaderButtonLeft } from '../Components'
-import { HeaderTitle } from '../Components/Design/Text/HeaderTitle'
+import { AcceptResultScreen, AddItemsScreen, AddPeopleScreen, ScanScreen } from '../Screens'
+import { HeaderButtonLeft, HeaderTitle } from '../Components'
 
-const ScanNavigator = ({ navigation }) => {
+const ScanNavigator = ({ navigation }: NavigationProps) => {
     const Stack = createNativeStackNavigator()
 
     return (

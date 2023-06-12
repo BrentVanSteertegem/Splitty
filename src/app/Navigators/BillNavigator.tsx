@@ -1,16 +1,18 @@
 import { Pressable } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Navigation } from '../../core/navigation'
-import { AcceptEditResultScreen, BillDetailScreen, BillsScreen, EditItemsScreen, EditPeopleScreen } from '../Screens'
+import { NavigationProps } from '../types'
 import { DefaultNavigatorOptions, Variables } from '../style'
-import { HeaderButtonLeft, Icon } from '../Components'
-import { HeaderTitle } from '../Components/Design/Text/HeaderTitle'
+import { AcceptEditResultScreen, BillDetailScreen, BillsScreen, EditItemsScreen, EditPeopleScreen } from '../Screens'
+import { HeaderButtonLeft, HeaderTitle, Icon } from '../Components'
 
-const BillNavigator = ({ navigation }) => {
+const BillNavigator = ({ navigation }: NavigationProps) => {
     const Stack = createNativeStackNavigator()
 
     return (
-        <Stack.Navigator screenOptions={DefaultNavigatorOptions}>
+        <Stack.Navigator
+            screenOptions={DefaultNavigatorOptions}
+        >
             <Stack.Screen
                 name={Navigation.BILLS}
                 component={BillsScreen}
@@ -23,7 +25,12 @@ const BillNavigator = ({ navigation }) => {
                         title: route.params!.bills[route.params!.index].name,
                         headerLeft: () => (
                             <HeaderButtonLeft
-                                onPress={() => navigation.goBack()}
+                                onPress={() => navigation.navigate(
+                                    Navigation.BILLNAVIGATOR,
+                                    {
+                                        screen: Navigation.BILLS,
+                                    }
+                                )}
                             >
                                 <HeaderTitle>&lt;</HeaderTitle>
                             </HeaderButtonLeft>

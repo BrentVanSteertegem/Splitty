@@ -1,4 +1,9 @@
 export const Navigation = Object.freeze({
+  AUTHNAVIGATOR: 'AuthNavigator',
+  FIRSTLAUNCH: 'FirstLaunch',
+  LOGIN: 'Login',
+  REGISTER: 'Register',
+  APPNAVIGATOR: 'AppNavigator',
   BILLNAVIGATOR: 'BillNavigator',
   BILLS: 'Bills',
   BILLDETAIL: 'BillDetail',

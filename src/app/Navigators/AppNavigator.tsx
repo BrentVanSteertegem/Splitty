@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { SettingsScreen } from '../Screens'
-import { DefaultNavigatorOptions, Variables } from '../style'
 import { Navigation } from '../../core/navigation'
+import { DefaultNavigatorOptions, Variables } from '../style'
+import { SettingsScreen } from '../Screens'
 import ScanNavigator from './ScanNavigator'
 import BillNavigator from './BillNavigator'
 import { Icon } from '../Components'
@@ -10,7 +10,9 @@ const AppNavigator = () => {
     const Tab = createBottomTabNavigator()
 
     return (
-        <Tab.Navigator screenOptions={DefaultNavigatorOptions}>
+        <Tab.Navigator
+            screenOptions={DefaultNavigatorOptions}
+        >
             <Tab.Screen
                 name={Navigation.BILLNAVIGATOR}
                 component={BillNavigator}

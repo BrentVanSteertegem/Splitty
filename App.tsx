@@ -1,7 +1,8 @@
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
-import AppNavigator from './src/app/Navigators/AppNavigator'
 import { Variables } from './src/app/style'
 import { AppContainer } from './src/app/Components'
+import AppContent from './src/app/Navigators/AppContent';
+import { NavigationProps } from './src/app/types';
 
 const AppTheme = {
   ...DefaultTheme,
@@ -15,11 +16,14 @@ const AppTheme = {
   },
 };
 
-const App = () => {
+const App = ({ navigation, route }: NavigationProps) => {
   return (
     <AppContainer>
       <NavigationContainer theme={AppTheme}>
-        <AppNavigator />
+        <AppContent
+          navigation={navigation}
+          route={route}
+        />
       </NavigationContainer>
     </AppContainer>
   )

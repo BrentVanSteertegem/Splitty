@@ -1,8 +1,20 @@
 import { format } from 'date-fns'
 import Constants from 'expo-constants'
 import { Bill, Entity, Item } from '../../app/types'
+import { supabase } from '../api/supabase'
 
-const { LOCATION, PROJECT_ID, PROCESSOR_ID, PROCESSOR_AUTH_TOKEN } = Constants.manifest.extra
+const { LOCATION, PROJECT_ID, PROCESSOR_ID } = Constants.manifest.extra
+
+const getDocumentAIKey = async () => {
+  const { data } = await supabase
+    .from('DocumentAI')
+    .select('key')
+    .eq('id', 1)
+    .single()
+    .throwOnError()
+
+  return data && data.key
+}
 
 export const processBillAsync = async (pictureBase64: string): Promise<Bill | undefined> => {
   const response = await fetch(`https://${LOCATION}-documentai.googleapis.com/v1/projects/${PROJECT_ID}/locations/${LOCATION}/processors/${PROCESSOR_ID}:process`,
@@ -10,7 +22,7 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
       method: 'POST',
       headers: {
         "Content-Type": "application/json; charset=utf-8",
-        "Authorization": `Bearer ${PROCESSOR_AUTH_TOKEN}`
+        "Authorization": `Bearer ${getDocumentAIKey()}`
       },
       body: JSON.stringify({
         "skipHumanReview": true,

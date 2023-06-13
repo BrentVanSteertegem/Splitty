@@ -1,8 +1,10 @@
-import { Variables } from '../style'
 import { storeData } from '../../core/storage/StoreData'
-import { Button, ContentContainer, LargeVerticalPadding } from '../Components'
+import { NavigationProps } from '../types'
+import { Variables } from '../style'
+import { Button, Container, ContentContainer, LargeVerticalPadding } from '../Components'
+import { Navigation } from '../../core/navigation'
 
-const SettingsScreen = () => {
+const SettingsScreen = ({ navigation }: NavigationProps) => {
   const deleteBills = async () => {
     await storeData('bills', [])
   }
@@ -11,14 +13,30 @@ const SettingsScreen = () => {
     <>
       <LargeVerticalPadding />
       <ContentContainer>
-        <Button
-          onPress={deleteBills}
-          faIconLeft='times-circle'
-          type='text'
-          color={Variables.colors.red}
+        <Container
+          gap={Variables.spacing.medium}
         >
-          Delete all bills
-        </Button>
+          <Button
+            onPress={deleteBills}
+            faIconLeft='times-circle'
+            type='text'
+            color={Variables.colors.red}
+            >
+            Delete all bills
+          </Button>
+          <Button
+            onPress={() => navigation.navigate(
+              Navigation.AUTHNAVIGATOR, 
+              {
+                screen: Navigation.AUTH 
+              }
+            )}
+            faIconLeft='user'
+            type='text'
+            >
+            Login / Register
+          </Button>
+        </Container>
       </ContentContainer>
     </>
   )

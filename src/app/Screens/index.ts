@@ -1,4 +1,4 @@
-import FirstLaunchScreen from './FirstLaunchScreen'
+import AuthScreen from './AuthScreen'
 import LoginScreen from './LoginScreen'
 import RegisterScreen from './RegisterScreen'
 import BillsScreen from './BillsScreen'
@@ -13,7 +13,7 @@ import AcceptResultScreen from './AcceptResultScreen'
 import SettingsScreen from './SettingsScreen'
 
 export { 
-    FirstLaunchScreen,
+    AuthScreen,
     LoginScreen,
     RegisterScreen,
     BillsScreen, 

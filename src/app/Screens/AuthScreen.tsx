@@ -3,7 +3,7 @@ import { NavigationProps } from '../types'
 import { Variables } from '../style'
 import { Button, Container, ContentContainer, CustomVerticalPadding, SmallVerticalPadding, Title } from '../Components'
 
-const FirstLaunchScreen = ({ navigation }: NavigationProps) => {
+const AuthScreen = ({ navigation }: NavigationProps) => {
   return (
     <ContentContainer>
       <SmallVerticalPadding />
@@ -74,4 +74,4 @@ const FirstLaunchScreen = ({ navigation }: NavigationProps) => {
   )
 }
 
-export default FirstLaunchScreen
+export default AuthScreen

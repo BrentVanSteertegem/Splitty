@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Navigation } from '../../core/navigation'
 import { NavigationProps } from '../types'
 import { DefaultNavigatorOptions } from '../style'
-import { FirstLaunchScreen, LoginScreen, RegisterScreen } from '../Screens'
+import { AuthScreen, LoginScreen, RegisterScreen } from '../Screens'
 import { HeaderButtonLeft, HeaderTitle } from '../Components'
 
 const AuthNavigator = ({ navigation }: NavigationProps) => {
@@ -13,8 +13,8 @@ const AuthNavigator = ({ navigation }: NavigationProps) => {
             screenOptions={DefaultNavigatorOptions}
         >
             <Stack.Screen
-                name={Navigation.FIRSTLAUNCH}
-                component={FirstLaunchScreen}
+                name={Navigation.AUTH}
+                component={AuthScreen}
                 options={{
                     headerShown: false
                 }}
@@ -28,7 +28,7 @@ const AuthNavigator = ({ navigation }: NavigationProps) => {
                             onPress={() => navigation.navigate(
                                 Navigation.AUTHNAVIGATOR,
                                 {
-                                    screen: Navigation.FIRSTLAUNCH,
+                                    screen: Navigation.AUTH,
                                 }
                             )}
                         >
@@ -48,7 +48,7 @@ const AuthNavigator = ({ navigation }: NavigationProps) => {
                             onPress={() => navigation.navigate(
                                 Navigation.AUTHNAVIGATOR,
                                 {
-                                    screen: Navigation.FIRSTLAUNCH,
+                                    screen: Navigation.AUTH,
                                 }
                             )}
                         >

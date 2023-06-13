@@ -1,6 +1,6 @@
 export const Navigation = Object.freeze({
   AUTHNAVIGATOR: 'AuthNavigator',
-  FIRSTLAUNCH: 'FirstLaunch',
+  AUTH: 'Auth',
   LOGIN: 'Login',
   REGISTER: 'Register',
   APPNAVIGATOR: 'AppNavigator',

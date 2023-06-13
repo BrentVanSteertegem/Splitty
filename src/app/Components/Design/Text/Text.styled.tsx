@@ -2,6 +2,7 @@ import { Text } from 'react-native'
 import styled from 'styled-components'
 import { DefaultStyles, Variables } from '../../../style'
 import { StTextProps } from './Text'
+import { StTitleProps } from './Title'
 
 export const StText = styled(Text)<StTextProps>`
     ${DefaultStyles.text}
@@ -16,8 +17,10 @@ export const StText = styled(Text)<StTextProps>`
     }
 `
 
-export const StTitle = styled(Text)`
+export const StTitle = styled(Text)<StTitleProps>`
     ${DefaultStyles.title}
+    ${({ color }) => color && `color: ${color}`}
+    ${({ fontSize }) => fontSize && `font-size: ${fontSize}px; line-height: ${fontSize * 1.4}px;`}
 `
 
 export const StHeaderTitle = styled(StTitle)`

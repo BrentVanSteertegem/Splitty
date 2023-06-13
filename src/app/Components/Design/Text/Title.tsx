@@ -1,9 +1,17 @@
 import { TextProps } from './Text'
 import { StTitle } from './Text.styled'
 
-export const Title = ({ children }: TextProps) => {
+export type StTitleProps = {
+    color?: string
+    fontSize?: number
+}
+
+export const Title = ({ children, color, fontSize }: TextProps & StTitleProps) => {
     return (
-        <StTitle>
+        <StTitle
+            color={color}
+            fontSize={fontSize}
+        >
             {children}
         </StTitle>
     )

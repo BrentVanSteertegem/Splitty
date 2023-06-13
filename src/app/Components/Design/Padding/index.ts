@@ -1,3 +1,4 @@
+export * from './CustomVerticalPadding'
 export * from './LargeVerticalPadding'
 export * from './MediumHorizontalPadding'
 export * from './MediumVerticalPadding'

@@ -17,7 +17,6 @@ const LoginScreen = () => {
 
   return (
    <ContentContainer>
-    <LargeVerticalPadding />
     <Container
       justifyContent='center'
     >
@@ -30,6 +29,7 @@ const LoginScreen = () => {
         validationSchema={schema}
         onSubmit={handleSubmit}
       >
+        <SmallVerticalPadding />
         <FormTextInput
           name='email'
           label='Email'

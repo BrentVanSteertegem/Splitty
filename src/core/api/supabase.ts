@@ -12,7 +12,7 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
     autoRefreshToken: true,
     persistSession: true,
   },
-});
+})
 
 export const AuthEvent = {
   SIGNED_IN: 'SIGNED_IN',

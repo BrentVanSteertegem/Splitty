@@ -9,6 +9,7 @@ export const StContainer = styled(View)<StContainerProps>`
     ${({ justifyContent }) => justifyContent && `justifyContent : ${justifyContent}`};
     ${({ alignItems }) => alignItems && `alignItems : ${alignItems}`};
     ${({ gap }) => gap && `gap : ${gap}px`};
+    width: ${({ width }) => width ? typeof(width) == 'number' ? `${width}px` : width : '100%'};
 `
 
 export const StContentContainer = styled(View)`

@@ -70,7 +70,7 @@ export const ManagePeople = ({ bill, bills, index, navigation, buttonNavigator, 
                     >
                         <Button
                             fontSize='large'
-                            size='full-width'
+                            width='100%'
                             onPress={() => navigation.navigate(
                                 buttonNavigator, 
                                 { 

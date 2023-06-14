@@ -81,7 +81,11 @@ const ScanScreen = ({ navigation }) => {
         <CenteredContainer>
           <Text>Splitty needs access to your camera in order to be able to scan bills</Text>
           <SmallVerticalPadding />
-          <Button onPress={requestPermission}>Allow acces</Button>
+          <Button
+            onPress={requestPermission}
+            >
+              Allow acces
+            </Button>
         </CenteredContainer>
       </ContentContainer>
     )
@@ -144,7 +148,13 @@ const ScanScreen = ({ navigation }) => {
             <Container
               justifyContent='flex-end'
             >
-              <Button fontSize='large' size='full-width' onPress={onScan}>Scan</Button>
+              <Button
+                fontSize='large'
+                width='100%'
+                onPress={onScan}
+                >
+                  Scan
+                </Button>
             </Container>
           </ContentContainer>
         </StCamera>

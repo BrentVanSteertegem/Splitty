@@ -6,7 +6,7 @@ import { ButtonContainerProps } from './Button'
 
 export const StButtonContainer = styled(View)<Omit<ButtonContainerProps, 'type'>>`
     ${DefaultStyles.button}
-    ${({ size }) => size && `width: ${size}px;`}
+    width: ${({ width }) => width ? typeof(width) == 'number' ? `${width}px` : width : '100%'};
 `
 
 export const StSecondaryButtonContainer = styled(StButtonContainer)<Omit<ButtonContainerProps, 'type'>>`

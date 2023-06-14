@@ -13,7 +13,7 @@ const AuthScreen = ({ navigation }: NavigationProps) => {
         <Container
           justifyContent='center'
           alignItems='center'
-          gap={20}
+          gap={Variables.sizes.large}
         >
           <CustomVerticalPadding 
             padding={60}
@@ -29,7 +29,7 @@ const AuthScreen = ({ navigation }: NavigationProps) => {
           alignItems='center'
         >
           <Button
-            size={150}
+            width={150}
             onPress={() => {
               navigation.navigate(
                 Navigation.AUTHNAVIGATOR,
@@ -42,7 +42,7 @@ const AuthScreen = ({ navigation }: NavigationProps) => {
             Login
           </Button>
           <Button
-            size={150}
+            width={150}
             onPress={() => {
               navigation.navigate(
                 Navigation.AUTHNAVIGATOR,
@@ -56,7 +56,7 @@ const AuthScreen = ({ navigation }: NavigationProps) => {
           </Button>
           <Button
             type='text'
-            size={180}
+            width={180}
             onPress={() => {
               navigation.navigate(
                 Navigation.APPNAVIGATOR,

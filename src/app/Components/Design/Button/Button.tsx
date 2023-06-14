@@ -6,7 +6,7 @@ import { StTextProps } from '../Text'
 
 export type ButtonContainerProps = {
     type?: 'primary' | 'secondary' | 'text' | 'negative',
-    size?: 'full-width' | number,
+    width?: string | number,
 }
 
 type InnerButtonProps = Partial<StTextProps> & {
@@ -15,17 +15,17 @@ type InnerButtonProps = Partial<StTextProps> & {
     faIconRight?: string,
 }
 
-type ButtonProps = ButtonContainerProps & InnerButtonProps & {
+export type ButtonProps = ButtonContainerProps & InnerButtonProps & {
     onPress?: () => void,
     disabled?: boolean,
 }
 
-const renderButtonContainer = ({children, type, fontSize, faIconLeft, faIconRight, color, size}: InnerButtonProps & ButtonContainerProps) => {
+const renderButtonContainer = ({children, type, fontSize, faIconLeft, faIconRight, color, width}: InnerButtonProps & ButtonContainerProps) => {
     switch (type) {
         case 'secondary':
             return (
                 <StSecondaryButtonContainer
-                    size={size}
+                    width={width}
                 >
                     {renderButtonContent({children, fontSize, faIconLeft, faIconRight})}
                 </StSecondaryButtonContainer>
@@ -33,7 +33,7 @@ const renderButtonContainer = ({children, type, fontSize, faIconLeft, faIconRigh
         case 'text':
             return (
                 <StTextButtonContainer
-                    size={size}
+                    width={width}
                 >
                     {renderButtonContent({children, fontSize, faIconLeft, faIconRight, color: color || Variables.colors.text})}
                 </StTextButtonContainer>
@@ -41,7 +41,7 @@ const renderButtonContainer = ({children, type, fontSize, faIconLeft, faIconRigh
         case 'negative':
             return (
                 <StNegativeButtonContainer
-                    size={size}
+                    width={width}
                 >
                     {renderButtonContent({children, fontSize, faIconLeft, faIconRight})}
                 </StNegativeButtonContainer>
@@ -49,7 +49,7 @@ const renderButtonContainer = ({children, type, fontSize, faIconLeft, faIconRigh
         default:
             return (
                 <StButtonContainer
-                    size={size}
+                    width={width}
                 >
                     {renderButtonContent({children, fontSize, faIconLeft, faIconRight})}
                 </StButtonContainer>
@@ -82,17 +82,15 @@ const renderButtonContent = ({children, fontSize, faIconLeft, faIconRight, color
     )
 }
 
-export const Button = ({ children, type, fontSize, size, faIconLeft, faIconRight, color, disabled, onPress }: ButtonProps) => {
+export const Button = ({ children, type, fontSize, width, faIconLeft, faIconRight, color, disabled, onPress }: ButtonProps) => {
     return (
         <Pressable disabled={disabled} onPress={onPress}>
-            {size && size == 'full-width' ?
-                renderButtonContainer({children, type, fontSize, faIconLeft, faIconRight, color})
-            : typeof(size) == 'number' ?
-                renderButtonContainer({children, type, fontSize, faIconLeft, faIconRight, color, size})
+            {width ?
+                renderButtonContainer({children, type, fontSize, faIconLeft, faIconRight, color, width})
             :
-            <Text> {/* By wrapping the entire button container in a text component, the container will behave as if width would be set to fit-content */}
-                {renderButtonContainer({children, type, fontSize, faIconLeft, faIconRight, color})}
-            </Text>
+                <Text> {/* By wrapping the entire button container in a text component, the container will behave as if width would be set to fit-content */}
+                    {renderButtonContainer({children, type, fontSize, faIconLeft, faIconRight, color})}
+                </Text>
             }
             
         </Pressable>

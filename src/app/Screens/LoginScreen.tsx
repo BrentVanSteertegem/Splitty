@@ -1,14 +1,13 @@
 import * as yup from 'yup'
 import { useMutation } from '@tanstack/react-query'
 import { login } from '../../core/modules/auth/api'
-import { Variables } from '../style'
-import { Container, ContentContainer, Form, FormSubmitButton, FormTextInput, LargeVerticalPadding } from '../Components'
+import { Container, ContentContainer, Form, FormSubmitButton, FormTextInput, LargeVerticalPadding, SmallVerticalPadding } from '../Components'
 
 const LoginScreen = () => {
   const { mutate, isLoading, isError, error } = useMutation(login)
   
   const schema = yup.object().shape({
-    email: yup.string().required().email(),
+    email: yup.string().trim().required().email(),
     password: yup.string().required(),
   })
 
@@ -33,19 +32,23 @@ const LoginScreen = () => {
       >
         <FormTextInput
           name='email'
+          label='Email'
           placeholder='john.doe@email.com'
           keyboardType='email-address'
         />
         <FormTextInput
           name='password'
+          label='Password'
           placeholder='Password'
           hidden={true}
         />
-        <FormSubmitButton
-          width={150}
-        >
-          Login
-        </FormSubmitButton>
+        <SmallVerticalPadding>
+          <FormSubmitButton
+            width={150}
+          >
+            Login
+          </FormSubmitButton>
+        </SmallVerticalPadding>
       </Form>
     </Container>
   </ContentContainer>

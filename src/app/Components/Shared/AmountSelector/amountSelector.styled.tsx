@@ -18,7 +18,8 @@ export const StAmount = styled(View)`
 export const StButton = styled(StButtonContainer)`
     margin: 0;
     padding: ${Variables.spacing.xsmall}px;
-    height: ${Variables.spacing.xsmall * 2 + Variables.textSizes.xsmall * 1.4}px;
+    width: ${Variables.spacing.xsmall * 4}px;
+    height: ${Variables.spacing.xsmall * 2 + Variables.textSizes.xsmall * 1.2}px;
     border-radius: ${Variables.rounded.small}px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;

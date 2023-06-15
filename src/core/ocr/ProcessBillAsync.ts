@@ -22,7 +22,7 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
       method: 'POST',
       headers: {
         "Content-Type": "application/json; charset=utf-8",
-        "Authorization": `Bearer ${getDocumentAIKey()}`
+        "Authorization": `Bearer ${await getDocumentAIKey()}`
       },
       body: JSON.stringify({
         "skipHumanReview": true,

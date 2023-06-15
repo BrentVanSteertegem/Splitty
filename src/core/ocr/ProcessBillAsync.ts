@@ -63,7 +63,7 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
               switch (property.type) {
                 case 'line_item/amount':
                   const totalPrice = parseFloat(property.mentionText)
-                  typeof totalPrice === 'number' && !isNaN(totalPrice) ? item.totalPrice = totalPrice : item.notes!.push('Could not establish the total price for this item.')
+                  typeof totalPrice == 'number' ? item.totalPrice = totalPrice : null
                   break
                 case 'line_item/description':
                   item.description = property.mentionText
@@ -79,14 +79,14 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
                   while (isNaN(parseInt(quantity[quantity.length - 1]))) {
                     quantity = quantity.slice(0, -1)
                   }
-                  typeof quantity === 'number' && !isNaN(quantity) ? item.quantity = quantity : item.notes!.push('Could not establish the quantity of this item.')
+                  typeof quantity == 'number' ? item.quantity = quantity : null
                   break
                 case 'line_item/unit':
                   item.name = property.mentionText
                   break
                 case 'line_item/unit_price':
                   const price = parseFloat(property.mentionText)
-                  typeof price === 'number' && !isNaN(price) ? item.price = price : item.notes!.push('Could not establish the unit price for this item.')
+                  typeof price == 'number' ? item.price = price : null
                   break
               }
             })

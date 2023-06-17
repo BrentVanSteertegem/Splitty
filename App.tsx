@@ -4,6 +4,7 @@ import { NavigationProps } from './src/app/types'
 import { Variables } from './src/app/style'
 import AppContent from './src/app/Navigators/AppContent'
 import { AppContainer } from './src/app/Components'
+import AuthProvider from './src/app/Components/Shared/Auth/AuthProvider'
 
 const AppTheme = {
   ...DefaultTheme,
@@ -25,14 +26,16 @@ const App = ({ navigation, route }: NavigationProps) => {
       client={queryClient}
     >
       <AppContainer>
-        <NavigationContainer
-          theme={AppTheme}
-        >
-          <AppContent
-            navigation={navigation}
-            route={route}
-          />
-        </NavigationContainer>
+        <AuthProvider>
+          <NavigationContainer
+            theme={AppTheme}
+          >
+            <AppContent
+              navigation={navigation}
+              route={route}
+            />
+          </NavigationContainer>
+        </AuthProvider>
       </AppContainer>
     </QueryClientProvider>
   )

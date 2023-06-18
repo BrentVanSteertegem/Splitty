@@ -48,6 +48,7 @@ type SubEntity = {
 }
 
 export type Bill = {
+    id?: number
     items: Item[]
     total: number
     currency: string

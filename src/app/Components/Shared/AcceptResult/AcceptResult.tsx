@@ -2,11 +2,13 @@ import { ScrollView, View } from 'react-native'
 import { Navigation } from '../../../../core/navigation'
 import { getData, storeData } from '../../../../core/storage/StoreData'
 import { Bill, Person } from '../../../types'
+import { useAuthContext } from '../Auth/AuthProvider'
 import { LargeVerticalPadding, SmallVerticalPadding } from '../../Design/Padding'
 import { Container, ContentContainer } from '../../Design/Container'
 import { Text } from '../../Design/Text'
 import { PersonCard } from '../PersonCard'
 import { Button } from '../../Design/Button'
+import { getLatestBillId, saveBill } from '../../../../core/modules/bill/api'
 
 type AcceptResultProps = {
     navigation: any
@@ -19,10 +21,20 @@ type AcceptResultProps = {
 }
 
 export const AcceptResult = ({ navigation, people, bill, bills, index, buttonsNavigator, editItemsScreen }: AcceptResultProps) => {
+    const { isLoggedIn, user } = useAuthContext()
+
+    const uploadBill = async () => {
+        await saveBill(bill)
+        const { data } = await getLatestBillId(user!.id)
+        bill.id = data!.id
+    }
+
     const onComplete = async () => {
         if (!bill.name || bill.name.trim().length == 0) {
             bill.name = 'Nameless bill'
         }
+
+        isLoggedIn && await uploadBill()
         
         if (bills && index !== undefined) {
             bills!.splice(index!, 1, bill)
@@ -57,9 +69,9 @@ export const AcceptResult = ({ navigation, people, bill, bills, index, buttonsNa
                 }
             )
         }
-      }
+    }
     
-      return (
+    return (
         <ScrollView>
             <LargeVerticalPadding />
             <ContentContainer>
@@ -111,5 +123,5 @@ export const AcceptResult = ({ navigation, people, bill, bills, index, buttonsNa
                 <SmallVerticalPadding />
             </ContentContainer>
         </ScrollView>
-      )
+    )
 }

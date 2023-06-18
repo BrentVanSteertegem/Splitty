@@ -6,16 +6,25 @@ import { Navigation } from '../../core/navigation'
 import { getData } from '../../core/storage/StoreData'
 import { Variables } from '../style'
 import { ContentContainer, Divider, SmallVerticalPadding, Text } from '../Components'
+import { useAuthContext } from '../Components/Shared/Auth/AuthProvider'
+import { getBills } from '../../core/modules/bill/api'
 
 const BillsScreen = ({ navigation }: NavigationProps) => {
+  const { isLoggedIn, user } = useAuthContext()
   const [bills, setBills] = useState<Bill[]>([])
 
   useEffect(() => {
-    const getBills = async () => {
-      const newBills: Bill[] = await getData('bills') || []
+    const getAllBills = async () => {
+      let newBills: Bill[] = await getData('bills') || []
+      if (isLoggedIn) {
+        const { data } = await getBills(user!.id)
+        newBills = data!.map((supabaseBill: any) => {
+          return supabaseBill.bill
+        })
+      }
       setBills(newBills)
     }
-    getBills()
+    getAllBills()
   }, [useIsFocused(), bills])
 
   const getAmountWhoPaidBack = (people: Person[]) => {

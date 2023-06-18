@@ -1,6 +1,15 @@
 import { supabase } from '../../api/supabase'
 import { Bill } from '../../../app/types'
 
+export const getBills = async (userId: string) => {
+  return await supabase
+  .from('Bill')
+  .select('*')
+  .eq('user_id', userId)
+  .order('id', { ascending: false })
+  .throwOnError()
+}
+
 export const getLatestBillId = async (userId: string) => {
   return await supabase
   .from('Bill')

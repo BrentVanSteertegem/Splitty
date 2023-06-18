@@ -17,6 +17,7 @@ const SettingsScreen = ({ navigation }: NavigationProps) => {
 
   const handleLogout = async () => {
     await logout()
+    await storeData('bills', [])
   }
 
   return (

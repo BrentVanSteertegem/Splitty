@@ -70,7 +70,8 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
                   break
                 case 'line_item/quantity':
                   let quantity = property.mentionText
-                  if (isNaN(parseInt(quantity)) && quantity.length > 3 && !item.name) {
+                  if (isNaN(parseInt(quantity)) && quantity.length > 3) {
+                    item.name ? item.description = item.name : null
                     item.name = quantity.split(' ')[1]
                   }
                   while (isNaN(parseInt(quantity[0]))) {
@@ -79,7 +80,7 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
                   while (isNaN(parseInt(quantity[quantity.length - 1]))) {
                     quantity = quantity.slice(0, -1)
                   }
-                  typeof quantity == 'number' ? item.quantity = quantity : null
+                  typeof parseInt(quantity) == 'number' ? item.quantity = parseInt(quantity) : null
                   break
                 case 'line_item/unit':
                   item.name = property.mentionText
@@ -107,7 +108,7 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
                 item.notes!.push('Could not establish the name of this item.')
               }
             }
-            bill.items.push(item)
+            item .name ? bill.items.push(item) : null
             break
           case 'net_amount':
             bill.total = parseFloat(entity.mentionText)
@@ -117,6 +118,9 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
             break
         } 
       })
+      if (!bill.currency) {
+        bill.currency = '€'
+      }
       return bill
     }
     console.log('No entities')

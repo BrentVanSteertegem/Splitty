@@ -101,8 +101,8 @@ export const BillItem = ({ item, index, bill, people, setPeople, activePersonInd
                 <Text
                     fontSize='small'
                     grayedOut={true}
-                    >
-                    {bill.currency.length == 1 && `${bill.currency} `}
+                >
+                    {bill.currency.length == 1 && `${bill.currency}`}
                     {item.price}
                     {bill.currency.length > 1 && ` ${bill.currency}`}
                     {` - Remaining: ${remaining}`}

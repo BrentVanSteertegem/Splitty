@@ -8,7 +8,7 @@ import { Container, ContentContainer } from '../../Design/Container'
 import { Text } from '../../Design/Text'
 import { PersonCard } from '../PersonCard'
 import { Button } from '../../Design/Button'
-import { getLatestBillId, saveBill } from '../../../../core/modules/bill/api'
+import { getLatestBillId, saveBill, updateBill } from '../../../../core/modules/bill/api'
 
 type AcceptResultProps = {
     navigation: any
@@ -24,9 +24,13 @@ export const AcceptResult = ({ navigation, people, bill, bills, index, buttonsNa
     const { isLoggedIn, user } = useAuthContext()
 
     const uploadBill = async () => {
-        await saveBill(bill)
-        const { data } = await getLatestBillId(user!.id)
-        bill.id = data!.id
+        if (bill.id) {
+            await updateBill(bill)
+        } else {
+            await saveBill(bill)
+            const { data } = await getLatestBillId(user!.id)
+            bill.id = data!.id
+        }
     }
 
     const onComplete = async () => {

@@ -5,12 +5,14 @@ import { Button, Container, ContentContainer, LargeVerticalPadding } from '../Co
 import { Navigation } from '../../core/navigation'
 import { useAuthContext } from '../Components/Shared/Auth/AuthProvider'
 import { logout } from '../../core/modules/auth/api'
+import { deleteBills } from '../../core/modules/bill/api'
 
 const SettingsScreen = ({ navigation }: NavigationProps) => {
-  const { isLoggedIn } = useAuthContext()
+  const { isLoggedIn, user } = useAuthContext()
 
-  const deleteBills = async () => {
+  const deleteAllBills = async () => {
     await storeData('bills', [])
+    isLoggedIn && await deleteBills(user!.id)
   }
 
   const handleLogout = async () => {
@@ -25,7 +27,7 @@ const SettingsScreen = ({ navigation }: NavigationProps) => {
           gap={Variables.spacing.medium}
         >
           <Button
-            onPress={deleteBills}
+            onPress={deleteAllBills}
             faIconLeft='times-circle'
             type='text'
             color={Variables.colors.red}

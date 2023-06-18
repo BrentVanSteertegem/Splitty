@@ -30,3 +30,11 @@ export const updateBill = async (bill: Bill) => {
   .eq('id', bill.id)
   .throwOnError()
 }
+
+export const deleteBills = async (userId: string) => {
+  return await supabase
+  .from('Bill')
+  .delete()
+  .eq('user_id', userId)
+  .throwOnError()
+}

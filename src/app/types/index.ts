@@ -84,5 +84,4 @@ export type Profile = {
     userId: string
     firstName: string
     lastName: string
-    acceptedTerms: boolean
 }

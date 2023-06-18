@@ -16,7 +16,7 @@ export const getCurrentSession = async () => {
   }
 }
 
-export const register = async ({ email, password, firstName, lastName, acceptedTerms }: Omit<User, 'id'> & Omit<Profile, 'userId'> ) => {
+export const register = async ({ email, password, firstName, lastName }: Omit<User, 'id'> & Omit<Profile, 'userId'> ) => {
   const { data, error } = await supabase.auth.signUp({
     email: email,
     password: password,
@@ -25,16 +25,15 @@ export const register = async ({ email, password, firstName, lastName, acceptedT
     return Promise.reject(error)
   }
   await Promise.resolve(data)
-  return insertProfile({ firstName, lastName, acceptedTerms })
+  return insertProfile({ firstName, lastName })
 }
 
-const insertProfile = async ({ firstName, lastName, acceptedTerms }: Omit<Profile, 'userId'>) => {
+const insertProfile = async ({ firstName, lastName }: Omit<Profile, 'userId'>) => {
   const { data, error } = await supabase
   .from('Profile')
   .insert([{ 
     first_name: firstName,
     last_name: lastName,
-    accepted_terms: acceptedTerms,
   }])
   if (error) {
     return Promise.reject(error)

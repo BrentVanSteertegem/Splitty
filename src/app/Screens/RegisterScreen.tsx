@@ -12,7 +12,6 @@ const RegisterScreen = () => {
     email: yup.string().trim().required().email(),
     password: yup.string().required('password is a required field').min(6, 'password must contain at least 6 characters'),
     confirmPassword: yup.string().required('confirm password is a required field').equals([yup.ref('password')], 'Passwords must match'),
-    acceptedTerms: yup.boolean().oneOf([true], 'you must accept the terms and conditions'),
   })
 
   const handleSubmit = async (values) => {
@@ -32,7 +31,6 @@ const RegisterScreen = () => {
           email: '',
           password: '',
           confirmPassword: '',
-          acceptedTerms: true,
         }}
         validationSchema={schema}
         onSubmit={handleSubmit}

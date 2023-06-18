@@ -18,8 +18,9 @@ const BillsScreen = ({ navigation }: NavigationProps) => {
       let newBills: Bill[] = await getData('bills') || []
       if (isLoggedIn) {
         const { data } = await getBills(user!.id)
-        newBills = data!.map((supabaseBill: any) => {
-          return supabaseBill.bill
+        newBills = []
+        data!.forEach((supabaseBill: any) => {
+          newBills.push(JSON.parse(supabaseBill.bill))
         })
       }
       setBills(newBills)

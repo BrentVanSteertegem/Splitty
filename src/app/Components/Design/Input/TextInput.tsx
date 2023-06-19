@@ -1,12 +1,17 @@
 import { forwardRef, Ref } from 'react'
-import { TextInput as RNTextInput } from 'react-native'
+import { TextInput as RNTextInput, ScrollView } from 'react-native'
 import { Variables } from '../../../style'
 import { StTextInput, StTextInputComponent, StTextInputContainer } from './TextInput.styled'
 import { Text } from '../Text'
 import { MediumHorizontalPadding } from '../Padding'
+import { Container } from '../Container'
 
 export type StTextInputComponentProps = {
     width?: string | number
+}
+
+export type StTextInputContainerProps = {
+    borderColor: string
 }
 
 export type TextInputProps = StTextInputComponentProps & {
@@ -18,22 +23,61 @@ export type TextInputProps = StTextInputComponentProps & {
     hidden?: boolean
     onChangeText?: (text: string) => void
     onSubmitEditing?: () => void
+    error?: string
+    onBlur?: () => void
 }
 
-export const TextInput = forwardRef(({ width, value, label, placeholder, focus, keyboardType, hidden, onChangeText, onSubmitEditing }: TextInputProps, ref: Ref<RNTextInput>) => {
+const renderTitle = (label: string | undefined, error: string | undefined) => {
+    return label ? (
+            <MediumHorizontalPadding>
+                <ScrollView
+                    horizontal={true}
+                >
+                    <Container
+                        flexDirection='row'
+                        alignItems='center'
+                        >
+                        <Text>
+                            {label}
+                        </Text>
+                        {error &&
+                            <Text
+                            color={Variables.colors.error}
+                            fontSize='small'
+                            >
+                                {' - '}
+                                {error}
+                            </Text>
+                        }
+                    </Container>
+                </ScrollView>
+            </MediumHorizontalPadding>
+    ) : error ? (
+        <MediumHorizontalPadding>
+             <ScrollView
+                    horizontal={true}
+            >
+                <Text
+                    color={Variables.colors.error}
+                    fontSize='small'
+                >
+                    {error}
+                </Text>
+            </ScrollView>
+        </MediumHorizontalPadding>
+    ) : null
+}
+
+
+export const TextInput = forwardRef(({ width, value, label, placeholder, focus, keyboardType, hidden, onChangeText, onSubmitEditing, error, onBlur }: TextInputProps, ref: Ref<RNTextInput>) => {
     return (
         <StTextInputComponent
             width={width}
         >
-            {label && 
-                <MediumHorizontalPadding>
-                    <Text>
-                        {label}
-                    </Text>
-                </MediumHorizontalPadding>
-            }
+            {renderTitle(label, error)}
             <StTextInputContainer
-                >
+                borderColor={error ? Variables.colors.error : 'transparent'}
+            >
                 <StTextInput
                     ref={ref}
                     value={value}
@@ -44,7 +88,8 @@ export const TextInput = forwardRef(({ width, value, label, placeholder, focus, 
                     placeholder={placeholder}
                     placeholderTextColor={Variables.colors.placeholderColor}
                     onSubmitEditing={onSubmitEditing}
-                    />
+                    onBlur={onBlur}
+                />
             </StTextInputContainer>
         </StTextInputComponent>
         )

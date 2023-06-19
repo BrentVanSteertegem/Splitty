@@ -10,7 +10,7 @@ type FormTextInputProps = {
 export const FormTextInput = forwardRef(({ name, label, placeholder, focus, keyboardType, hidden, onChangeText, onSubmitEditing }: FormTextInputProps & Partial<TextInputProps>, ref: Ref<RNTextInput>) => {
   const { values, touched, errors, handleBlur, setFieldValue } = useFormikContext()
 
-  // const hasError = errors[name] && touched[name]
+  const hasError = errors[name] && touched[name]
 
   const onTextChange = (text: string) => {
     setFieldValue(name, text)
@@ -29,7 +29,8 @@ export const FormTextInput = forwardRef(({ name, label, placeholder, focus, keyb
       hidden={hidden}
       onChangeText={onTextChange}
       onSubmitEditing={onSubmitEditing}
-      // error={hasError ? errors[name] : ''}
+      error={hasError ? errors[name] : ''}
+      onBlur={handleBlur(name)}
     />
   )
 })

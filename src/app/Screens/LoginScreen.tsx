@@ -7,7 +7,7 @@ import { Variables } from '../style'
 import { Container, ContentContainer, CustomVerticalMargin, Form, FormSubmitButton, FormTextInput, SmallVerticalPadding, Text } from '../Components'
 
 const LoginScreen = () => {
-  const { mutate, isLoading, isError, error } = useMutation(login)
+  const { mutate, isError, error } = useMutation(login)
 
   const schema = yup.object().shape({
     email: yup.string().trim().required().email(),

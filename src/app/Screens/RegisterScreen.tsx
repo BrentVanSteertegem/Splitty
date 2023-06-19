@@ -7,7 +7,7 @@ import { Variables } from '../style'
 import { Container, ContentContainer, CustomVerticalMargin, Form, FormSubmitButton, FormTextInput, SmallVerticalPadding, Text } from '../Components'
 
 const RegisterScreen = () => {
-  const { mutate, isLoading, isError, error } = useMutation(register)
+  const { mutate, isError, error } = useMutation(register)
   
   const schema = yup.object().shape({
     firstName: yup.string().trim().required('first name is a required field'),

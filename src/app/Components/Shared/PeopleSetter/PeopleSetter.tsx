@@ -4,11 +4,9 @@ import { Person } from '../../../types'
 import { Button } from '../../Design/Button'
 import { PersonPreview } from '../../Design/PersonPreview'
 import { Modal } from '../../Design/Modal'
-import { Text } from '../../Design/Text'
 import { TextInput } from '../../Design/Input'
 import { StPeoplecontainer } from './PeopleSetter.styled'
 import { PersonPreviewBubbleColors } from '../../../style/PersonPreviewBubbleColors'
-import { MediumHorizontalPadding } from '../../Design/Padding'
 import { Variables } from '../../../style'
 
 type PeopleSetterProps = {
@@ -18,13 +16,13 @@ type PeopleSetterProps = {
 
 export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
     const [showModal, setShowModal] = useState<boolean>(false)
+    const [isValidName, setIsValidName] = useState<boolean>(true)
     const [name, setName] = useState<string>('')
 
     const renderAddPersonModal = () => {
         const onContinue = () => {
             if (name.trim() == '') {
-                return window.alert('Name cannot be empty')
-
+                return setIsValidName(false)
             }
             setPeople([...people, { 
                 id: people[people.length - 1].id + 1,
@@ -33,11 +31,13 @@ export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
                 total: 0,
             }])
             setName('')
+            setIsValidName(true)
             setShowModal(false)
         }
 
         const onCancel = () => {
             setName('')
+            setIsValidName(true)
             setShowModal(false)
         }
 
@@ -60,14 +60,14 @@ export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
                     </Button>
                 ]}
             >
-                <MediumHorizontalPadding>
-                    <Text>Enter name</Text>
-                </MediumHorizontalPadding>
                 <TextInput
+                    value={name}
+                    label='Enter name'
                     focus={true}
                     onChangeText={setName}
                     placeholder='John'
                     onSubmitEditing={onContinue}
+                    error={!isValidName ? 'Name cannot be empty' : undefined}
                 />
             </Modal>
         )
@@ -78,6 +78,7 @@ export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
             people.splice(people.findIndex(person => person.name == name), 1)
             setPeople([...people])
         }
+
         return people.map((person, index) => {
             return (
                 <Pressable

@@ -3,7 +3,7 @@ import Constants from 'expo-constants'
 import { Bill, Entity, Item } from '../../app/types'
 import { supabase } from '../api/supabase'
 
-const { LOCATION, PROJECT_ID, PROCESSOR_ID } = Constants.manifest.extra
+const { LOCATION, PROJECT_ID, PROCESSOR_ID } = Constants!.manifest!.extra
 
 const getDocumentAIKey = async () => {
   const { data } = await supabase

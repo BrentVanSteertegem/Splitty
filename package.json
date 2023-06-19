@@ -8,7 +8,7 @@
     "start:ios": "expo start --ios",
     "start:web": "expo start --web",
     "start:tunnel": "expo start --tunnel",
-    "build:preview": "eas build --platform android --profile preview"
+    "build": "eas build --platform android --profile production"
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",

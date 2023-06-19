@@ -22,9 +22,10 @@ export type TextInputProps = StTextInputComponentProps & {
     keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad' | 'visible-password'
     hidden?: boolean
     onChangeText?: (text: string) => void
-    onSubmitEditing?: () => void
+    onSubmitEditing?: (values: any | undefined) => void | Promise<void>
     error?: string
-    onBlur?: () => void
+    onBlur?: (e: any | undefined) => void
+    blurOnSubmit?: boolean
 }
 
 const renderTitle = (label: string | undefined, error: string | undefined) => {
@@ -69,7 +70,7 @@ const renderTitle = (label: string | undefined, error: string | undefined) => {
 }
 
 
-export const TextInput = forwardRef(({ width, value, label, placeholder, focus, keyboardType, hidden, onChangeText, onSubmitEditing, error, onBlur }: TextInputProps, ref: Ref<RNTextInput>) => {
+export const TextInput = forwardRef(({ width, value, label, placeholder, focus, keyboardType, hidden, onChangeText, onSubmitEditing, error, onBlur, blurOnSubmit }: TextInputProps, ref: Ref<RNTextInput>) => {
     return (
         <StTextInputComponent
             width={width}
@@ -89,6 +90,7 @@ export const TextInput = forwardRef(({ width, value, label, placeholder, focus, 
                     placeholderTextColor={Variables.colors.placeholderColor}
                     onSubmitEditing={onSubmitEditing}
                     onBlur={onBlur}
+                    blurOnSubmit={blurOnSubmit}
                 />
             </StTextInputContainer>
         </StTextInputComponent>

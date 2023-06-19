@@ -1,3 +1,5 @@
+import { useRef } from 'react'
+import { TextInput } from 'react-native'
 import * as yup from 'yup'
 import { useMutation } from '@tanstack/react-query'
 import { login } from '../../core/modules/auth/api'
@@ -11,6 +13,8 @@ const LoginScreen = () => {
     email: yup.string().trim().required().email(),
     password: yup.string().required(),
   })
+
+  const passwordRef = useRef<TextInput>(null)
 
   const handleSubmit = async (values) => {
     mutate(values)
@@ -48,12 +52,18 @@ const LoginScreen = () => {
           label='Email'
           placeholder='john.doe@email.com'
           keyboardType='email-address'
+          onSubmitEditing={() => {
+            passwordRef.current!.focus()
+          }}
+          blurOnSubmit={false}
         />
         <FormTextInput
           name='password'
+          ref={passwordRef}
           label='Password'
           placeholder='Password'
           hidden={true}
+          onSubmitEditing={handleSubmit}
         />
         <SmallVerticalPadding>
           <FormSubmitButton

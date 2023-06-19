@@ -22,11 +22,11 @@ export const Form = ({ width, initialValues, validationSchema, onSubmit, childre
         >
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 200}
-                >
+            >
                 <ScrollView
                     keyboardShouldPersistTaps='always'
                     contentContainerStyle={{ alignItems: 'center' }}
-                    >
+                >
                     <Container
                         width={width}
                         gap={Variables.sizes.large}

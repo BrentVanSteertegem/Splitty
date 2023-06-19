@@ -5,8 +5,7 @@ import { Bill, NavigationProps, Person } from '../types'
 import { Navigation } from '../../core/navigation'
 import { getData } from '../../core/storage/StoreData'
 import { Variables } from '../style'
-import { ContentContainer, Divider, SmallVerticalPadding, Text } from '../Components'
-import { useAuthContext } from '../Components/Shared/Auth/AuthProvider'
+import { ContentContainer, Divider, SmallVerticalPadding, Text, useAuthContext } from '../Components'
 import { getBills } from '../../core/modules/bill/api'
 
 const BillsScreen = ({ navigation }: NavigationProps) => {

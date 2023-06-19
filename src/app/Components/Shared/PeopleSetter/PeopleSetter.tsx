@@ -44,9 +44,21 @@ export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
         return (
             <Modal
                 onCancel={onCancel}
-                onCancelText='cancel'
-                onContinue={onContinue}
-                onContinueText='Add person'
+                buttons={[
+                    <Button
+                        key={0}
+                        type='negative'
+                        onPress={onCancel}
+                    >
+                        Cancel
+                    </Button>,
+                    <Button
+                        key={1}
+                        onPress={onContinue}
+                    >
+                        Add person
+                    </Button>
+                ]}
             >
                 <MediumHorizontalPadding>
                     <Text>Enter name</Text>

@@ -1,17 +1,15 @@
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import { StModal, StInnerModal, StModalCard, StButtonContainer } from './Modal.styled'
 import { CenteredContainer, ContentContainer } from '../Container'
-import { Button } from '../Button'
+import { Button, ButtonProps } from '../Button'
 
 type ModalProps = {
     children: ReactNode
     onCancel: () => void
-    onCancelText?: string
-    onContinue?: () => void
-    onContinueText?: string
+    buttons?: ReactNode[]
 }
 
-export const Modal = ({ children, onCancel, onCancelText, onContinue, onContinueText }: ModalProps) => {
+export const Modal = ({ children, onCancel, buttons }: ModalProps) => {
     return (
         <StModal transparent={true} onRequestClose={onCancel}>
             <StInnerModal>
@@ -20,19 +18,14 @@ export const Modal = ({ children, onCancel, onCancelText, onContinue, onContinue
                         <StModalCard>
                             {children}
                             <StButtonContainer>
-                                {onCancelText &&
-                                    <Button
-                                    onPress={onCancel}
-                                    type='negative'
+                                {buttons && buttons.length > 0 ? 
+                                    buttons
+                                : 
+                                    <Button 
+                                        onPress={onCancel}
+                                        type='negative'
                                     >
                                         Close
-                                    </Button>
-                                }
-                                {onContinue && onContinueText &&
-                                    <Button
-                                    onPress={onContinue}
-                                    >
-                                        Add person
                                     </Button>
                                 }
                             </StButtonContainer>

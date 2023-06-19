@@ -3,8 +3,8 @@ import { TextInput } from 'react-native'
 import * as yup from 'yup'
 import { useMutation } from '@tanstack/react-query'
 import { login } from '../../core/modules/auth/api'
-import { Container, ContentContainer, CustomVerticalMargin, Form, FormSubmitButton, FormTextInput, SmallVerticalPadding, Text } from '../Components'
 import { Variables } from '../style'
+import { Container, ContentContainer, CustomVerticalMargin, Form, FormSubmitButton, FormTextInput, SmallVerticalPadding, Text } from '../Components'
 
 const LoginScreen = () => {
   const { mutate, isLoading, isError, error } = useMutation(login)
@@ -36,16 +36,16 @@ const LoginScreen = () => {
       >
         <SmallVerticalPadding />
         {isError &&
-        <>
-          <CustomVerticalMargin
-            margin={-Variables.textSizes.medium * 1.4}
-          /> 
-          <Text
-            color={Variables.colors.error}
-            >
-            {error.message}
-          </Text>
-        </>
+          <>
+            <CustomVerticalMargin
+              margin={-Variables.textSizes.medium * 1.4}
+            /> 
+            <Text
+              color={Variables.colors.error}
+              >
+              {error.message}
+            </Text>
+          </>
         }
         <FormTextInput
           name='email'

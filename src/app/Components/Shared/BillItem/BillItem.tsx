@@ -63,22 +63,30 @@ export const BillItem = ({ item, index, bill, people, setPeople, activePersonInd
                 setRemaining(remaining - 1)
             }
         } else if (!isPositiveAction) {
-            if ( amount > 0 ) {
+            if (amount > 0) {
                 const newAmount = amount - 1
-                newPeople.splice(activePersonIndex, 1, {
-                    ...activePerson,
-                    total: parseFloat((activePerson.total - item.price).toFixed(2)),
-                    items: activePerson.items.map((personItem: Item) => {
-                        if (personItem.name == item.name) {
-                            return {
-                                ...personItem,
-                                quantity: newAmount,
-                                totalPrice:  parseFloat((newAmount * item.price).toFixed(2))
+                if (newAmount > 0) {
+                    newPeople.splice(activePersonIndex, 1, {
+                        ...activePerson,
+                        total: parseFloat((activePerson.total - item.price).toFixed(2)),
+                        items: activePerson.items.map((personItem: Item) => {
+                            if (personItem.name == item.name) {
+                                return {
+                                    ...personItem,
+                                    quantity: newAmount,
+                                    totalPrice:  parseFloat((newAmount * item.price).toFixed(2))
+                                }
                             }
-                        }
-                        return personItem
+                            return personItem
+                        })
                     })
-                })
+                } else {
+                    newPeople.splice(activePersonIndex, 1, {
+                        ...activePerson,
+                        total: parseFloat((activePerson.total - item.price).toFixed(2)),
+                        items: activePerson.items.filter((personItem: Item) => personItem.name != item.name)
+                    })
+                }
                 setAmount(newAmount)
                 bill.items.splice(index, 1, {
                     ...item,
@@ -95,12 +103,14 @@ export const BillItem = ({ item, index, bill, people, setPeople, activePersonInd
             <View>
                 <Text
                     fontSize='small'
+                    crossedOut={remaining == 0}
                 >
                     {item.name}
                 </Text>
                 <Text
                     fontSize='small'
                     grayedOut={true}
+                    crossedOut={remaining == 0}
                 >
                     {bill.currency.length == 1 && `${bill.currency}`}
                     {item.price}

@@ -108,7 +108,7 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
                 item.notes!.push('Could not establish the name of this item.')
               }
             }
-            item .name ? bill.items.push(item) : null
+            item.name && item.price ? bill.items.push(item) : null
             break
           case 'net_amount':
             bill.total = parseFloat(entity.mentionText)

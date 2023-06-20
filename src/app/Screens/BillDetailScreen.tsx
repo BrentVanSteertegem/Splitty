@@ -1,14 +1,17 @@
+import { useEffect } from 'react'
 import { ScrollView, View } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
-import { ContentContainer, PersonCard, SmallVerticalPadding } from '../Components'
-import { NavigationProps, Person } from '../types'
 import { storeData } from '../../core/storage/StoreData'
-import { useEffect } from 'react'
+import { NavigationProps, Person } from '../types'
+import { ContentContainer, PersonCard, SmallVerticalPadding, useAuthContext } from '../Components'
+import { updateBill } from '../../core/modules/bill/api'
 
 const BillDetailScreen = ({ navigation, route }: NavigationProps) => {
   const { bills, index } = route.params
   const bill = bills[index]
   
+  const { isLoggedIn } = useAuthContext()
+
   useEffect(() => {
     navigation.setOptions({
       title: bills[index].name
@@ -16,9 +19,14 @@ const BillDetailScreen = ({ navigation, route }: NavigationProps) => {
   }, [useIsFocused()])
 
   const updatePerson = async (person: Person, peopleIndex: number) => {
-    const newBills = [...bills]
-    newBills[index].people[peopleIndex] = { ...person }
-    return await storeData('bills', bills)
+    bill.people[peopleIndex] = { ...person }
+
+    bills.splice(index, 1, bill)
+    await storeData('bills', bills)
+    
+    isLoggedIn && await updateBill(bill)
+    
+    return
   }
 
   return (

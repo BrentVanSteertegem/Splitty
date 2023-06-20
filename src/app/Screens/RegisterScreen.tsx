@@ -58,7 +58,7 @@ const RegisterScreen = () => {
         }
         <FormTextInput
           name='firstName'
-          label='First name'
+          label='First name*'
           placeholder='john'
           onSubmitEditing={() => {
             lastNameRef.current!.focus()
@@ -78,7 +78,7 @@ const RegisterScreen = () => {
         <FormTextInput
           name='email'
           ref={emailRef}
-          label='Email'
+          label='Email*'
           placeholder='john.doe@email.com'
           keyboardType='email-address'
           onSubmitEditing={() => {
@@ -89,7 +89,7 @@ const RegisterScreen = () => {
         <FormTextInput
           name='password'
           ref={passwordRef}
-          label='Password'
+          label='Password*'
           placeholder='Password'
           hidden={true}
           onSubmitEditing={() => {
@@ -100,7 +100,7 @@ const RegisterScreen = () => {
         <FormTextInput
           name='confirmPassword'
           ref={confirmPasswordRef}
-          label='Confirm password'
+          label='Confirm password*'
           placeholder='Confirm password'
           hidden={true}
           onSubmitEditing={handleSubmit}

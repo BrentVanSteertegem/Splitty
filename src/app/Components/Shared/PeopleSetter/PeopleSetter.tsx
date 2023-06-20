@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Pressable } from 'react-native'
+import { useRef, useState } from 'react'
+import { Pressable, TextInput as RNTextInput } from 'react-native'
 import { Person } from '../../../types'
 import { Button } from '../../Design/Button'
 import { PersonPreview } from '../../Design/PersonPreview'
@@ -18,11 +18,27 @@ export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
     const [showModal, setShowModal] = useState<boolean>(false)
     const [isValidName, setIsValidName] = useState<boolean>(true)
     const [name, setName] = useState<string>('')
+    const nameRef = useRef<RNTextInput>(null)
+
+    const onTextChange = (text: string) => {
+        setName(text)
+        setIsValidName(true)
+    }
+
+    const openModal = () => {
+        setShowModal(true)
+        setTimeout(() => {
+            nameRef.current?.focus()
+        }
+        , 100)
+    }
 
     const renderAddPersonModal = () => {
         const onContinue = () => {
             if (name.trim() == '') {
-                return setIsValidName(false)
+                setName('')
+                setIsValidName(false)
+                return
             }
             setPeople([...people, { 
                 id: people[people.length - 1].id + 1,
@@ -62,9 +78,9 @@ export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
             >
                 <TextInput
                     value={name}
+                    ref={nameRef}
                     label='Enter name'
-                    focus={true}
-                    onChangeText={setName}
+                    onChangeText={onTextChange}
                     placeholder='John'
                     onSubmitEditing={onContinue}
                     error={!isValidName ? 'Name cannot be empty' : undefined}
@@ -104,7 +120,7 @@ export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
                 type='text'
                 color={Variables.colors.green}
                 faIconLeft='plus'
-                onPress={() => setShowModal(true)}
+                onPress={openModal}
             >
                 Add person
             </Button>

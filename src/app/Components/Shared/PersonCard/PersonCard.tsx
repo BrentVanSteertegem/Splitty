@@ -35,7 +35,7 @@ export const PersonCard = ({ person, bill, isFinished, updatePerson }: PersonCar
                 alignItems='center'
             >
                 <Text>{person.name}</Text>
-                {isFinished && (
+                {isFinished && person.name !== 'You' &&(
                     <Container
                         flexDirection='row'
                         justifyContent='flex-end'
@@ -92,7 +92,13 @@ export const PersonCard = ({ person, bill, isFinished, updatePerson }: PersonCar
                                 </Text>
                             </View>
                             <Text
-                                color={person.hasPaid ? Variables.colors.green : Variables.colors.red}
+                                color={
+                                    person.name == 'You' ?
+                                        Variables.colors.text :
+                                    person.hasPaid ? 
+                                        Variables.colors.green : 
+                                    Variables.colors.red
+                                }
                                 fontSize='small'
                             >
                                 {bill.currency.length == 1 && `${bill.currency} `}
@@ -109,7 +115,13 @@ export const PersonCard = ({ person, bill, isFinished, updatePerson }: PersonCar
                 justifyContent='flex-end'
             >
                 <Text
-                    color={person.hasPaid ? Variables.colors.green : Variables.colors.red}
+                    color={
+                        person.name == 'You' ?
+                            Variables.colors.text :
+                        person.hasPaid ? 
+                            Variables.colors.green : 
+                        Variables.colors.red
+                    }
                 >
                     {bill.currency.length == 1 && `${bill.currency} `}
                     {person.total}

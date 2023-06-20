@@ -22,6 +22,12 @@ const SettingsScreen = ({ navigation }: NavigationProps) => {
       await storeData('bills', [])
       isLoggedIn && await deleteBills(user!.id)
       setShowModal(false)
+      navigation.navigate(
+        Navigation.BILLNAVIGATOR, 
+        { 
+          screen: Navigation.BILLS 
+        }
+      )
     }
 
     const onCancel = () => {

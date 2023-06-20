@@ -1,13 +1,26 @@
+import { useEffect } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Navigation } from '../../core/navigation'
+import { NavigationProps } from '../types'
 import { DefaultNavigatorOptions, Variables } from '../style'
 import { SettingsScreen } from '../Screens'
 import ScanNavigator from './ScanNavigator'
 import BillNavigator from './BillNavigator'
-import { Icon } from '../Components'
+import { Icon, useAuthContext } from '../Components'
 
-const AppNavigator = () => {
+const AppNavigator = ({ navigation }: NavigationProps) => {
     const Tab = createBottomTabNavigator()
+
+    const { isLoggedIn } = useAuthContext()
+
+    useEffect(() => {
+        navigation.navigate(
+            Navigation.BILLNAVIGATOR, 
+            {
+                screen: Navigation.BILLS
+            }
+        )
+    }, [isLoggedIn])
 
     return (
         <Tab.Navigator

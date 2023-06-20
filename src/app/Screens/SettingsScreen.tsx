@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { storeData } from '../../core/storage/StoreData'
-import { NavigationProps, Profile } from '../types'
+import { getData, storeData } from '../../core/storage/StoreData'
+import { NavigationProps } from '../types'
 import { Variables } from '../style'
-import { Button, Container, ContentContainer, LargeVerticalPadding, Modal, Text, useAuthContext } from '../Components'
+import { Button, Container, ContentContainer, LargeVerticalPadding, Modal, SmallVerticalPadding, Text, useAuthContext } from '../Components'
 import { Navigation } from '../../core/navigation'
 import { logout } from '../../core/modules/auth/api'
 import { deleteBills } from '../../core/modules/bill/api'
@@ -15,8 +15,9 @@ type SupabaseProfile = {
 }
 
 const SettingsScreen = ({ navigation }: NavigationProps) => {
-  const [showModal, setShowModal] = useState(false)
-
+  const [showDeleteWarning, setShowDeleteWarning] = useState(false)
+  const [showAuthWarning, setShowAuthWarning] = useState(false)
+  
   const { isLoggedIn, user } = useAuthContext()
 
   const [profile, setProfile] = useState<SupabaseProfile | undefined>(user ? user.user_metadata.data : undefined)
@@ -33,11 +34,23 @@ const SettingsScreen = ({ navigation }: NavigationProps) => {
     await storeData('bills', [])
   }
 
-  const renderDeleteAllBillsModal = () => {
+  const handleAuth = async () => {
+    const bills = await getData('bills')
+    bills && bills.length > 0 ? 
+      setShowAuthWarning(true) :
+    navigation.navigate(
+      Navigation.AUTHNAVIGATOR, 
+      {
+        screen: Navigation.AUTH 
+      }
+    )
+  }
+
+  const renderDeleteWarningModal = () => {
     const onDelete = async () => {
       await storeData('bills', [])
       isLoggedIn && await deleteBills(user!.id)
-      setShowModal(false)
+      setShowDeleteWarning(false)
       navigation.navigate(
         Navigation.BILLNAVIGATOR, 
         { 
@@ -47,7 +60,7 @@ const SettingsScreen = ({ navigation }: NavigationProps) => {
     }
 
     const onCancel = () => {
-      setShowModal(false)
+      setShowDeleteWarning(false)
     }
 
     return (
@@ -55,13 +68,13 @@ const SettingsScreen = ({ navigation }: NavigationProps) => {
         onCancel={onCancel}
         buttons={[
           <Button
-            key={1}
+            key={0}
             onPress={onCancel}
           >
             Cancel
           </Button>,
           <Button
-            key={0}
+            key={1}
             type='negative'
             onPress={onDelete}
           >
@@ -77,18 +90,71 @@ const SettingsScreen = ({ navigation }: NavigationProps) => {
         </Text>
       </Modal>
     )
-}
+  }
+
+  const renderAuthWarningModal = () => {
+    const onCancel = () => {
+      setShowAuthWarning(false)
+    }
+
+    const onContinue = async (saveBillsOnAuthChange: boolean) => {
+      await storeData('saveBillsOnAuthChange', saveBillsOnAuthChange)
+      navigation.navigate(
+        Navigation.AUTHNAVIGATOR, 
+        {
+          screen: Navigation.AUTH 
+        }
+      )
+    }
+
+    return (
+      <Modal
+        onCancel={onCancel}
+        buttons={[
+          <Button
+            key={0}
+            onPress={onCancel}
+            type='negative'
+          >
+            Cancel
+          </Button>,
+          <Button
+            key={1}
+            type='secondary'
+            onPress={() => onContinue(false)}
+          >
+            Don't upload
+          </Button>,
+           <Button
+            key={2}
+            onPress={() => onContinue(true)}
+          >
+           Upload
+         </Button>,
+        ]}
+      >
+        <Text>
+          Looks like you have split some bills while you were not logged in.
+        </Text>
+        <SmallVerticalPadding />
+        <Text>
+          Would you like to upload them to your account?
+        </Text>
+      </Modal>
+    )
+  }
 
   return (
     <>
-      {showModal && renderDeleteAllBillsModal()}
+      {showDeleteWarning && renderDeleteWarningModal()}
+      {showAuthWarning && renderAuthWarningModal()}
       <LargeVerticalPadding />
       <ContentContainer>
         <Container
           gap={Variables.spacing.medium}
         >
           <Button
-            onPress={() => setShowModal(true)}
+            onPress={() => setShowDeleteWarning(true)}
             faIconLeft='times-circle'
             type='text'
             color={Variables.colors.red}
@@ -120,12 +186,7 @@ const SettingsScreen = ({ navigation }: NavigationProps) => {
             </Button>
           :
             <Button
-              onPress={() => navigation.navigate(
-                Navigation.AUTHNAVIGATOR, 
-                {
-                  screen: Navigation.AUTH 
-                }
-              )}
+              onPress={handleAuth}
               faIconLeft='user-alt'
               type='text'
             >

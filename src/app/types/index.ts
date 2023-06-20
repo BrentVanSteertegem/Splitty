@@ -59,6 +59,7 @@ export type Bill = {
 
 export type Item = {
     name: string
+    id: number
     description?: string
     quantity: number
     price: number

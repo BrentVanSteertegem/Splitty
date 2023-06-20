@@ -19,9 +19,23 @@ type ManagePeopleProps = {
 
 export const ManagePeople = ({ bill, bills, index, navigation, buttonNavigator, nextButtonScreen }: ManagePeopleProps) => {
     const [people, setPeople] = useState<Person[]>(bill.people)
-    const addPerson = (newPeople: Person[]) => {
-      bill.people = newPeople
-      setPeople(newPeople)
+    const addPerson = (newPerson: Person) => {
+        const newPeople = [...bill.people, newPerson]
+        bill.people = newPeople
+        setPeople(newPeople)
+    }
+    const deletePerson = (id: number) => {
+        const person = bill.people.find(person => person.id === id)
+        person?.items && person.items.length > 0 && bill.items.forEach(item => {
+            const personItem = person.items.find((personItem) => personItem.id == item.id)
+            if (personItem) {
+                item.quantity += personItem.quantity
+            }
+        })
+                
+        const newPeople = bill.people.filter(person => person.id !== id)
+        bill.people = newPeople
+        setPeople(newPeople)
     }
   
     const [billName, setBillName] = useState<string>(bill.name!)
@@ -60,8 +74,9 @@ export const ManagePeople = ({ bill, bills, index, navigation, buttonNavigator, 
                             People
                         </Text>
                         <PeopleSetter
-                            people={people}
-                            setPeople={addPerson}
+                            people={bill.people}
+                            addPerson={addPerson}
+                            onPersonPress={deletePerson}
                         />
                     </MediumHorizontalPadding>
                     <MediumVerticalPadding />

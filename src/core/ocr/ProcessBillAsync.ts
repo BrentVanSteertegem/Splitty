@@ -121,6 +121,9 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
       if (!bill.currency) {
         bill.currency = '€'
       }
+      bill.items.forEach((item, index) => {
+        item.id = index
+      })
       return bill
     }
     console.log('No entities')

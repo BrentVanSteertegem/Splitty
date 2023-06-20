@@ -16,11 +16,11 @@ type BillItemProps = {
 
 export const BillItem = ({ item, index, bill, people, setPeople, activePersonIndex }: BillItemProps) => {
     const activePerson = people[activePersonIndex]
-    const [amount, setAmount] = useState(activePerson.items.find((personItem: Item) => personItem.name == item.name)?.quantity || 0)
+    const [amount, setAmount] = useState(activePerson.items.find((personItem: Item) => personItem.id == item.id)?.quantity || 0)
     const [remaining, setRemaining] = useState(item.quantity)
 
     useEffect(() => {
-        setAmount(activePerson.items.find((personItem: Item) => personItem.name == item.name)?.quantity || 0)
+        setAmount(activePerson.items.find((personItem: Item) => personItem.id == item.id)?.quantity || 0)
     }, [activePersonIndex])
 
     const updateAmount = (item: Item, index: number, isPositiveAction: boolean) => {
@@ -34,7 +34,7 @@ export const BillItem = ({ item, index, bill, people, setPeople, activePersonInd
                         ...activePerson,
                         total: parseFloat((activePerson.total + item.price).toFixed(2)),
                         items: activePerson.items.map((personItem: Item) => {
-                            if (personItem.name == item.name) {
+                            if (personItem.id == item.id) {
                                 return {
                                     ...personItem,
                                     quantity: newAmount,
@@ -70,7 +70,7 @@ export const BillItem = ({ item, index, bill, people, setPeople, activePersonInd
                         ...activePerson,
                         total: parseFloat((activePerson.total - item.price).toFixed(2)),
                         items: activePerson.items.map((personItem: Item) => {
-                            if (personItem.name == item.name) {
+                            if (personItem.id == item.id) {
                                 return {
                                     ...personItem,
                                     quantity: newAmount,
@@ -84,7 +84,7 @@ export const BillItem = ({ item, index, bill, people, setPeople, activePersonInd
                     newPeople.splice(activePersonIndex, 1, {
                         ...activePerson,
                         total: parseFloat((activePerson.total - item.price).toFixed(2)),
-                        items: activePerson.items.filter((personItem: Item) => personItem.name != item.name)
+                        items: activePerson.items.filter((personItem: Item) => personItem.id != item.id)
                     })
                 }
                 setAmount(newAmount)

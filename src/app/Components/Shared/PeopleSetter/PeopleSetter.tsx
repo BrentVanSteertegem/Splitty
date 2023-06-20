@@ -11,10 +11,11 @@ import { Variables } from '../../../style'
 
 type PeopleSetterProps = {
     people: Person[]
-    setPeople: (people: Person[]) => void
+    addPerson: (person: Person) => void
+    onPersonPress: (id: number) => void
 }
 
-export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
+export const PeopleSetter = ({ people, addPerson, onPersonPress }: PeopleSetterProps) => {
     const [showModal, setShowModal] = useState<boolean>(false)
     const [isValidName, setIsValidName] = useState<boolean>(true)
     const [name, setName] = useState<string>('')
@@ -40,12 +41,12 @@ export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
                 setIsValidName(false)
                 return
             }
-            setPeople([...people, { 
+            addPerson({
                 id: people[people.length - 1].id + 1,
                 name,
                 items: [],
                 total: 0,
-            }])
+            })
             setName('')
             setIsValidName(true)
             setShowModal(false)
@@ -88,33 +89,24 @@ export const PeopleSetter = ({ people, setPeople }: PeopleSetterProps) => {
             </Modal>
         )
     }
-    
-    const renderPeople = (people: Person[]) => {
-        const deletePersonPreview = (name: string) => {
-            people.splice(people.findIndex(person => person.name == name), 1)
-            setPeople([...people])
-        }
-
-        return people.map((person, index) => {
-            return (
-                <Pressable
-                    onPress={() => deletePersonPreview(person.name)}
-                    key={index}
-                >
-                    <PersonPreview
-                        name={person.name}
-                        bubbleColor={Object.values(PersonPreviewBubbleColors)[person.id % Object.values(PersonPreviewBubbleColors).length]}
-                    />
-                </Pressable>
-            )
-        })
-    }
 
     return (
         <>
             {showModal && renderAddPersonModal()}
             <StPeoplecontainer>
-                {renderPeople(people)}
+                {people.map((person, index) => {
+                    return (
+                        <Pressable
+                            onPress={() => onPersonPress(person.id)}
+                            key={index}
+                        >
+                            <PersonPreview
+                                name={person.name}
+                                bubbleColor={Object.values(PersonPreviewBubbleColors)[person.id % Object.values(PersonPreviewBubbleColors).length]}
+                            />
+                        </Pressable>
+                    )
+                })}
             </StPeoplecontainer>
             <Button
                 type='text'

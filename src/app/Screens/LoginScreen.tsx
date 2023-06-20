@@ -63,7 +63,6 @@ const LoginScreen = () => {
           label='Password'
           placeholder='Password'
           hidden={true}
-          onSubmitEditing={handleSubmit}
         />
         <SmallVerticalPadding>
           <FormSubmitButton

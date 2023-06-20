@@ -103,7 +103,6 @@ const RegisterScreen = () => {
           label='Confirm password*'
           placeholder='Confirm password'
           hidden={true}
-          onSubmitEditing={handleSubmit}
         />
         <SmallVerticalPadding>
           <FormSubmitButton

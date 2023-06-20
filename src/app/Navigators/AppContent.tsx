@@ -33,8 +33,9 @@ const AppContent = () => {
       screenOptions={{
         headerShown: false
       }}
+      initialRouteName={isFirstLaunch ? Navigation.AUTHNAVIGATOR : Navigation.APPNAVIGATOR}
     >
-      {!isLoggedIn && isFirstLaunch &&
+      {!isLoggedIn &&
         <Stack.Screen
           name={Navigation.AUTHNAVIGATOR}
           component={AuthNavigator}

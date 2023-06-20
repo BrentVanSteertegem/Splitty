@@ -53,6 +53,7 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
         switch (entity.type){
           case 'line_item':
             const item: Item = {
+              id: -1,
               name:'',
               quantity: 0,
               price: 0,
@@ -110,9 +111,6 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
             }
             item.name && item.price ? bill.items.push(item) : null
             break
-          case 'net_amount':
-            bill.total = parseFloat(entity.mentionText)
-            break
           case 'currency':
             bill.currency = entity.mentionText
             break
@@ -123,7 +121,9 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
       }
       bill.items.forEach((item, index) => {
         item.id = index
+        bill.total += item.totalPrice!
       })
+      bill.total = parseFloat(bill.total.toFixed(2))
       return bill
     }
     console.log('No entities')

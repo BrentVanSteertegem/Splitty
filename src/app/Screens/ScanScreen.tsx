@@ -1,11 +1,13 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useIsFocused } from '@react-navigation/native'
 import { Camera, CameraType } from 'expo-camera'
-import { Button, Camera as StCamera, Container, ContentContainer, CenteredContainer, SmallVerticalPadding, Text } from '../Components'
+import { Button, Camera as StCamera, Container, ContentContainer, CenteredContainer, SmallVerticalPadding, Text, Modal } from '../Components'
 import { processBillAsync } from '../../core/ocr/ProcessBillAsync'
 import { Navigation } from '../../core/navigation'
+import { NavigationProps } from '../types'
 
-const ScanScreen = ({ navigation }) => {
+const ScanScreen = ({ navigation }: NavigationProps) => {
+  const [showModal, setShowModal] = useState(false)
   const [permission, requestPermission] = Camera.useCameraPermissions()
   const cameraRef = useRef<Camera>(null)
   const isFocused = useIsFocused()
@@ -64,12 +66,14 @@ const ScanScreen = ({ navigation }) => {
     cameraRef.current!.resumePreview()
     if (picture && picture.base64) {
       const bill = await scanBill(picture.base64)
+      bill?.items && bill.items.length > 0 ?
       navigation.navigate(Navigation.SCANNAVIGATOR, {
         screen: Navigation.ADDPEOPLE,
         params: {
           bill
         },
-      })
+      }) :
+      setShowModal(true)
       return
     }
     console.log('No scan')
@@ -78,6 +82,23 @@ const ScanScreen = ({ navigation }) => {
 
   return (
     <Container>
+      {showModal && 
+        <Modal
+          onCancel={() => setShowModal(false)}
+          buttons={[
+            <Button
+              key={0}
+              width={150}
+              onPress={() => setShowModal(false)}
+            >
+              Understood
+            </Button>
+          ]}
+        >
+          <Text>Could not detect a valid bill.</Text>
+          <Text>Please make sure at least one item is completely visible in the picture!</Text>
+        </Modal>
+      }
       {isFocused && permission.granted && (
         <StCamera
           type={CameraType.back}

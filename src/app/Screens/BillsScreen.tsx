@@ -30,7 +30,11 @@ const BillsScreen = ({ navigation }: NavigationProps) => {
         const { data } = await getBills(user!.id)
         newBills = []
         data!.forEach((supabaseBill: any) => {
-          newBills.push(JSON.parse(supabaseBill.bill))
+          newBills.push(
+            {
+              id: supabaseBill.id,
+              ...JSON.parse(supabaseBill.bill)
+            })
         })
       }
       setBills(newBills)

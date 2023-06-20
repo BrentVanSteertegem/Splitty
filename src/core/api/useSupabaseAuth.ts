@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getCurrentSession } from '../modules/auth/api'
-import { Session, User } from '@supabase/supabase-js'
+import { Session, User, UserMetadata } from '@supabase/supabase-js'
 import { AuthEvent, supabase } from './supabase'
 
 const useSupabaseAuth = () => {
@@ -30,7 +30,11 @@ const useSupabaseAuth = () => {
     })
   }, [])
 
-  const user: User | null = auth ? auth.user : null
+  const user: User & UserMetadata  | null = auth ? 
+  {
+    ...auth.user,
+    ...auth.user?.user_metadata,
+  } : null
 
   const isLoggedIn = isInitialized && !!auth
 

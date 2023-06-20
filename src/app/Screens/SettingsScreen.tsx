@@ -1,16 +1,32 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { storeData } from '../../core/storage/StoreData'
-import { NavigationProps } from '../types'
+import { NavigationProps, Profile } from '../types'
 import { Variables } from '../style'
 import { Button, Container, ContentContainer, LargeVerticalPadding, Modal, Text, useAuthContext } from '../Components'
 import { Navigation } from '../../core/navigation'
 import { logout } from '../../core/modules/auth/api'
 import { deleteBills } from '../../core/modules/bill/api'
+import { getProfile } from '../../core/modules/profile/api'
+
+type SupabaseProfile = {
+  id: string
+  first_name: string
+  last_name: string
+}
 
 const SettingsScreen = ({ navigation }: NavigationProps) => {
   const [showModal, setShowModal] = useState(false)
 
   const { isLoggedIn, user } = useAuthContext()
+
+  const [profile, setProfile] = useState<SupabaseProfile | undefined>(user ? user.user_metadata.data : undefined)
+  useEffect(() => {
+    const updateProfile = async () => {
+      const profile = await getProfile(user!.id)
+      setProfile(profile.data)
+    }
+    user && updateProfile()
+  }, [user])
 
   const handleLogout = async () => {
     await logout()
@@ -85,7 +101,22 @@ const SettingsScreen = ({ navigation }: NavigationProps) => {
               faIconLeft='user-alt-slash'
               type='text'
             >
-              Logout
+              <Container
+                flexDirection='row'
+                alignItems='center'
+                justifyContent='space-between'
+                gap={Variables.spacing.medium}
+              >
+              <Text>
+                Logout
+              </Text>
+              <Text
+                fontSize='small'
+                color={Variables.colors.darkGray}
+              >
+                {profile && profile.first_name} {profile && profile.last_name}
+              </Text>
+              </Container>
             </Button>
           :
             <Button

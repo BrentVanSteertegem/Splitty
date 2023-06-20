@@ -66,12 +66,16 @@ const renderButtonContent = ({children, fontSize, faIconLeft, faIconRight, color
                     color={color}
                 />
             }
-            <StButtonText
-                fontSize={fontSize}
-                color={color}
-            >
-                {children}
-            </StButtonText>
+            {typeof children === 'string' ?
+                <StButtonText
+                    fontSize={fontSize}
+                    color={color}
+                >
+                    {children}
+                </StButtonText> 
+            :
+                children
+            }
             {faIconRight &&
                 <Icon
                     name={faIconRight}

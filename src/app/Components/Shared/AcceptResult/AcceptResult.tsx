@@ -4,7 +4,7 @@ import { getData, storeData } from '../../../../core/storage/StoreData'
 import { Bill, Person } from '../../../types'
 import { useAuthContext } from '../Auth/AuthProvider'
 import { LargeVerticalPadding, SmallVerticalPadding } from '../../Design/Padding'
-import { Container, ContentContainer } from '../../Design/Container'
+import { Container, ContentContainer, FullScreenContainer } from '../../Design/Container'
 import { Text } from '../../Design/Text'
 import { PersonCard } from '../PersonCard'
 import { Button } from '../../Design/Button'
@@ -77,55 +77,58 @@ export const AcceptResult = ({ navigation, people, bill, bills, index, buttonsNa
     
     return (
         <ScrollView>
-            <LargeVerticalPadding />
-            <ContentContainer>
-                <Text
-                    fontSize='small'
-                >
-                    You can view your splitted bill below. Press “complete” to accept this result or press “edit” to change the result.
-                </Text>
+            <FullScreenContainer>
                 <LargeVerticalPadding />
-                {people.map((person: Person, index: number) => (
-                    <View
-                        key={index}
+                <ContentContainer>
+                    <Text
+                        fontSize='small'
                     >
-                        <PersonCard
-                            person={person}
-                            bill={bill}
-                        />
-                        <SmallVerticalPadding />
-                    </View>
-                ))}
-                <Container
-                    flexDirection='row'
-                    justifyContent='space-between'
-                >
-                    <Button
-                        faIconLeft='chevron-left'
-                        type='secondary'
-                        onPress={() => navigation.navigate(
-                            buttonsNavigator, 
-                            {
-                                screen: editItemsScreen,
-                                params: {
-                                    bill,
-                                    bills,
-                                    index
+                        You can view your splitted bill below. Press “complete” to accept this result or press “edit” to change the result.
+                    </Text>
+                    <LargeVerticalPadding />
+                    {people.map((person: Person, index: number) => (
+                        <View
+                            key={index}
+                        >
+                            <PersonCard
+                                person={person}
+                                bill={bill}
+                            />
+                            <SmallVerticalPadding />
+                        </View>
+                    ))}
+                    <Container
+                        flexDirection='row'
+                        justifyContent='space-between'
+                        alignItems='flex-end'
+                    >
+                        <Button
+                            faIconLeft='chevron-left'
+                            type='secondary'
+                            onPress={() => navigation.navigate(
+                                buttonsNavigator, 
+                                {
+                                    screen: editItemsScreen,
+                                    params: {
+                                        bill,
+                                        bills,
+                                        index
+                                    }
                                 }
+                            )
                             }
-                        )
-                        }
-                    >
-                        Edit
-                    </Button>
-                    <Button
-                        onPress={onComplete}
-                    >
-                        Complete
-                    </Button>
-                </Container>
-                <SmallVerticalPadding />
-            </ContentContainer>
+                        >
+                            Edit
+                        </Button>
+                        <Button
+                            onPress={onComplete}
+                        >
+                            Complete
+                        </Button>
+                    </Container>
+                    <SmallVerticalPadding />
+                </ContentContainer>
+            </FullScreenContainer>
         </ScrollView>
     )
 }

@@ -63,11 +63,7 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
             entity.properties.forEach((property) => {
               switch (property.type) {
                 case 'line_item/amount':
-                  const totalPrice = parseFloat(property.mentionText)
-                  typeof totalPrice == 'number' ? item.totalPrice = totalPrice : null
-                  break
-                case 'line_item/description':
-                  item.description = property.mentionText
+                  item.totalPrice = parseFloat(property.mentionText.replaceAll(',', '.'))
                   break
                 case 'line_item/quantity':
                   let quantity = property.mentionText
@@ -87,8 +83,7 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
                   item.name = property.mentionText
                   break
                 case 'line_item/unit_price':
-                  const price = parseFloat(property.mentionText)
-                  typeof price == 'number' ? item.price = price : null
+                  item.price = parseFloat(property.mentionText.replaceAll(',', '.'))
                   break
               }
             })
@@ -101,15 +96,7 @@ export const processBillAsync = async (pictureBase64: string): Promise<Bill | un
             if (!item.totalPrice) {
               item.quantity && item.price ? item.totalPrice = item.quantity * item.price : item.notes!.push('Could not establish the total price for this item.')
             }
-            if (!item.name) {
-              if (item.description) {
-                item.name = item.description 
-                item.description = undefined
-              } else {
-                item.notes!.push('Could not establish the name of this item.')
-              }
-            }
-            item.name && item.price ? bill.items.push(item) : null
+            item.name && item.price && bill.items.push(item)
             break
           case 'currency':
             bill.currency = entity.mentionText
